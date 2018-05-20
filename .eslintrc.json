@@ -1,0 +1,21 @@
+{   
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "jquery": true,
+        "mocha": true,
+        "mongo": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "eqeqeq":"error",
+        "no-console": "warn",
+        "no-unused-vars": "warn",
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"]
+    }
+}

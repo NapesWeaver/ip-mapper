@@ -1,0 +1,52 @@
+body {
+  /* box-sizing: border-box; */
+  font-family: sans-serif;
+}
+
+#map {
+  height: 400px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+div p {
+  color: red;
+}
+
+.ip-search-form,
+.host-results,
+.result {
+  width: 300px;
+  margin: 5px auto;  
+}
+
+.host-results,
+.results {
+  /* border: 1px solid #000000; */
+}
+
+.search-text {
+  width: 50%;
+}
+
+.delete-button {
+  margin-left: 63%;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+}

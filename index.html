@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IP Mapper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Get local and remote Internet Protocol information">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/styles.css">
+  </head>
+  <body>
+    <header role="banner">
+      <h1>IP Mapper</h1>
+    </header>
+
+    <main>    
+      <div id="map"></div>   
+      
+      <form class="ip-search-form">       
+        <div class="host-results">
+          <p>This page requires JavaScript</p>
+        </div>
+
+        <input type="text" class="search-text" placeholder="Search IP">
+
+        <input type="submit" value="SEARCH">
+
+        <input type="reset" value="RESET">
+      </form>
+
+      <div class="search-results">
+        <div class="results">
+          <!-- <h3>IP: 212.23.0.11</h3>
+          <ul>
+            <li>Organization: Zen Internet Ltd</li>
+            <li>Region: England</li>
+            <li>Distance: 4423mi</li>
+          </ul>
+          <input type="button" class="delete-button" value="DELETE">
+        </div>
+        <div class="result">
+          <h3>IP: 57.212.100.0</h3>
+          <ul>            
+            <li>Organization: Societe Internationale de Telecommunications Aeronautiques</li>
+            <li>City: Paris</li>
+            <li>Region: Île-de-France</li>
+            <li>Distance: 2500mi</li>
+          </ul>
+          <input type="button" class="delete-button" value="DELETE">
+        </div>
+        <div class="result">
+          <h3>IP: 89.230.90.72</h3>
+          <ul>            
+            <li>Organization: Multimedia Polska S.A.</li>
+            <li>City: Rzeszów</li>
+            <li>Region: Subcarpathian Voivodeship</li>
+            <li>Distance: 5354mi</li>
+          </ul>
+          <input type="button" class="delete-button" value="DELETE"> -->
+        </div>
+      </div>      
+    </main>
+
+    <footer role="contentinfo">
+        <p>Last Updated on May 12, 2018</p>
+    </footer>
+    
+    <script
+		  src="https://code.jquery.com/jquery-3.3.1.js"
+		  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+		  crossorigin="anonymous">		  	
+    </script>
+    <script type="module" src="scripts/data/data.js"></script>
+    <script type="module" src="scripts/utils/init-map.js"></script>
+    <script type="module" src="scripts/utils/get-local-info.js"></script>
+    <script type="module" src="scripts/utils/template.js"></script>
+    <script type="module" src="scripts/ip-mapper.js"></script>
+    <script type="module" src="scripts/index.js"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4&callback=initMap"></script> -->
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4&callback=initMap"></script>
+  </body>
+</html>
