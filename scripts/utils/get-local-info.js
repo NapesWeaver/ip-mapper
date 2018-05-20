@@ -2,10 +2,6 @@ import { renderHostInfo } from '../ip-mapper.js';
 import { addMarker } from '../utils/init-map.js';
 import { data } from '../data/data.js';
 
-function getPublicIP() {
-
-}
-
 /**
  * Get user IP through webkitRTCPeerConnection
  * @param onNewIP {Function} listener function to expose IP locally
@@ -97,4 +93,24 @@ function getPrivateIP() {
   }
 }
 
-export { getUserLocation, getPublicIP, getPrivateIP };
+// navigator.connection.addEventListener('change', logNetworkInfo);
+
+// function logNetworkInfo() {
+//   // Network type that browser uses
+//   console.log('         type: ' + navigator.connection.type);
+//   // Effective bandwidth estimate
+//   console.log('     downlink: ' + navigator.connection.downlink + 'Mb/s');
+//   // Effective round-trip time estimate
+//   console.log('          rtt: ' + navigator.connection.rtt + 'ms');
+//   // Upper bound on the downlink speed of the first network hop
+//   console.log('  downlinkMax: ' + navigator.connection.downlinkMax + 'Mb/s');
+//   // Effective connection type determined using a combination of recently
+//   // observed rtt and downlink values: ' +
+//   console.log('effectiveType: ' + navigator.connection.effectiveType);  
+//   // True if the user has requested a reduced data usage mode from the user
+//   // agent.
+//   console.log('     saveData: ' + navigator.connection.saveData);
+// }
+// logNetworkInfo();
+
+export { getUserLocation, getPrivateIP };
