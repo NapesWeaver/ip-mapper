@@ -5,14 +5,15 @@ function decorateHostInfo() {
   return `
   <h2>Host Information</h2>
   <ul>
-    <li class="lat-lon">lat: ${data.userLat.toFixed(5)}, lon: ${data.userLng.toFixed(5)}</li>
     <li>Private IP: ${data.privateIP}</li>
+    <li class="lat-lon">lat: ${data.privateLat.toFixed(5)}, lon: ${data.privateLng.toFixed(5)}</li>
     <li>Public IP: ${data.publicIP}</li>
-    <li>Distance: ${data.distance}mi</li>   
+    <li class="lat-lon">lat: ${data.publicLat.toFixed(5)}, lon: ${data.publicLng.toFixed(5)}</li>
+    <li>Distance: ${data.distance.toFixed(2)}mi</li>   
     <li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>
-    <li>Effective Type: ${data.effectiveType}G</li>
+    <li>Effective Type: ${data.effectiveType}</li>
     <li>RTT: ${data.rtt}ms</li>    
-    <li>DNS: ${data.dns}</li>  
+    <li>${data.dns}</li>  
   </ul>
   `;
 }

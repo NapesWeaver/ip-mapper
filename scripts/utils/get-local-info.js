@@ -43,20 +43,24 @@ function findPrivateIP(onNewIP) {
 }
 
 function getUserLocation() {
+
   if (navigator.geolocation) {
     /* Local network information used by Google Location Services to estimate location includes information about visible WiFi access points, including signal strength &information about your local router, computer's IP address */ 
     navigator.geolocation.getCurrentPosition(function (position) {
-      data.userLat = position.coords.latitude;
-      data.userLng = position.coords.longitude;
-      // console.log(data.userLat, data.userLng);
-      addMarker({ lat: data.userLat, lng: data.userLng });
+      data.privateLat = position.coords.latitude;
+      data.privateLng = position.coords.longitude;
+      // console.log(data.privateLat, data.privateLng);
+      addMarker({ lat: data.privateLat, lng: data.privateLng });
       map.setZoom(3);
-      map.setCenter({ lat: data.userLat, lng: data.userLng });
+      map.setCenter({ lat: data.privateLat, lng: data.privateLng });
       renderHostInfo();
       
     }, geolocationError);
-  }
-  else {
+  } else {
+    // addMarker({ lat: 0.0, lng: 0.0 });
+    // map.setZoom(3);
+    // map.setCenter({ lat: 0.0, lng: 0.0 });
+    // renderHostInfo();
     console.log('Geolocation not supported.');
   }
 }
@@ -80,37 +84,35 @@ function geolocationError(error) {
 }
 
 function getPrivateIP() {
+
   if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
     // Edge & IE
     data.privateIP = 'Not supported by this browser';
-    renderHostInfo();
+    // renderHostInfo();
   }
   else {
     findPrivateIP(function(ip) {
       data.privateIP = ip;
-      renderHostInfo();
+      // renderHostInfo();
     });
+  }
+  renderHostInfo();
+}
+
+function getLocalInfo() {
+
+  if (navigator.connection) {
+    navigator.connection.addEventListener('change', logNetworkInfo);
+    function logNetworkInfo() {
+      // Bandwidth estimate
+      data.downloadSpeed = navigator.connection.downlink;
+      // Round-trip time estimate
+      data.rtt = navigator.connection.rtt;
+      // Effective connection type determined using recently observed rtt and downlink values
+      data.effectiveType = navigator.connection.effectiveType;
+    }
+    logNetworkInfo();
   }
 }
 
-// navigator.connection.addEventListener('change', logNetworkInfo);
-
-// function logNetworkInfo() {
-//   // Network type that browser uses
-//   console.log('         type: ' + navigator.connection.type);
-//   // Effective bandwidth estimate
-//   console.log('     downlink: ' + navigator.connection.downlink + 'Mb/s');
-//   // Effective round-trip time estimate
-//   console.log('          rtt: ' + navigator.connection.rtt + 'ms');
-//   // Upper bound on the downlink speed of the first network hop
-//   console.log('  downlinkMax: ' + navigator.connection.downlinkMax + 'Mb/s');
-//   // Effective connection type determined using a combination of recently
-//   // observed rtt and downlink values: ' +
-//   console.log('effectiveType: ' + navigator.connection.effectiveType);  
-//   // True if the user has requested a reduced data usage mode from the user
-//   // agent.
-//   console.log('     saveData: ' + navigator.connection.saveData);
-// }
-// logNetworkInfo();
-
-export { getUserLocation, getPrivateIP };
+export { getLocalInfo, getUserLocation, getPrivateIP };
