@@ -48,7 +48,22 @@ function handleSubmit() {
   $('.ip-search-form').submit(function(event) {
     event.preventDefault();
     addMarker({ lat: data.publicLat, lng: data.publicLng });
-    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng });
+    let latLngs = [
+      { lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng }
+    ]
+    console.log("ran");
+    let ipPath = new google.maps.Polyline({
+      path: latLngs,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 1
+    });
+    ipPath.setMap(map);
+    
     renderHostInfo();    
   });   
 }
