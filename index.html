@@ -65,18 +65,20 @@
     <footer role="contentinfo">
         <p>Last Updated on May 12, 2018</p>
     </footer>
-    
     <script
-		  src="https://code.jquery.com/jquery-3.3.1.js"
-		  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-		  crossorigin="anonymous">		  	
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
     </script>
+    <!-- We're loading gmaps without the async defer attributes, which will guarentee that the `google` object loads before anything else -->
+    <!-- This way, we don't need to use the initMap callback -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="module" src="scripts/data/data.js"></script>
+    <script type="module" src="scripts/utils/google-maps-wrapper.js"></script>
     <script type="module" src="scripts/utils/template.js"></script>
-    <script type="module" src="scripts/utils/init-map.js"></script>
-    <script type="module" src="scripts/ip-mapper.js"></script>
     <script type="module" src="scripts/utils/get-local-info.js"></script>
+    <script type="module" src="scripts/ip-mapper.js"></script>
     <script type="module" src="scripts/index.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4&callback=initMap&libraries=geometry"></script>    
+    <!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4&callback=initMap&libraries=geometry"></script>     -->
   </body>
 </html>
