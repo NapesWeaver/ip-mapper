@@ -41,12 +41,12 @@ function ipCallBack(response) {
     getDNS(data.publicIP);
   }
   data.ipSearches.push(response);
-  //addMarker({ lat: response.latitude , lng: response.longitude});
 }
 
 function handleSubmit() {
   $('.ip-search-form').submit(function(event) {
     event.preventDefault();
+
     addMarker({ lat: data.publicLat, lng: data.publicLng });
     data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng });
@@ -54,7 +54,7 @@ function handleSubmit() {
       { lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng }
     ];
-    console.log('ran');
+    
     let ipPath = new google.maps.Polyline({
       path: latLngs,
       geodesic: true,
@@ -62,6 +62,7 @@ function handleSubmit() {
       strokeOpacity: 1.0,
       strokeWeight: 1
     });
+    
     ipPath.setMap(map);
       
     renderHostInfo();    

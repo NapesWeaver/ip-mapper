@@ -19,6 +19,7 @@ function findPrivateIP(onNewIP) {
     key;
   
   function iterateIP(ip) {
+    
     if (!localIPs[ip]) onNewIP(ip);
     localIPs[ip] = true;
   }
@@ -57,10 +58,6 @@ function getUserLocation() {
       
     }, geolocationError);
   } else {
-    // addMarker({ lat: 0.0, lng: 0.0 });
-    // map.setZoom(3);
-    // map.setCenter({ lat: 0.0, lng: 0.0 });
-    // renderHostInfo();
     console.log('Geolocation not supported.');
   }
 }
@@ -88,12 +85,10 @@ function getPrivateIP() {
   if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
     // Edge & IE
     data.privateIP = 'Not supported by this browser';
-    // renderHostInfo();
   }
   else {
     findPrivateIP(function(ip) {
       data.privateIP = ip;
-      // renderHostInfo();
     });
   }
   renderHostInfo();

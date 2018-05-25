@@ -1,4 +1,4 @@
-import { initMap, addMarker } from './utils/init-map.js';
+import { initMap } from './utils/init-map.js';
 import { getIP, handleSubmit } from './ip-mapper.js';
 import { getLocalInfo, getUserLocation, getPrivateIP } from './utils/get-local-info.js';
 
