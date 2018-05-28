@@ -51,7 +51,6 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
-      // console.log(data.privateLat, data.privateLng);
       let googleMap = new GoogleMap();
       googleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       googleMap.map.setZoom(3);
