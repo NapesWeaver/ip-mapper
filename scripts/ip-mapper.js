@@ -30,14 +30,19 @@ function getDNS(ip) {
 function mapHostInfo() {
   GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
     
-  data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
-    { lat: data.publicLat, lng: data.publicLng });
-
-  let latLngs = [
-    { lat: data.privateLat, lng: data.privateLng }, 
-    { lat: data.publicLat, lng: data.publicLng }
-  ];    
-  GoogleMap.drawLine(latLngs);
+  if (data.privateLat !== 0) {
+    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng });
+  
+    let latLngs = [
+      { lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng }
+    ];    
+    GoogleMap.drawLine(latLngs);
+  } else {
+    GoogleMap.map.setZoom(6);
+    GoogleMap.map.setCenter({ lat: data.publicLat, lng: data.publicLng });
+  }
 }
 
 function getIP(ip) {
@@ -64,9 +69,9 @@ function ipCallBack(response) {
 function submitStart(event) {
   event.preventDefault();
   
-  GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
-  GoogleMap.map.setZoom(6);
-  GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
+  // GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
+  // GoogleMap.map.setZoom(6);
+  // GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
 
   mapHostInfo();     
   renderHostInfo();
@@ -74,7 +79,6 @@ function submitStart(event) {
 
 function submitSearch(event) {
   event.preventDefault();
-
 }
 
 function renderHostInfo() {

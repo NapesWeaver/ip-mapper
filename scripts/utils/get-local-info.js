@@ -1,5 +1,5 @@
 import GoogleMap from '../utils/google-maps-wrapper.js';
-import { renderHostInfo } from '../ip-mapper.js';
+import { handleSubmit, renderHostInfo } from '../ip-mapper.js';
 import { data } from '../data/data.js';
 
 /**
@@ -59,15 +59,17 @@ function getUserLocation() {
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
-      renderHostInfo();      
+      renderHostInfo();
+      handleSubmit();      
     }, geolocationError);
   } else {
+    handleSubmit();    
     console.log('Geolocation not supported.');
-  }
+  }  
 }
 
 function geolocationError(error) {
-
+  handleSubmit();
   switch (error.code) {
   case error.PERMISSION_DENIED:
     console.log('Request for Geolocation denied.');
@@ -100,8 +102,8 @@ function getPrivateIP() {
 function getLocalConnectionInfo() {
 
   if (navigator.connection) {
-    navigator.connection.addEventListener('change', logNetworkInfo);
-    function logNetworkInfo() {
+    navigator.connection.addEventListener('change', saveNetworkInfo);
+    function saveNetworkInfo() {
       // Bandwidth estimate
       data.downloadSpeed = navigator.connection.downlink;
       // Round-trip time estimate
@@ -109,9 +111,8 @@ function getLocalConnectionInfo() {
       // Effective connection type determined using recently observed rtt and downlink values
       data.effectiveType = navigator.connection.effectiveType;
     }
-    logNetworkInfo();
+    saveNetworkInfo();
   }
 }
 
-// export { getLocalConnectionInfo, getUserLocation, getPrivateIP };
 export { getLocalInfo };

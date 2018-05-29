@@ -3,4 +3,4 @@ import { getLocalInfo } from './utils/get-local-info.js';
 
 getLocalInfo();
 getIP('');
-handleSubmit();
+// handleSubmit();
