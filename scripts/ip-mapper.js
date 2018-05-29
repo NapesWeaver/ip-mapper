@@ -1,4 +1,3 @@
-//import { addMarker } from './utils/init-map.js';
 import GoogleMap from './utils/google-maps-wrapper.js';
 import { decorateHostInfo } from './utils/template.js';
 import { data } from './data/data.js';
@@ -48,15 +47,15 @@ function handleSubmit() {
   $('.ip-search-form').submit(function(event) {
     event.preventDefault();
 
-    let googleMap = new GoogleMap();
-    googleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
+    //let googleMap = new GoogleMap();
+    GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
     
-    // data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
-    //   { lat: data.publicLat, lng: data.publicLng });
-    // let latLngs = [
-    //   { lat: data.privateLat, lng: data.privateLng }, 
-    //   { lat: data.publicLat, lng: data.publicLng }
-    // ];
+    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng });
+    let latLngs = [
+      { lat: data.privateLat, lng: data.privateLng }, 
+      { lat: data.publicLat, lng: data.publicLng }
+    ];
     
     // let ipPath = new google.maps.Polyline({
     //   path: latLngs,

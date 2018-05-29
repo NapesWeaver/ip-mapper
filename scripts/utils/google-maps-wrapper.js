@@ -1,35 +1,5 @@
 import { data } from '../data/data.js';
 
-// function initMap() {
-
-//   let options = {
-//     zoom: 0,
-//     center: {lat: data.privateLat, lng: data.privateLng},
-//   };
-
-//   window.map = new google.maps.Map(document.getElementById('map'), options);      
- 
-// };
-
-// function addMarker(location) {
-//   let marker = new google.maps.Marker({
-//     position: location,
-//     map: map,
-//     moveMarker: function(location) {
-//       map.setCenter(location);
-//       marker.setPosition(location);
-//     },
-//   });
-//   marker.addListener('click', function() {
-//     map.setZoom(8);
-//     map.setCenter(marker.getPosition());
-//   });
-// }
-
-// export { initMap, addMarker };
-
-
-
 /*
  This is a basic demonstration of composition. GoogleMap 'has a' google.maps.Map.
   https://en.wikipedia.org/wiki/Object_composition
@@ -66,4 +36,6 @@ GoogleMap.prototype.addMarker = function(location) {
   this.markers.push(marker);
 };
 
-export default GoogleMap;
+let googleMap = new GoogleMap();
+
+export default googleMap;

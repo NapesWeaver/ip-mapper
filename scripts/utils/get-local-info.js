@@ -1,6 +1,5 @@
 import GoogleMap from '../utils/google-maps-wrapper.js';
 import { renderHostInfo } from '../ip-mapper.js';
-//import { addMarker } from '../utils/init-map.js';
 import { data } from '../data/data.js';
 
 /**
@@ -51,10 +50,10 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
-      let googleMap = new GoogleMap();
-      googleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
-      googleMap.map.setZoom(3);
-      googleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
+      //let googleMap = new GoogleMap();
+      GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
+      GoogleMap.map.setZoom(3);
+      GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
       renderHostInfo();
       
     }, geolocationError);
