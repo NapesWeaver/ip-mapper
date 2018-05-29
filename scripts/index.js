@@ -1,8 +1,6 @@
 import { getIP, handleSubmit } from './ip-mapper.js';
-import { getLocalInfo, getUserLocation, getPrivateIP } from './utils/get-local-info.js';
+import { getLocalInfo } from './utils/get-local-info.js';
 
+getLocalInfo();
 getIP('');
 handleSubmit();
-getPrivateIP();
-getUserLocation();
-getLocalInfo();

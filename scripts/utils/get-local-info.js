@@ -43,6 +43,12 @@ function findPrivateIP(onNewIP) {
   };
 }
 
+function getLocalInfo() {
+  getPrivateIP();
+  getUserLocation();
+  getLocalConnectionInfo();
+}
+
 function getUserLocation() {
 
   if (navigator.geolocation) {
@@ -53,8 +59,7 @@ function getUserLocation() {
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
-      renderHostInfo();
-      
+      renderHostInfo();      
     }, geolocationError);
   } else {
     console.log('Geolocation not supported.');
@@ -90,10 +95,9 @@ function getPrivateIP() {
       data.privateIP = ip;
     });
   }
-  renderHostInfo();
 }
 
-function getLocalInfo() {
+function getLocalConnectionInfo() {
 
   if (navigator.connection) {
     navigator.connection.addEventListener('change', logNetworkInfo);
@@ -109,4 +113,5 @@ function getLocalInfo() {
   }
 }
 
-export { getLocalInfo, getUserLocation, getPrivateIP };
+// export { getLocalConnectionInfo, getUserLocation, getPrivateIP };
+export { getLocalInfo };

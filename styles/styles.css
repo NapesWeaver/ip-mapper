@@ -26,17 +26,17 @@ div p {
   color: red;
 }
 
-.ip-search-form,
+form,
 .host-results,
 .result {
   width: 300px;
   margin: 5px auto;  
 }
 
-.host-results,
+/* .host-results,
 .results {
-  /* border: 1px solid #000000; */
-}
+  border: 1px solid #000000;
+} */
 
 .search-text {
   width: 50%;

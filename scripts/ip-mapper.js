@@ -27,10 +27,28 @@ function getDNS(ip) {
   });
 }
 
+function mapHostInfo() {
+  GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
+    
+  data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
+    { lat: data.publicLat, lng: data.publicLng });
+
+  let latLngs = [
+    { lat: data.privateLat, lng: data.privateLng }, 
+    { lat: data.publicLat, lng: data.publicLng }
+  ];    
+  GoogleMap.drawLine(latLngs);
+}
+
 function getIP(ip) {
   
   const QUERY = `https://ipapi.co/${ip}/json/`;
   $.getJSON(QUERY, ipCallBack);  
+}
+
+function handleSubmit() {
+  $('.page').on('submit', '.ip-start-form', submitStart);
+  $('.page').on('submit', '.ip-search-from', submitSearch);
 }
 
 function ipCallBack(response) {
@@ -43,23 +61,20 @@ function ipCallBack(response) {
   data.ipSearches.push(response);
 }
 
-function handleSubmit() {
-  $('.ip-search-form').submit(function(event) {
-    event.preventDefault();
+function submitStart(event) {
+  event.preventDefault();
+  
+  GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
+  GoogleMap.map.setZoom(6);
+  GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
 
-    GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
-    
-    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
-      { lat: data.publicLat, lng: data.publicLng });
+  mapHostInfo();     
+  renderHostInfo();
+}
 
-    let latLngs = [
-      { lat: data.privateLat, lng: data.privateLng }, 
-      { lat: data.publicLat, lng: data.publicLng }
-    ];    
-    GoogleMap.drawLine(latLngs);
-      
-    renderHostInfo();    
-  });   
+function submitSearch(event) {
+  event.preventDefault();
+
 }
 
 function renderHostInfo() {
