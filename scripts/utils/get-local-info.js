@@ -50,9 +50,8 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
-      //let googleMap = new GoogleMap();
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
-      GoogleMap.map.setZoom(3);
+      GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
       renderHostInfo();
       

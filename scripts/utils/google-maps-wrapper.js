@@ -1,19 +1,10 @@
-import { data } from '../data/data.js';
-
-/*
- This is a basic demonstration of composition. GoogleMap 'has a' google.maps.Map.
-  https://en.wikipedia.org/wiki/Object_composition
-*/
 function GoogleMap(zoom, center, target) {
   let options = {
     zoom: zoom || 0,
     center: center || { lat: 0, lng: 0 }
   };
   this.map = new google.maps.Map(document.getElementById(target || 'map'), options);
-  this.markers = []; 
-  // as an exercise, you can implement
-  // setMapOnAll, clearMarkers, showMarkers, deleteMarkers
-  // from here https://developers.google.com/maps/documentation/javascript/examples/marker-remove
+  this.markers = [];  
 }
 
 GoogleMap.prototype.getMap = function() {
@@ -45,11 +36,7 @@ GoogleMap.prototype.drawLine = function(latLngs) {
     strokeWeight: 1
   });
   ipPath.setMap(this.map);
-};
-
-
-    
-
+}; 
 
 let googleMap = new GoogleMap();
 

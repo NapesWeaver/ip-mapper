@@ -19,7 +19,7 @@ function getDistance(p1, p2) {
     Math.sin(dLong / 2) * Math.sin(dLong / 2);
   const C = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * C * 0.000621371;
-};
+}
 
 function getDNS(ip) {
   $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, function(response) {
@@ -47,7 +47,6 @@ function handleSubmit() {
   $('.ip-search-form').submit(function(event) {
     event.preventDefault();
 
-    //let googleMap = new GoogleMap();
     GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
     
     data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
@@ -67,4 +66,4 @@ function renderHostInfo() {
   $('.host-results').html(decorateHostInfo);
 }
 
-export { getDistance, getIP, handleSubmit, renderHostInfo };
+export { getIP, handleSubmit, renderHostInfo };
