@@ -36,6 +36,21 @@ GoogleMap.prototype.addMarker = function(location) {
   this.markers.push(marker);
 };
 
+GoogleMap.prototype.drawLine = function(latLngs) {
+  let ipPath = new google.maps.Polyline({
+    path: latLngs,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 1
+  });
+  ipPath.setMap(this.map);
+};
+
+
+    
+
+
 let googleMap = new GoogleMap();
 
 export default googleMap;

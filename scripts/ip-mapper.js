@@ -52,20 +52,12 @@ function handleSubmit() {
     
     data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng });
+
     let latLngs = [
       { lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng }
-    ];
-    
-    // let ipPath = new google.maps.Polyline({
-    //   path: latLngs,
-    //   geodesic: true,
-    //   strokeColor: '#FF0000',
-    //   strokeOpacity: 1.0,
-    //   strokeWeight: 1
-    // });
-    
-    // ipPath.setMap(map);
+    ];    
+    GoogleMap.drawLine(latLngs);
       
     renderHostInfo();    
   });   
