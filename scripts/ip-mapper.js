@@ -79,10 +79,11 @@ function submitStart(event) {
 
 function submitSearch(event) {
   event.preventDefault();
+  console.log('submitSearch');
 }
 
 function renderHostInfo() {
-  $('.host-results').html(decorateHostInfo);
+  $('.ip-start-form').replaceWith(decorateHostInfo);
 }
 
 export { getIP, handleSubmit, renderHostInfo };

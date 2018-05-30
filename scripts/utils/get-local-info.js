@@ -43,10 +43,39 @@ function findPrivateIP(onNewIP) {
   };
 }
 
+function getLocalConnectionInfo() {
+  
+  if (navigator.connection) {
+    navigator.connection.addEventListener('change', saveNetworkInfo);
+    function saveNetworkInfo() {
+      // Bandwidth estimate
+      data.downloadSpeed = navigator.connection.downlink;
+      // Round-trip time estimate
+      data.rtt = navigator.connection.rtt;
+      // Effective connection type determined using recently observed rtt and downlink values
+      data.effectiveType = navigator.connection.effectiveType;
+    }
+    saveNetworkInfo();
+  }
+}
+
 function getLocalInfo() {
   getPrivateIP();
   getUserLocation();
   getLocalConnectionInfo();
+}
+
+function getPrivateIP() {
+  
+  if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
+    // Edge & IE
+    data.privateIP = 'Not supported by this browser';
+  }
+  else {
+    findPrivateIP(function(ip) {
+      data.privateIP = ip;
+    });
+  }
 }
 
 function getUserLocation() {
@@ -59,7 +88,7 @@ function getUserLocation() {
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
-      renderHostInfo();
+      //renderHostInfo();
       handleSubmit();      
     }, geolocationError);
   } else {
@@ -84,35 +113,6 @@ function geolocationError(error) {
     console.log('An unknown error occurred.');
     break;
   } 
-}
-
-function getPrivateIP() {
-
-  if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
-    // Edge & IE
-    data.privateIP = 'Not supported by this browser';
-  }
-  else {
-    findPrivateIP(function(ip) {
-      data.privateIP = ip;
-    });
-  }
-}
-
-function getLocalConnectionInfo() {
-
-  if (navigator.connection) {
-    navigator.connection.addEventListener('change', saveNetworkInfo);
-    function saveNetworkInfo() {
-      // Bandwidth estimate
-      data.downloadSpeed = navigator.connection.downlink;
-      // Round-trip time estimate
-      data.rtt = navigator.connection.rtt;
-      // Effective connection type determined using recently observed rtt and downlink values
-      data.effectiveType = navigator.connection.effectiveType;
-    }
-    saveNetworkInfo();
-  }
 }
 
 export { getLocalInfo };
