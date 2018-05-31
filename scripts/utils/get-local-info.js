@@ -88,17 +88,16 @@ function getUserLocation() {
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
-      //renderHostInfo();
-      handleSubmit();      
+      $('#start').prop('disabled', false);
     }, geolocationError);
   } else {
-    handleSubmit();    
+    $('#start').prop('disabled', false);   
     console.log('Geolocation not supported.');
   }  
 }
 
 function geolocationError(error) {
-  handleSubmit();
+  $('#start').prop('disabled', false);
   switch (error.code) {
   case error.PERMISSION_DENIED:
     console.log('Request for Geolocation denied.');
