@@ -53,7 +53,7 @@ function getIP(ip) {
 
 function handleSubmit() {
   $('.page').on('submit', '.ip-start-form', submitStart);
-  $('.page').on('submit', '.ip-search-from', submitSearch);
+  $('.page').on('submit', '.ip-search-form', submitSearch);
 }
 
 function ipCallBack(response) {
