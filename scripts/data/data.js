@@ -9,7 +9,7 @@ let data = {
   publicIP: '0.0.0.0',
   publicLat: 0.0,
   publicLng: 0.0,
-  downloadSpeed: '0.0',
+  downloadSpeed: 0.0,
   effectiveType: 0,
   rtt: 0,
   distance: 0.0,
