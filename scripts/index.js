@@ -1,6 +1,5 @@
-import { getIP, handleSubmit } from './ip-mapper.js';
-import { getLocalInfo } from './utils/get-local-info.js';
+import { getLocalInfo } from './utils/get-info.js';
+import { handleSubmit } from './ip-mapper.js';
 
 getLocalInfo();
-getIP('');
 handleSubmit();

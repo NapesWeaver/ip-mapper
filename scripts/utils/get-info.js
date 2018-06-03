@@ -1,5 +1,4 @@
 import GoogleMap from '../utils/google-maps-wrapper.js';
-import { handleSubmit, renderHostInfo } from '../ip-mapper.js';
 import { data } from '../data/data.js';
 
 /**
@@ -43,6 +42,17 @@ function findPrivateIP(onNewIP) {
   };
 }
 
+function getDNS(ip) {
+  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, function(response) {
+    data.dns = response[Object.keys(response)[0]];
+  });
+}
+
+function getIP(ip) {  
+  const QUERY = `https://ipapi.co/${ip}/json/`;
+  $.getJSON(QUERY, ipCallBack);  
+}
+
 function getLocalConnectionInfo() {
   
   if (navigator.connection) {
@@ -61,6 +71,7 @@ function getLocalConnectionInfo() {
 
 function getLocalInfo() {
   getPrivateIP();
+  getIP('');
   getUserLocation();
   getLocalConnectionInfo();
 }
@@ -85,9 +96,11 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
+
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
+      
       $('#start').prop('disabled', false);
     }, geolocationError);
   } else {
@@ -112,6 +125,16 @@ function geolocationError(error) {
     console.log('An unknown error occurred.');
     break;
   } 
+}
+
+function ipCallBack(response) {
+  if (data.ipSearches.length < 1) {
+    data.publicIP = response.ip;
+    data.publicLat = response.latitude;
+    data.publicLng = response.longitude;
+    getDNS(data.publicIP);
+  }
+  data.ipSearches.push(response);
 }
 
 export { getLocalInfo };
