@@ -7,10 +7,6 @@ function GoogleMap(zoom, center, target) {
   this.markers = [];  
 }
 
-GoogleMap.prototype.getMap = function() {
-  return this.map;
-};
-
 GoogleMap.prototype.addMarker = function(location) {
   let marker = new google.maps.Marker({
     position: location,
@@ -37,6 +33,10 @@ GoogleMap.prototype.drawLine = function(latLngs) {
   });
   ipPath.setMap(this.map);
 }; 
+
+GoogleMap.prototype.getMap = function() {
+  return this.map;
+};
 
 let googleMap = new GoogleMap();
 

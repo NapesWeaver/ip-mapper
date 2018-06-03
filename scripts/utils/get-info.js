@@ -42,6 +42,24 @@ function findPrivateIP(onNewIP) {
   };
 }
 
+function geolocationError(error) {
+  $('#start').prop('disabled', false);
+  switch (error.code) {
+  case error.PERMISSION_DENIED:
+    console.log('Request for Geolocation denied.');
+    break;
+  case error.POSITION_UNAVAILABLE:
+    console.log('Location information is unavailable.');
+    break;
+  case error.TIMEOUT:
+    console.log('The request to get user location timed out.');
+    break;
+  case error.UNKNOWN_ERROR:
+    console.log('An unknown error occurred.');
+    break;
+  } 
+}
+
 function getDNS(ip) {
   $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, function(response) {
     data.dns = response[Object.keys(response)[0]];
@@ -100,31 +118,13 @@ function getUserLocation() {
       GoogleMap.addMarker({ lat: data.privateLat, lng: data.privateLng });
       GoogleMap.map.setZoom(6);
       GoogleMap.map.setCenter({ lat: data.privateLat, lng: data.privateLng });
-      
+
       $('#start').prop('disabled', false);
     }, geolocationError);
   } else {
     $('#start').prop('disabled', false);   
     console.log('Geolocation not supported.');
   }  
-}
-
-function geolocationError(error) {
-  $('#start').prop('disabled', false);
-  switch (error.code) {
-  case error.PERMISSION_DENIED:
-    console.log('Request for Geolocation denied.');
-    break;
-  case error.POSITION_UNAVAILABLE:
-    console.log('Location information is unavailable.');
-    break;
-  case error.TIMEOUT:
-    console.log('The request to get user location timed out.');
-    break;
-  case error.UNKNOWN_ERROR:
-    console.log('An unknown error occurred.');
-    break;
-  } 
 }
 
 function ipCallBack(response) {

@@ -7,14 +7,9 @@ function getDistance(latLngJSON_a, latLngJSON_b) {
   return meters * 0.000621371; // convert meters to miles
 }
 
-function toLatLngObj (latLngJSON) {
-  return new google.maps.LatLng(latLngJSON.lat, latLngJSON.lng);
-}
-
-function markLocation(latLngJSON) {
-  GoogleMap.addMarker(latLngJSON);
-  GoogleMap.map.setZoom(6);
-  GoogleMap.map.setCenter(latLngJSON);
+function handleSubmit() {
+  $('.page').on('submit', '.ip-start-form', submitStart);
+  $('.page').on('submit', '.ip-search-form', submitSearch);
 }
 
 function mapHostInfo() {
@@ -33,9 +28,19 @@ function mapHostInfo() {
   }
 }
 
-function handleSubmit() {
-  $('.page').on('submit', '.ip-start-form', submitStart);
-  $('.page').on('submit', '.ip-search-form', submitSearch);
+function markLocation(latLngJSON) {
+  GoogleMap.addMarker(latLngJSON);
+  GoogleMap.map.setZoom(6);
+  GoogleMap.map.setCenter(latLngJSON);
+}
+
+function renderHostInfo() {
+  $('.ip-start-form').replaceWith(decorateHostInfo);
+}
+
+function submitSearch(event) {
+  event.preventDefault();
+  console.log('submitSearch');
 }
 
 function submitStart(event) {
@@ -44,13 +49,8 @@ function submitStart(event) {
   renderHostInfo();
 }
 
-function submitSearch(event) {
-  event.preventDefault();
-  console.log('submitSearch');
-}
-
-function renderHostInfo() {
-  $('.ip-start-form').replaceWith(decorateHostInfo);
+function toLatLngObj (latLngJSON) {
+  return new google.maps.LatLng(latLngJSON.lat, latLngJSON.lng);
 }
 
 export { handleSubmit, renderHostInfo };
