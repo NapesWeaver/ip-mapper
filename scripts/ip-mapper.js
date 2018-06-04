@@ -1,10 +1,14 @@
 import GoogleMap from './utils/google-maps-wrapper.js';
 import { decorateHostInfo } from './utils/template.js';
+import { getDistance } from './utils/get-info.js';
 import { data } from './data/data.js';
 
-function getDistance(latLngJSON_a, latLngJSON_b) {
-  let meters = google.maps.geometry.spherical.computeDistanceBetween(toLatLngObj(latLngJSON_a), toLatLngObj(latLngJSON_b));
-  return meters * 0.000621371; // convert meters to miles
+function fitBounds() {
+  let bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < GoogleMap.markers.length; i++) {
+    bounds.extend(GoogleMap.markers[i].getPosition());
+  }
+  GoogleMap.map.fitBounds(bounds);
 }
 
 function handleSubmit() {
@@ -13,7 +17,6 @@ function handleSubmit() {
 }
 
 function mapHostInfo() {
-  GoogleMap.addMarker({ lat: data.publicLat, lng: data.publicLng });
     
   if (data.privateLat !== 0) {
     data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
@@ -22,16 +25,18 @@ function mapHostInfo() {
       { lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng }
     ]);
-  } else {
-    GoogleMap.map.setZoom(6);
-    GoogleMap.map.setCenter({ lat: data.publicLat, lng: data.publicLng });
   }
+  mapLocation({ lat: data.publicLat, lng: data.publicLng });
 }
 
-function markLocation(latLngJSON) {
+function mapLocation(latLngJSON) {  
   GoogleMap.addMarker(latLngJSON);
-  GoogleMap.map.setZoom(6);
   GoogleMap.map.setCenter(latLngJSON);
+  if (GoogleMap.markers.length > 1) {
+    fitBounds();
+  } else {
+    GoogleMap.map.setZoom(6);
+  }
 }
 
 function renderHostInfo() {
@@ -49,8 +54,6 @@ function submitStart(event) {
   renderHostInfo();
 }
 
-function toLatLngObj (latLngJSON) {
-  return new google.maps.LatLng(latLngJSON.lat, latLngJSON.lng);
-}
 
-export { handleSubmit, renderHostInfo };
+
+export { handleSubmit, renderHostInfo, mapLocation };
