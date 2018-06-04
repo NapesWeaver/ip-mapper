@@ -61,11 +61,6 @@ function geolocationError(error) {
   } 
 }
 
-function getDistance(latLngJSON_a, latLngJSON_b) {
-  let meters = google.maps.geometry.spherical.computeDistanceBetween(toLatLngObj(latLngJSON_a), toLatLngObj(latLngJSON_b));
-  return meters * 0.000621371; // convert meters to miles
-}
-
 function getDNS(ip) {
   $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, function(response) {
     data.dns = response[Object.keys(response)[0]];
@@ -139,8 +134,4 @@ function ipCallBack(response) {
   data.ipSearches.push(response);
 }
 
-function toLatLngObj (latLngJSON) {
-  return new google.maps.LatLng(latLngJSON.lat, latLngJSON.lng);
-}
-
-export { getDistance, getLocalInfo };
+export { getLocalInfo };

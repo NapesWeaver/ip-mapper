@@ -1,6 +1,5 @@
 import GoogleMap from './utils/google-maps-wrapper.js';
 import { decorateHostInfo } from './utils/template.js';
-import { getDistance } from './utils/get-info.js';
 import { data } from './data/data.js';
 
 function handleSubmit() {
@@ -11,7 +10,7 @@ function handleSubmit() {
 function mapHostInfo() {
     
   if (data.privateLat !== 0) {
-    data.distance = getDistance({ lat: data.privateLat, lng: data.privateLng }, 
+    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, 
       { lat: data.publicLat, lng: data.publicLng });  
     GoogleMap.drawLine([
       { lat: data.privateLat, lng: data.privateLng }, 

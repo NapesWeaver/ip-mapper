@@ -42,9 +42,18 @@ GoogleMap.prototype.fitBounds = function() {
   this.map.fitBounds(bounds);
 };
 
+GoogleMap.prototype.getDistance = function(latLngJSON_a, latLngJSON_b) {
+  let meters = google.maps.geometry.spherical.computeDistanceBetween(toLatLngObj(latLngJSON_a), toLatLngObj(latLngJSON_b));
+  return meters * 0.000621371; // convert meters to miles
+};
+
 GoogleMap.prototype.getMap = function() {
   return this.map;
 };
+
+function toLatLngObj (latLngJSON) {
+  return new google.maps.LatLng(latLngJSON.lat, latLngJSON.lng);
+}
 
 let googleMap = new GoogleMap();
 
