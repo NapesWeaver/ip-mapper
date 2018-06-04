@@ -34,6 +34,14 @@ GoogleMap.prototype.drawLine = function(latLngs) {
   ipPath.setMap(this.map);
 }; 
 
+GoogleMap.prototype.fitBounds = function() {
+  let bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < this.markers.length; i++) {
+    bounds.extend(this.markers[i].getPosition());
+  }
+  this.map.fitBounds(bounds);
+};
+
 GoogleMap.prototype.getMap = function() {
   return this.map;
 };
