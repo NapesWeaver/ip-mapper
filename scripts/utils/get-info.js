@@ -25,10 +25,21 @@ function getDNS(ip) {
 
 function getDNSCallBack(response) {
   data.dns = response[Object.keys(response)[0]];
+  //data.searchDNS = response[Object.keys(response)[0]];
 }
 
 function getIP(ip) {  
   $.getJSON(`https://ipapi.co/${ip}/json/`, getIPCallBack);
+}
+
+function getIPCallBack(response) {
+  if (data.ipSearches.length < 1) {
+    data.publicIP = response.ip;
+    data.publicLat = response.latitude;
+    data.publicLng = response.longitude;
+    getDNS(data.publicIP);
+  }
+  data.ipSearches.push(response);
 }
 
 function getLocalConnectionInfo() {
@@ -47,22 +58,12 @@ function getLocalConnectionInfo() {
   }
 }
 
-function getIPCallBack(response) {
-  if (data.ipSearches.length < 1) {
-    data.publicIP = response.ip;
-    data.publicLat = response.latitude;
-    data.publicLng = response.longitude;
-    getDNS(data.publicIP);
-  }
-  data.ipSearches.push(response);
-}
-
 function getLocalInfo() {
-  testForPrivateIP();
-  getIP('');
-  // getDNS(data.publicIP);
   getUserLocation();
   getLocalConnectionInfo();
+  testForPrivateIP();
+  getPublicIP();
+  //data.dns = data.searchDNS;
 }
 
 /**
@@ -78,8 +79,7 @@ function getPrivateIP(onNewIP) {
     }),
     noop = function () { },
     localIPs = {},
-    ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
-    key;
+    ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
   
   function iterateIP(ip) {
     
@@ -106,6 +106,10 @@ function getPrivateIP(onNewIP) {
   };
 }
 
+function getPublicIP() {
+  getIP('');
+}
+
 function getUserLocation() {
 
   if (navigator.geolocation) {
@@ -127,8 +131,7 @@ function testForPrivateIP() {
   if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
     // Edge & IE
     data.privateIP = 'Not supported by this browser';
-  }
-  else {
+  } else {
     getPrivateIP(function(ip) {
       data.privateIP = ip;
     });

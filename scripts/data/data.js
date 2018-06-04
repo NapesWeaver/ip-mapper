@@ -15,6 +15,7 @@ let data = {
   distance: 0.0,
   dns: '0.0.0.0',
   ipSearches: [],
+  searchDNS: '0.0.0.0',
 };
 
 export { data };
