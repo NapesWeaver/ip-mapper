@@ -31,11 +31,12 @@ function mapHostInfo() {
 
 function mapLocation(latLngJSON) {  
   GoogleMap.addMarker(latLngJSON);
-  GoogleMap.map.setCenter(latLngJSON);
+    
   if (GoogleMap.markers.length > 1) {
     fitBounds();
   } else {
     GoogleMap.map.setZoom(6);
+    GoogleMap.map.setCenter(latLngJSON);
   }
 }
 
