@@ -1,5 +1,6 @@
 import GoogleMap from './utils/google-maps-wrapper.js';
 import { decorateHostInfo } from './utils/template.js';
+import { getIP } from './utils/get-info.js';
 import { data } from './data/data.js';
 
 function handleSubmit() {

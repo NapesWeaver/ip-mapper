@@ -22,7 +22,7 @@ function decorateHostInfo() {
       ${rtt}
       <li>${data.dns}</li>  
     </ul>
-    <input type="text" class="search-text" placeholder="Search IP">
+    <input type="text" id="search-text" placeholder="Search IP">
     <input type="submit" value="SEARCH">
     <input type="reset" value="RESET">
   </form>

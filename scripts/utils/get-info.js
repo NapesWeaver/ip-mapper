@@ -1,13 +1,76 @@
-import GoogleMap from '../utils/google-maps-wrapper.js';
 import { data } from '../data/data.js';
 import { mapLocation } from '../ip-mapper.js';
+
+function geolocationError(error) {
+  $('#start').prop('disabled', false);
+  switch (error.code) {
+  case error.PERMISSION_DENIED:
+    console.log('Request for Geolocation denied.');
+    break;
+  case error.POSITION_UNAVAILABLE:
+    console.log('Location information is unavailable.');
+    break;
+  case error.TIMEOUT:
+    console.log('The request to get user location timed out.');
+    break;
+  case error.UNKNOWN_ERROR:
+    console.log('An unknown error occurred.');
+    break;
+  } 
+}
+
+function getDNS(ip) {
+  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, getDNSCallBack);
+}
+
+function getDNSCallBack(response) {
+  data.dns = response[Object.keys(response)[0]];
+}
+
+function getIP(ip) {  
+  $.getJSON(`https://ipapi.co/${ip}/json/`, getIPCallBack);
+}
+
+function getLocalConnectionInfo() {
+  
+  if (navigator.connection) {
+    navigator.connection.addEventListener('change', saveNetworkInfo);
+    function saveNetworkInfo() {
+      // Bandwidth estimate
+      data.downloadSpeed = navigator.connection.downlink;
+      // Round-trip time estimate
+      data.rtt = navigator.connection.rtt;
+      // Effective connection type determined using recently observed rtt and downlink values
+      data.effectiveType = navigator.connection.effectiveType;
+    }
+    saveNetworkInfo();
+  }
+}
+
+function getIPCallBack(response) {
+  if (data.ipSearches.length < 1) {
+    data.publicIP = response.ip;
+    data.publicLat = response.latitude;
+    data.publicLng = response.longitude;
+    getDNS(data.publicIP);
+  }
+  data.ipSearches.push(response);
+}
+
+function getLocalInfo() {
+  testForPrivateIP();
+  getIP('');
+  // getDNS(data.publicIP);
+  getUserLocation();
+  getLocalConnectionInfo();
+}
 
 /**
  * Get user IP through webkitRTCPeerConnection
  * @param onNewIP {Function} listener function to expose IP locally
  * @return undefined
  */
-function findPrivateIP(onNewIP) {
+function getPrivateIP(onNewIP) {
   // Compatibility for Chrome & Firefox
   let myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
   let pc = new myPeerConnection({
@@ -43,71 +106,6 @@ function findPrivateIP(onNewIP) {
   };
 }
 
-function geolocationError(error) {
-  $('#start').prop('disabled', false);
-  switch (error.code) {
-  case error.PERMISSION_DENIED:
-    console.log('Request for Geolocation denied.');
-    break;
-  case error.POSITION_UNAVAILABLE:
-    console.log('Location information is unavailable.');
-    break;
-  case error.TIMEOUT:
-    console.log('The request to get user location timed out.');
-    break;
-  case error.UNKNOWN_ERROR:
-    console.log('An unknown error occurred.');
-    break;
-  } 
-}
-
-function getDNS(ip) {
-  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, function(response) {
-    data.dns = response[Object.keys(response)[0]];
-  });
-}
-
-function getIP(ip) {  
-  const QUERY = `https://ipapi.co/${ip}/json/`;
-  $.getJSON(QUERY, ipCallBack);  
-}
-
-function getLocalConnectionInfo() {
-  
-  if (navigator.connection) {
-    navigator.connection.addEventListener('change', saveNetworkInfo);
-    function saveNetworkInfo() {
-      // Bandwidth estimate
-      data.downloadSpeed = navigator.connection.downlink;
-      // Round-trip time estimate
-      data.rtt = navigator.connection.rtt;
-      // Effective connection type determined using recently observed rtt and downlink values
-      data.effectiveType = navigator.connection.effectiveType;
-    }
-    saveNetworkInfo();
-  }
-}
-
-function getLocalInfo() {
-  getPrivateIP();
-  getIP('');
-  getUserLocation();
-  getLocalConnectionInfo();
-}
-
-function getPrivateIP() {
-  
-  if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
-    // Edge & IE
-    data.privateIP = 'Not supported by this browser';
-  }
-  else {
-    findPrivateIP(function(ip) {
-      data.privateIP = ip;
-    });
-  }
-}
-
 function getUserLocation() {
 
   if (navigator.geolocation) {
@@ -124,14 +122,17 @@ function getUserLocation() {
   }  
 }
 
-function ipCallBack(response) {
-  if (data.ipSearches.length < 1) {
-    data.publicIP = response.ip;
-    data.publicLat = response.latitude;
-    data.publicLng = response.longitude;
-    getDNS(data.publicIP);
+function testForPrivateIP() {
+  
+  if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
+    // Edge & IE
+    data.privateIP = 'Not supported by this browser';
   }
-  data.ipSearches.push(response);
+  else {
+    getPrivateIP(function(ip) {
+      data.privateIP = ip;
+    });
+  }
 }
 
-export { getLocalInfo };
+export { getLocalInfo, getIP };
