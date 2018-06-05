@@ -1,5 +1,27 @@
 import { data } from '../data/data.js';
-import { mapLocation } from '../ip-mapper.js';
+import { mapLocation, mapSearch } from '../ip-mapper.js';
+
+function callBackSearchIP(response) {
+  console.log(response);
+  data.ipSearches.push(response);
+  getHostName(response.ip, callBackSearchHost);
+  mapSearch();
+}
+
+function callBackPublicIP(response) {
+  data.publicIP = response.ip;
+  data.publicLat = response.latitude;
+  data.publicLng = response.longitude;
+  getHostName(data.publicIP, callBackUserHost);
+}
+
+function callBackSearchHost(response) {
+  console.log(response[Object.keys(response)[0]]);
+}
+
+function callBackUserHost(response) {
+  data.dns = response[Object.keys(response)[0]];
+}
 
 function geolocationError(error) {
   $('#start').prop('disabled', false);
@@ -19,26 +41,12 @@ function geolocationError(error) {
   } 
 }
 
-function getDNS(ip) {
-  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, getDNSCallBack);
+function getHostName(ip, callBack) {
+  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, callBack);
 }
 
-function getDNSCallBack(response) {
-  data.dns = response[Object.keys(response)[0]];
-}
-
-function getIP(ip) {  
-  $.getJSON(`https://ipapi.co/${ip}/json/`, getIPCallBack);
-}
-
-function getIPCallBack(response) {
-  if (data.ipSearches.length < 1) {
-    data.publicIP = response.ip;
-    data.publicLat = response.latitude;
-    data.publicLng = response.longitude;
-    getDNS(data.publicIP);
-  }
-  data.ipSearches.push(response);
+function getIP(ip, callBack) {  
+  $.getJSON(`https://ipapi.co/${ip}/json/`, callBack);
 }
 
 function getLocalConnectionInfo() {
@@ -105,7 +113,7 @@ function getPrivateIP(onNewIP) {
 }
 
 function getPublicIP() {
-  getIP('');
+  getIP('', callBackPublicIP);
 }
 
 function getUserLocation() {
@@ -138,4 +146,4 @@ function testForPrivateIP() {
   }
 }
 
-export { getLocalInfo, getIP };
+export { callBackSearchIP, getLocalInfo, getIP };

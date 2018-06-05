@@ -1,13 +1,25 @@
-import GoogleMap from './utils/map-class.js';
-import { decorateHostInfo } from './utils/template.js';
 import { data } from './data/data.js';
+import { decorateHostInfo } from './utils/template.js';
+import GoogleMap from './utils/map-class.js';
+import { getIP, callBackSearchIP } from './utils/get-info.js';
 
 function handleSubmit() {
   $('.page').on('submit', '.ip-start-form', submitStart);
   $('.page').on('submit', '.ip-search-form', submitSearch);
 }
 
-function mapHostInfo() {
+function mapLocation(latLng) {  
+  GoogleMap.addMarker(latLng);
+    
+  if (GoogleMap.markers.length > 1) {
+    GoogleMap.fitBounds();
+  } else {
+    GoogleMap.map.setZoom(6);
+    GoogleMap.map.setCenter(latLng);
+  }
+}
+
+function mapHost() {
     
   if (data.privateLat !== 0) {
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, 
@@ -20,15 +32,13 @@ function mapHostInfo() {
   mapLocation({ lat: data.publicLat, lng: data.publicLng });
 }
 
-function mapLocation(latLngJSON) {  
-  GoogleMap.addMarker(latLngJSON);
-    
-  if (GoogleMap.markers.length > 1) {
-    GoogleMap.fitBounds();
-  } else {
-    GoogleMap.map.setZoom(6);
-    GoogleMap.map.setCenter(latLngJSON);
-  }
+function mapSearch() {
+  const startingLatLng = { lat: data.publicLat, lng: data.publicLng };
+  const newLatLng = { lat: data.ipSearches[data.ipSearches.length-1].latitude, lng: data.ipSearches[data.ipSearches.length-1].longitude }
+  
+  //distance = GoogleMap.getDistance(startingLatLng, newLatLng);  
+  GoogleMap.drawLine([startingLatLng, newLatLng]);
+  mapLocation(newLatLng);
 }
 
 function renderHostInfo() {
@@ -37,15 +47,13 @@ function renderHostInfo() {
 
 function submitSearch(event) {
   event.preventDefault();
-  console.log('submitSearch');
+  getIP($('#search-text').val(), callBackSearchIP);
 }
 
 function submitStart(event) {
   event.preventDefault();
-  mapHostInfo();     
+  mapHost();     
   renderHostInfo();
 }
 
-
-
-export { handleSubmit, renderHostInfo, mapLocation };
+export { handleSubmit, mapLocation, mapSearch };
