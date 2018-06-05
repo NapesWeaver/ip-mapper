@@ -25,7 +25,6 @@ function getDNS(ip) {
 
 function getDNSCallBack(response) {
   data.dns = response[Object.keys(response)[0]];
-  //data.searchDNS = response[Object.keys(response)[0]];
 }
 
 function getIP(ip) {  
@@ -63,7 +62,6 @@ function getLocalInfo() {
   getLocalConnectionInfo();
   testForPrivateIP();
   getPublicIP();
-  //data.dns = data.searchDNS;
 }
 
 /**
@@ -117,8 +115,10 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
+
       mapLocation({ lat: data.privateLat, lng: data.privateLng });
       $('#start').prop('disabled', false);
+
     }, geolocationError);
   } else {
     $('#start').prop('disabled', false);   
