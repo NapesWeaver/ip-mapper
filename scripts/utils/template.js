@@ -26,7 +26,28 @@ function decorateHostInfo() {
     <input type="submit" value="SEARCH">
     <input type="reset" value="RESET">
   </form>
+  <div class="search-results">
+    <div class="results">
+    </div>
+  </div>
   `;
 }
 
-export { decorateHostInfo };
+function decorateSearchInfo(response) {
+  // console.log(response);
+  return `
+  <div class="result">
+    <h3>IP: ${response.ip}</h3>
+    <ul>
+      <li>Country: ${response.country_name}</li>            
+      <li>Organization: ${response.org}</li>
+      <li>City: ${response.city}</li>
+      <li>Region: ${response.region}</li>
+      <li>Distance: ---mi</li>
+    </ul>
+    <input type="button" class="delete-button" value="DELETE">
+  </div>
+  `;
+}
+
+export { decorateHostInfo, decorateSearchInfo };

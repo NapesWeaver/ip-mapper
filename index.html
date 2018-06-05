@@ -14,56 +14,31 @@
       <h1>IP Mapper</h1>
     </header>
 
-    <main class="page">    
-      <div id="map"></div>   
-      
-      <form class="ip-start-form">
-          <input type="submit" id="start" value="START" disabled="true">         
-      </form>
+    <main>    
+      <div id="map">        
+      </div>   
+      <div class="page">
+        <form class="ip-start-form">
+            <input type="submit" id="start" value="START" disabled="true">         
+        </form>
 
-      <div class="search-results">
-        <div class="results">
-          <!-- <h3>IP: 212.23.0.11</h3>
-          <ul>
-            <li>Organization: Zen Internet Ltd</li>
-            <li>Region: England</li>
-            <li>Distance: 4423mi</li>
-          </ul>
-          <input type="button" class="delete-button" value="DELETE">
+        <div class="search-results">
+          <div class="results">
+          </div>
         </div>
-        <div class="result">
-          <h3>IP: 57.212.100.0</h3>
-          <ul>            
-            <li>Organization: Societe Internationale de Telecommunications Aeronautiques</li>
-            <li>City: Paris</li>
-            <li>Region: Île-de-France</li>
-            <li>Distance: 2500mi</li>
-          </ul>
-          <input type="button" class="delete-button" value="DELETE">
-        </div>
-        <div class="result">
-          <h3>IP: 89.230.90.72</h3>
-          <ul>            
-            <li>Organization: Multimedia Polska S.A.</li>
-            <li>City: Rzeszów</li>
-            <li>Region: Subcarpathian Voivodeship</li>
-            <li>Distance: 5354mi</li>
-          </ul>
-          <input type="button" class="delete-button" value="DELETE"> -->
-        </div>
-      </div>      
+      </div>     
     </main>
 
     <footer role="contentinfo">
-        <p>Last Updated on May 29, 2018</p>
+        <p>Last Updated on June 5, 2018</p>
     </footer>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
     </script>
-    <!-- We're loading gmaps without the async defer attributes, which will guarentee that the `google` object loads before anything else -->
-    <!-- This way, we don't need to use the initMap callback -->
+    <!-- Loading gmaps without async & defer attributes guarentees the `google` object loads before anything else -->
+    <!-- This way, no need for initMap callback -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4&libraries=geometry"></script>    
     <script type="module" src="scripts/data/data.js"></script>
     <script type="module" src="scripts/utils/template.js"></script>

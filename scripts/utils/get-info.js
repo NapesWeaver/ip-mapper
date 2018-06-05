@@ -1,11 +1,11 @@
 import { data } from '../data/data.js';
-import { mapLocation, mapSearch } from '../ip-mapper.js';
+import { mapLocation, mapSearch, renderSearchInfo } from '../ip-mapper.js';
 
 function callBackSearchIP(response) {
-  console.log(response);
   data.ipSearches.push(response);
-  getHostName(response.ip, callBackSearchHost);
   mapSearch();
+  getHostName(response.ip, callBackSearchHost);
+  renderSearchInfo(response);
 }
 
 function callBackPublicIP(response) {
@@ -16,7 +16,7 @@ function callBackPublicIP(response) {
 }
 
 function callBackSearchHost(response) {
-  console.log(response[Object.keys(response)[0]]);
+  data.ipSearches[length - 1].public_host = response[Object.keys(response)[0]];
 }
 
 function callBackUserHost(response) {
