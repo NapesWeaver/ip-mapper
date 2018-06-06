@@ -1,5 +1,5 @@
 import { getLocalInfo } from './utils/get-info.js';
-import { handleButtons } from './ip-mapper.js';
+import { attachListeners } from './ip-mapper.js';
 
 getLocalInfo();
-handleButtons();
+attachListeners();

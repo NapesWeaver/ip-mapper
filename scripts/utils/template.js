@@ -50,4 +50,15 @@ function decorateSearchInfo(response) {
   `;
 }
 
-export { decorateHostInfo, decorateSearchInfo };
+function decorateStart() {
+  return `
+  <form class="ip-start-form">
+      <input type="submit" id="start" value="START">         
+  </form>
+  <div class="search-results">
+    <div class="results">
+    </div>
+  </div>
+  `;
+}
+export { decorateHostInfo, decorateSearchInfo, decorateStart };

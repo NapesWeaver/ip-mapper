@@ -9,7 +9,8 @@ class GoogleMap {
       center: center || { lat: 0, lng: 0 }
     };
     this.map = new google.maps.Map(document.getElementById(target || 'map'), options);
-    this.markers = []; 
+    this.markers = [];
+    this.polyLines = [];
   }
   
   addMarker(location) {
@@ -37,7 +38,8 @@ class GoogleMap {
       strokeWeight: 1
     });
     ipPath.setMap(this.map);
-  }; 
+    this.polyLines.push(ipPath);
+  };
   
   fitBounds() {
     let bounds = new google.maps.LatLngBounds();
