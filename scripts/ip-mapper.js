@@ -19,8 +19,7 @@ function attachListeners() {
 }
 
 function mapLocation(latLng) {  
-  GoogleMap.addMarker(latLng);  
-  // console.log(GoogleMap.markers.length);
+  GoogleMap.addMarker(latLng);
   if (GoogleMap.markers.length > 1) {
     GoogleMap.fitBounds();
   } else {
@@ -32,9 +31,7 @@ function mapLocation(latLng) {
 function mapHost() {
     
   if (data.privateLat !== 0) {
-    //console.log(GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }));
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
-    // console.log(data.distance);
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
   mapLocation({ lat: data.publicLat, lng: data.publicLng });
@@ -44,7 +41,7 @@ function mapSearch() {
   const startingLatLng = { lat: data.publicLat, lng: data.publicLng };
   const newLatLng = { lat: data.ipSearches[data.ipSearches.length-1].latitude, lng: data.ipSearches[data.ipSearches.length-1].longitude }
   
-  // distance = GoogleMap.getDistance(startingLatLng, newLatLng);  
+  // = GoogleMap.getDistance(startingLatLng, newLatLng);  
   GoogleMap.drawLine([startingLatLng, newLatLng]);
   mapLocation(newLatLng);
 }
