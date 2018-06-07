@@ -28,7 +28,6 @@ function decorateHostInfo() {
   </form>
   <div class="search-results">
     <div class="results">
-    ${data.ipSearches}
     ${decorateSearchInfo}
     </div>
   </div>
