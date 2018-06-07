@@ -51,27 +51,30 @@ function renderHostInfo() {
   $('#search-text').focus();
 }
 
-function renderSearchInfo(response) {
-  $('.results').append(decorateSearchInfo(response));
+function renderSearchInfo() {
+  // $('.results').append(decorateSearchInfo(response));
+  // console.log(data.ipSearches.map(e => e));
 }
 
 function removeMarkers() {
   for(let i = 0; i < GoogleMap.markers.length; i++){
     GoogleMap.markers[i].setMap(null);
   }
+  GoogleMap.markers = [];
 }
 
 function removePolyLines() {
   for (let i = 0; i < GoogleMap.polyLines.length; i++) {
     GoogleMap.polyLines[i].setMap(null);
   }
+  GoogleMap.polyLines = [];
 }
 
 function resetMap() {
   removePolyLines();
   removeMarkers();
-  GoogleMap.markers = [];
-  GoogleMap.polyLines = [];
+  
+  
   GoogleMap.map.setCenter({ lat: 0.0, lng: 0.0 });
   GoogleMap.map.setZoom(0);
 }
@@ -95,4 +98,4 @@ function submitStart(event) {
   renderHostInfo();
 }
 
-export { attachListeners, mapLocation, mapSearch, renderSearchInfo };
+export { attachListeners, mapLocation, mapSearch, renderHostInfo, renderSearchInfo };

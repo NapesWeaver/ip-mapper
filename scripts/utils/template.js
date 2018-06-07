@@ -28,27 +28,28 @@ function decorateHostInfo() {
   </form>
   <div class="search-results">
     <div class="results">
+    ${data.ipSearches}
+    ${decorateSearchInfo}
     </div>
   </div>
   `;
 }
 
-function decorateSearchInfo(response) {
-  // console.log(response);
+const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.map((e, i) => {
   return `
   <div class="result">
-    <h3>IP: ${response.ip}</h3>
+    <h3>IP: ${e[0].ip}</h3>
     <ul>
-      <li>Country: ${response.country_name}</li>            
-      <li>Organization: ${response.org}</li>
-      <li>City: ${response.city}</li>
-      <li>Region: ${response.region}</li>
+      <li>Country: ${e[0].country_name}</li>            
+      <li>Organization: ${e[0].org}</li>
+      <li>City: ${e[0].city}</li>
+      <li>Region: ${e[0].region}</li>
       <li>Distance: ---mi</li>
     </ul>
-    <input type="button" class="delete-button" value="DELETE">
+    <input id="${i}" type="button" class="delete-button" value="DELETE">
   </div>
   `;
-}
+}) : '';
 
 function decorateStart() {
   return `

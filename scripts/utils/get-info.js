@@ -1,11 +1,12 @@
 import { data } from '../data/data.js';
-import { mapLocation, mapSearch, renderSearchInfo } from '../ip-mapper.js';
+import { mapLocation, mapSearch, renderSearchInfo, renderHostInfo } from '../ip-mapper.js';
 
 function callBackSearchIP(response) {
   data.ipSearches.push(response);
   mapSearch();
   getHostName(response.ip, callBackSearchHost);
-  renderSearchInfo(response);
+  // renderSearchInfo(response);
+  renderHostInfo();
 }
 
 function callBackPublicIP(response) {

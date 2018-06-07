@@ -20,9 +20,6 @@ let initialData= {
 let data = Object.assign({}, initialData);
 
 function resetData() {
-  let newData = {};
-  newData = Object.assign(newData, initialData);
-  data = newData;
+  data = Object.assign({}, initialData);
 }
-
 export { data, resetData };
