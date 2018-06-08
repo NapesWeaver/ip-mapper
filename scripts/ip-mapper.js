@@ -22,7 +22,7 @@ function deleteMapObject(index) {
   GoogleMap.polyLines[index + polylinesOffSet].setMap(null);
   GoogleMap.markers[index + markersOffSet].setMap(null);  
   GoogleMap.polyLines.splice(index + polylinesOffSet, 1);
-  GoogleMap.markers.splice(index + markersOffSet, 1);
+  GoogleMap.markers.splice(index + markersOffSet, 1);  
 }
 
 function getSearchItemIndex(item) {
@@ -39,6 +39,8 @@ function attachListeners() {
   $('.page').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
+  $('main').on( 'change', '#radial', () => console.log('#radial'));
+  $('main').on( 'change', '#theme', toggleTheme);
 }
 
 function mapLocation(latLng) {  
@@ -118,6 +120,104 @@ function submitStart(event) {
   event.preventDefault();       
   mapHost();
   renderPage();
+}
+
+function toggleTheme() {
+  let options = {};
+  
+  if(GoogleMap.map.styles.length > 0) {
+    options = {
+      zoom: GoogleMap.map.zoom,
+      center: GoogleMap.map.center,
+      styles: []
+    };
+  } else {
+    options = {
+      zoom: GoogleMap.zoom,
+      center: GoogleMap.center,
+      styles: [
+        {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+        {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{color: '#263c3f'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#6b9a76'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{color: '#38414e'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#212a37'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#9ca5b3'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{color: '#746855'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#1f2835'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#f3d19c'}]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'geometry',
+          stylers: [{color: '#2f3948'}]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{color: '#17263c'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#515c6d'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.stroke',
+          stylers: [{color: '#17263c'}]
+        }
+      ]
+    };
+  }
+  GoogleMap.map.setOptions(options);
 }
 
 export { attachListeners, mapLocation, mapSearch, renderPage };
