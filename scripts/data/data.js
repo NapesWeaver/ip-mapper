@@ -1,4 +1,4 @@
-let initialData= {
+let initialData = {
   MAPS_KEY: 'AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4',
   // WHOIS_KEY: 'a290d2a80abb132b1127f4b8e25c63cc',
   //IP_STACK: '70054c0fbb8ec5ae62f13827c683cc65',
@@ -19,8 +19,15 @@ let initialData= {
 
 let data = Object.assign({}, initialData);
 
+// function resetData() {
+//   data = Object.assign({}, initialData);
+// }
+
 function resetData() {
-  data = Object.assign({}, initialData);
+  // Object.keys(data).forEach(e => delete data[e]);
+  // data = Object.assign(data, initialData);
+  data.ipSearches = [];
 }
+
 
 export { data, resetData };
