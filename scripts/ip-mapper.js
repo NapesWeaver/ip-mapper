@@ -6,15 +6,23 @@ import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
 function deleteSearch(event) {
   const index = getSearchItemIndex(event.currentTarget);
   data.ipSearches.splice(index, 1);
-
-  GoogleMap.polyLines[index + 1].setMap(null);
-  GoogleMap.markers[index + 2].setMap(null);
-  
-  GoogleMap.polyLines.splice(index + 1, 1);
-  GoogleMap.markers.splice(index + 2, 1);
-
+  deleteMapObject(index);
   resizeMap();  
   renderPage();
+}
+
+function deleteMapObject(index) {
+  let polylinesOffSet = 0;
+  let markersOffSet = 1;
+
+  if (data.privateLat !== 0 && data.privateLng !== 0) {
+    polylinesOffSet ++;
+    markersOffSet ++;
+  }
+  GoogleMap.polyLines[index + polylinesOffSet].setMap(null);
+  GoogleMap.markers[index + markersOffSet].setMap(null);  
+  GoogleMap.polyLines.splice(index + polylinesOffSet, 1);
+  GoogleMap.markers.splice(index + markersOffSet, 1);
 }
 
 function getSearchItemIndex(item) {
@@ -89,8 +97,6 @@ function resizeMap() {
     GoogleMap.fitBounds();
   } else {
     GoogleMap.map.setZoom(6);
-    // GoogleMap.map.setCenter(latLng);
-    console.log(GoogleMap.markers[GoogleMap.markers.length - 1].position);
     GoogleMap.map.setCenter(GoogleMap.markers[GoogleMap.markers.length - 1].position);
   }
 }
