@@ -1,12 +1,27 @@
 import { data, resetData } from './data/data.js';
-import { decorateHostInfo, decorateSearchInfo, decorateStart } from './utils/template.js';
+import { decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
 import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
 
 function deleteSearch(event) {
-  console.log(event.currentTarget);
-  console.log(event);
-  console.log(data.ipSearches);
+  const index = getSearchItemIndex(event.currentTarget);
+  data.ipSearches.splice(index, 1);
+
+  GoogleMap.polyLines[index + 1].setMap(null);
+  GoogleMap.markers[index + 2].setMap(null);
+  
+  GoogleMap.markers.splice(index + 2, 1);
+  GoogleMap.polyLines.splice(index + 1, 1);
+
+  GoogleMap.fitBounds();
+  renderPage();
+}
+
+function getSearchItemIndex(item) {
+  const itemIndexString = $(item)
+    .closest('.result')
+    .attr('data-index');
+  return parseInt(itemIndexString, 10);
 }
 
 function attachListeners() {
@@ -38,22 +53,19 @@ function mapHost() {
 }
 
 function mapSearch() {
+  const index = data.ipSearches.length - 1;
   const startingLatLng = { lat: data.publicLat, lng: data.publicLng };
-  const newLatLng = { lat: data.ipSearches[data.ipSearches.length-1].latitude, lng: data.ipSearches[data.ipSearches.length-1].longitude }
+  const newLatLng = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };
   
-  // = GoogleMap.getDistance(startingLatLng, newLatLng);  
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, newLatLng);  
+
   GoogleMap.drawLine([startingLatLng, newLatLng]);
   mapLocation(newLatLng);
 }
 
-function renderHostInfo() {
-  $('.page').html(decorateHostInfo);
+function renderPage() {
+  $('.page').html(decoratePage);
   $('#search-text').focus();
-}
-
-function renderSearchInfo() {
-  // $('.results').append(decorateSearchInfo(response));
-  // console.log(data.ipSearches.map(e => e));
 }
 
 function removeMarkers() {
@@ -72,9 +84,7 @@ function removePolyLines() {
 
 function resetMap() {
   removePolyLines();
-  removeMarkers();
-  
-  
+  removeMarkers();  
   GoogleMap.map.setCenter({ lat: 0.0, lng: 0.0 });
   GoogleMap.map.setZoom(0);
 }
@@ -95,7 +105,7 @@ function submitSearch(event) {
 function submitStart(event) {
   event.preventDefault();       
   mapHost();
-  renderHostInfo();
+  renderPage();
 }
 
-export { attachListeners, mapLocation, mapSearch, renderHostInfo, renderSearchInfo };
+export { attachListeners, mapLocation, mapSearch, renderPage };

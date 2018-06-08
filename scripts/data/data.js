@@ -13,7 +13,7 @@ let initialData= {
   effectiveType: 0,
   rtt: 0,
   distance: 0.0,
-  dns: '0.0.0.0',
+  hostName: '0.0.0.0',
   ipSearches: [],
 };
 
@@ -22,4 +22,5 @@ let data = Object.assign({}, initialData);
 function resetData() {
   data = Object.assign({}, initialData);
 }
+
 export { data, resetData };
