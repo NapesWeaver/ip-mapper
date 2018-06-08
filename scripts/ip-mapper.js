@@ -10,10 +10,10 @@ function deleteSearch(event) {
   GoogleMap.polyLines[index + 1].setMap(null);
   GoogleMap.markers[index + 2].setMap(null);
   
-  GoogleMap.markers.splice(index + 2, 1);
   GoogleMap.polyLines.splice(index + 1, 1);
+  GoogleMap.markers.splice(index + 2, 1);
 
-  GoogleMap.fitBounds();
+  resizeMap();  
   renderPage();
 }
 
@@ -35,12 +35,7 @@ function attachListeners() {
 
 function mapLocation(latLng) {  
   GoogleMap.addMarker(latLng);
-  if (GoogleMap.markers.length > 1) {
-    GoogleMap.fitBounds();
-  } else {
-    GoogleMap.map.setZoom(6);
-    GoogleMap.map.setCenter(latLng);
-  }
+  resizeMap();
 }
 
 function mapHost() {
@@ -87,6 +82,17 @@ function resetMap() {
   removeMarkers();  
   GoogleMap.map.setCenter({ lat: 0.0, lng: 0.0 });
   GoogleMap.map.setZoom(0);
+}
+
+function resizeMap() {
+  if (GoogleMap.markers.length > 1) {
+    GoogleMap.fitBounds();
+  } else {
+    GoogleMap.map.setZoom(6);
+    // GoogleMap.map.setCenter(latLng);
+    console.log(GoogleMap.markers[GoogleMap.markers.length - 1].position);
+    GoogleMap.map.setCenter(GoogleMap.markers[GoogleMap.markers.length - 1].position);
+  }
 }
 
 function submitReset() {

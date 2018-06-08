@@ -14,8 +14,8 @@ function decoratePage() {
       <ul>
         <li>Country: ${e.country_name}</li>            
         <li>Organization: ${e.org}</li>
-        <li>City: ${e.city}</li>
         <li>Region: ${e.region}</li>
+        <li>City: ${e.city}</li>
         <li>Distance: ${e.distance.toFixed(1)}mi</li>
       </ul>
       <input type="button" class="delete-button" value="DELETE">
@@ -27,6 +27,7 @@ function decoratePage() {
   <form class="ip-search-form">
     <h2>Host Information</h2>
     <ul>
+      <li>${data.hostName}</li>  
       <li>Private IP: ${data.privateIP}</li>
       ${privateLatLng}
       <li>Public IP: ${data.publicIP}</li>
@@ -35,7 +36,6 @@ function decoratePage() {
       ${downLink}
       ${effectiveType}
       ${rtt}
-      <li>${data.hostName}</li>  
     </ul>
     <input type="text" id="search-text" placeholder="Search IP">
     <input type="submit" value="SEARCH">
