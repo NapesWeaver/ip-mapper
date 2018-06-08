@@ -1,9 +1,5 @@
 class GoogleMap {
-  constructor(zoom, center, target) {
-    this.zoom = zoom;
-    this.center = center;
-    this.target = target;
-
+  constructor(zoom, center, target) {    
     let options = {
       zoom: zoom || 0,
       center: center || { lat: 0, lng: 0 },
@@ -88,6 +84,11 @@ class GoogleMap {
         }
       ]
     };
+
+    this.zoom = zoom;
+    this.center = center;
+    this.target = target;
+    this.options = options;    
     this.map = new google.maps.Map(document.getElementById(target || 'map'), options);
     this.markers = [];
     this.polyLines = [];
@@ -139,11 +140,11 @@ class GoogleMap {
   };
 }
 
+let googleMap = new GoogleMap();
+
 function toGoogleLatLng(latLng) {
   return new google.maps.LatLng(latLng.lat, latLng.lng);
 }
-
-let googleMap = new GoogleMap();
 
 export default googleMap;
 
