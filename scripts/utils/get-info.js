@@ -1,18 +1,18 @@
 import { data } from '../data/data.js';
-import { mapLocation, mapSearch, renderPage } from '../ip-mapper.js';
-
-function callBackSearchIP(response) {
-  data.ipSearches.push(response);
-  mapSearch();
-  getHostName(response.ip, callBackSearchHost);
-  renderPage();
-}
+import { mapMarker, mapSearch, renderPage } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
   data.publicLat = response.latitude;
   data.publicLng = response.longitude;
   getHostName(data.publicIP, callBackUserHost);
+}
+
+function callBackSearchIP(response) {
+  data.ipSearches.push(response);
+  mapSearch();
+  getHostName(response.ip, callBackSearchHost);
+  renderPage();
 }
 
 function callBackSearchHost(response) {
@@ -124,7 +124,7 @@ function getUserLocation() {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
-      mapLocation({ lat: data.privateLat, lng: data.privateLng });
+      mapMarker({ lat: data.privateLat, lng: data.privateLng });
       $('#start').prop('disabled', false);
 
     }, geolocationError);

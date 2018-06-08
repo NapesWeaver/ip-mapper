@@ -3,6 +3,17 @@ import { decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
 import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
 
+function attachListeners() {
+  $('.page').on('submit', '.ip-start-form', submitStart);
+  $('.page').on('submit', '.ip-search-form', submitSearch);
+  $('.page').on('reset', '', submitReset);
+  $('.page').on('click', '.delete-button', function(event) {
+    deleteSearch(event);
+  });
+  $('main').on( 'change', '#view', toggleView);
+  $('main').on( 'change', '#theme', toggleTheme);
+}
+
 function deleteSearch(event) {
   const index = getSearchItemIndex(event.currentTarget);
   data.ipSearches.splice(index, 1);
@@ -32,20 +43,19 @@ function getSearchItemIndex(item) {
   return parseInt(itemIndexString, 10);
 }
 
-function attachListeners() {
-  $('.page').on('submit', '.ip-start-form', submitStart);
-  $('.page').on('submit', '.ip-search-form', submitSearch);
-  $('.page').on('reset', '', submitReset);
-  $('.page').on('click', '.delete-button', function(event) {
-    deleteSearch(event);
-  });
-  $('main').on( 'change', '#radial', () => console.log('#radial'));
-  $('main').on( 'change', '#theme', toggleTheme);
-}
+function getStartingLatLng(index) {
+  let startingLatLng = {};
 
-function mapLocation(latLng) {  
-  GoogleMap.addMarker(latLng);
-  resizeMap();
+  if ($('#view').prop('checked')) {
+    if (data.ipSearches.length === 1) {
+      startingLatLng = { lat: data.publicLat, lng: data.publicLng };
+    } else {
+      startingLatLng = { lat: data.ipSearches[index - 1].latitude, lng: data.ipSearches[index - 1].longitude };
+    }    
+  } else {
+    startingLatLng = { lat: data.publicLat, lng: data.publicLng };    
+  }
+  return startingLatLng;
 }
 
 function mapHost() {
@@ -54,18 +64,25 @@ function mapHost() {
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
-  mapLocation({ lat: data.publicLat, lng: data.publicLng });
+  mapMarker({ lat: data.publicLat, lng: data.publicLng });
+}
+
+function mapLine(startingLatLng, newLatLng) {   
+  GoogleMap.drawLine([startingLatLng, newLatLng]);
+}
+
+function mapMarker(latLng) {  
+  GoogleMap.addMarker(latLng);
+  resizeMap();
 }
 
 function mapSearch() {
   const index = data.ipSearches.length - 1;
-  const startingLatLng = { lat: data.publicLat, lng: data.publicLng };
-  const newLatLng = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };
-  
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, newLatLng);  
-
-  GoogleMap.drawLine([startingLatLng, newLatLng]);
-  mapLocation(newLatLng);
+  const newLatLng = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
+  let startingLatLng = getStartingLatLng(index);
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, newLatLng);
+  mapLine(startingLatLng, newLatLng);
+  mapMarker(newLatLng);
 }
 
 function renderPage() {
@@ -220,4 +237,8 @@ function toggleTheme() {
   GoogleMap.map.setOptions(options);
 }
 
-export { attachListeners, mapLocation, mapSearch, renderPage };
+function toggleView() {
+  console.log('toggleView()');
+}
+
+export { attachListeners, mapMarker, mapSearch, renderPage };
