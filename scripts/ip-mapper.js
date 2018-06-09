@@ -10,8 +10,38 @@ function attachListeners() {
   $('.page').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
-  $('main').on( 'change', '#view', toggleView);
+  // $('main').on( 'change', '#view', toggleView);
   $('main').on( 'change', '#theme', toggleTheme);
+}
+
+function deleteMapObject(index) {
+  let polyLinesOffSet = 0;
+  let markersOffSet = 1;
+
+  if (data.privateLat !== 0 && data.privateLng !== 0) {
+    // There is an extra marker & polyline if getUserLocation() was successful
+    polyLinesOffSet++;
+    markersOffSet++;
+  }
+  deletePolyLines(index + polyLinesOffSet);
+  deleteMarker(index + markersOffSet);
+  redrawPolyLines(index);
+}
+
+function deleteMarker(index) {
+  GoogleMap.markers[index].setMap(null); 
+  GoogleMap.markers.splice(index, 1);
+}
+
+function deletePolyLine(index) {
+  GoogleMap.polyLines[index].setMap(null);
+  GoogleMap.polyLines.splice(index, 1);
+}
+
+function deletePolyLines(index) {
+  for (let i = index; i < GoogleMap.polyLines.length;) {
+    deletePolyLine(i);
+  }
 }
 
 function deleteSearch(event) {
@@ -22,18 +52,13 @@ function deleteSearch(event) {
   renderPage();
 }
 
-function deleteMapObject(index) {
-  let polylinesOffSet = 0;
-  let markersOffSet = 1;
+function drawMarker(latLng) {  
+  GoogleMap.addMarker(latLng);
+  resizeMap();
+}
 
-  if (data.privateLat !== 0 && data.privateLng !== 0) {
-    polylinesOffSet ++;
-    markersOffSet ++;
-  }
-  GoogleMap.polyLines[index + polylinesOffSet].setMap(null);
-  GoogleMap.markers[index + markersOffSet].setMap(null);  
-  GoogleMap.polyLines.splice(index + polylinesOffSet, 1);
-  GoogleMap.markers.splice(index + markersOffSet, 1);  
+function drawPolyLine(startingLatLng, newLatLng) {   
+  GoogleMap.drawLine([startingLatLng, newLatLng]);
 }
 
 function getSearchItemIndex(item) {
@@ -47,33 +72,24 @@ function getStartingLatLng(index) {
   let startingLatLng = {};
 
   if ($('#view').prop('checked')) {
-    if (data.ipSearches.length === 1) {
+    if (index === 0) {
       startingLatLng = { lat: data.publicLat, lng: data.publicLng };
     } else {
       startingLatLng = { lat: data.ipSearches[index - 1].latitude, lng: data.ipSearches[index - 1].longitude };
     }    
   } else {
-    startingLatLng = { lat: data.publicLat, lng: data.publicLng };    
+    startingLatLng = { lat: data.publicLat, lng: data.publicLng };  
   }
   return startingLatLng;
 }
 
 function mapHost() {
     
-  if (data.privateLat !== 0) {
+  if (data.privateLat !== 0 && data.privateLng !== 0) {
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
-  mapMarker({ lat: data.publicLat, lng: data.publicLng });
-}
-
-function mapLine(startingLatLng, newLatLng) {   
-  GoogleMap.drawLine([startingLatLng, newLatLng]);
-}
-
-function mapMarker(latLng) {  
-  GoogleMap.addMarker(latLng);
-  resizeMap();
+  drawMarker({ lat: data.publicLat, lng: data.publicLng });
 }
 
 function mapSearch() {
@@ -81,8 +97,19 @@ function mapSearch() {
   const newLatLng = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   let startingLatLng = getStartingLatLng(index);
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, newLatLng);
-  mapLine(startingLatLng, newLatLng);
-  mapMarker(newLatLng);
+  drawPolyLine(startingLatLng, newLatLng);
+  drawMarker(newLatLng);
+}
+
+function redrawPolyLines(index) {
+  
+  if (data.ipSearches.length !== index) {
+    for (let i = index; i < data.ipSearches.length; i++) {    
+      let startingLatLng = getStartingLatLng(i);
+      let nextLatLng = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
+      drawPolyLine(startingLatLng, nextLatLng);
+    }
+  }
 }
 
 function renderPage() {
@@ -238,7 +265,7 @@ function toggleTheme() {
 }
 
 function toggleView() {
-  console.log('toggleView()');
+  // console.log('toggleView()');
 }
 
-export { attachListeners, mapMarker, mapSearch, renderPage };
+export { attachListeners, drawMarker, mapSearch, renderPage };

@@ -1,5 +1,5 @@
 import { data } from '../data/data.js';
-import { mapMarker, mapSearch, renderPage } from '../ip-mapper.js';
+import { drawMarker, mapSearch, renderPage } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
@@ -119,12 +119,14 @@ function getPublicIP() {
 function getUserLocation() {
 
   if (navigator.geolocation) {
-    /* Local network information used by Google Location Services to estimate location includes information about visible WiFi access points, including signal strength &information about your local router, computer's IP address */ 
+    // Local network information used by Google Location Services to estimate
+    // location includes information about visible WiFi access points, including
+    // signal strength &information about your local router, computer's IP address 
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
-      mapMarker({ lat: data.privateLat, lng: data.privateLng });
+      drawMarker({ lat: data.privateLat, lng: data.privateLng });
       $('#start').prop('disabled', false);
 
     }, geolocationError);
