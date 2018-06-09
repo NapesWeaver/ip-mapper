@@ -3,13 +3,13 @@ class GoogleMap {
     let options = {
       zoom: zoom || 0,
       center: center || { lat: 0, lng: 0 },
-      styles: []  
+      styles: []
     };
 
     this.zoom = zoom;
     this.center = center;
     this.target = target;
-    this.options = options;    
+    this.options = options;
     this.map = new google.maps.Map(document.getElementById(target || 'map'), options);
     this.markers = [];
     this.polyLines = [];
@@ -19,6 +19,7 @@ class GoogleMap {
     let marker = new google.maps.Marker({
       position: location,
       map: this.map,
+      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
       moveMarker: (location) => {
         this.map.setCenter(location);
         this.marker.setPosition(location);
