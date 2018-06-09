@@ -107,6 +107,7 @@ function redrawPolyLines(index) {
     for (let i = index; i < data.ipSearches.length; i++) {    
       let startingLatLng = getStartingLatLng(i);
       let nextLatLng = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
+      data.ipSearches[i].distance = GoogleMap.getDistance(startingLatLng, nextLatLng);
       drawPolyLine(startingLatLng, nextLatLng);
     }
   }
