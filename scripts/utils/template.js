@@ -9,10 +9,12 @@ function decoratePage() {
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
   const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.map((e, i) => {
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
+    const publicHost = e.public_host === undefined ? '' : `<li>Host Name: ${e.public_host}</li>`;
     return `
     <div class="result" data-index="${i}">
       <h3>IP: ${e.ip}</h3>
       <ul>
+        <li>${publicHost}</li>
         <li>Country: ${e.country_name}</li>            
         <li>Organization: ${e.org}</li>
         <li>Region: ${e.region}</li>

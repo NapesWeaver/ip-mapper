@@ -12,11 +12,12 @@ function callBackSearchIP(response) {
   data.ipSearches.push(response);
   mapSearch();
   getHostName(response.ip, callBackSearchHost);
-  renderPage();
 }
 
 function callBackSearchHost(response) {
-  data.ipSearches[length - 1].public_host = response[Object.keys(response)[0]];
+  const host = response[Object.keys(response)[0]];
+  data.ipSearches[length - 1].public_host = host;
+  renderPage();
 }
 
 function callBackUserHost(response) {
@@ -126,7 +127,7 @@ function getUserLocation() {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
-      drawMarker({ lat: data.privateLat, lng: data.privateLng, data:{ city: 'hello'}});
+      drawMarker({ lat: data.privateLat, lng: data.privateLng, data:{ title: `Private IP: ${data.privateIP}`}});
       $('#start').prop('disabled', false);
 
     }, geolocationError);

@@ -99,7 +99,8 @@ function mapHost() {
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
-  const location = { lat: data.publicLat, lng: data.publicLng, data: {city: 'Host'} };
+  const title = `Public IP: ${data.publicIP}`;
+  const location = { lat: data.publicLat, lng: data.publicLng, data: { title: title } };
   drawMarker(location);
 }
 
@@ -107,14 +108,16 @@ function mapSearch() {
   const index = data.ipSearches.length - 1;
   const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
+  const title = data.ipSearches[index].ip;
+
   drawPolyLine(startingLatLng, location);
   
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);
   data.ipSearches[index].dataIndex = index;
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
   
   location.data = data.ipSearches[index];
+  location.data.title = title;
   drawMarker(location);
-  console.log(data.ipSearches);
 }
 
 function redrawMarkers(index) {
@@ -124,7 +127,6 @@ function redrawMarkers(index) {
     location.data = data.ipSearches[i];
     drawMarker(location);
   }
-  console.log(data.ipSearches);
 }
 
 function redrawPolyLines(index) {

@@ -16,12 +16,12 @@ class GoogleMap {
   }
   
   addMarker(location) {
-    const info = location.data.city;
+    const info = location.data.title;
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
       icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-      title: location.data.city,      
+      title: location.data.title,      
     });
 
     const infoWindow = new google.maps.InfoWindow({
