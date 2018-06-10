@@ -25,12 +25,20 @@ function deleteMapObject(index) {
   }
   deletePolyLines(index + polyLinesOffSet);
   deleteMarker(index + markersOffSet);
+  // deleteMarkers(index + markersOffSet);
+  // redrawMarkers(index);
   redrawPolyLines(index);
 }
 
 function deleteMarker(index) {
   GoogleMap.markers[index].setMap(null); 
   GoogleMap.markers.splice(index, 1);
+}
+
+function deleteMarkers(index) {
+  for (let i = index; i < GoogleMap.markers.length;) {
+    deleteMarker();
+  }
 }
 
 function deletePolyLine(index) {
@@ -52,8 +60,8 @@ function deleteSearch(event) {
   renderPage();
 }
 
-function drawMarker(latLng) {  
-  GoogleMap.addMarker(latLng);
+function drawMarker(location) { 
+  GoogleMap.addMarker(location);
   resizeMap();
 }
 
@@ -70,16 +78,19 @@ function getSearchItemIndex(item) {
 
 function getStartingLatLng(index) {
   let startingLatLng = {};
-
+          
   if ($('#view').prop('checked')) {
+    data.ipSearches[index].hopType = 'traceRoute';
+
     if (index === 0) {
       startingLatLng = { lat: data.publicLat, lng: data.publicLng };
     } else {
       startingLatLng = { lat: data.ipSearches[index - 1].latitude, lng: data.ipSearches[index - 1].longitude };
-    }    
+    } 
   } else {
-    startingLatLng = { lat: data.publicLat, lng: data.publicLng };  
-  }
+    data.ipSearches[index].hopType = 'radial';
+    startingLatLng = { lat: data.publicLat, lng: data.publicLng };
+  }          
   return startingLatLng;
 }
 
@@ -89,16 +100,35 @@ function mapHost() {
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
-  drawMarker({ lat: data.publicLat, lng: data.publicLng });
+  const location = { lat: data.publicLat, lng: data.publicLng, data: {city: 'Host'} };
+  drawMarker(location);
 }
 
 function mapSearch() {
   const index = data.ipSearches.length - 1;
-  const newLatLng = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
-  let startingLatLng = getStartingLatLng(index);
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, newLatLng);
-  drawPolyLine(startingLatLng, newLatLng);
-  drawMarker(newLatLng);
+  const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
+  const startingLatLng = getStartingLatLng(index);
+  drawPolyLine(startingLatLng, location);
+  
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);
+  data.ipSearches[index].dataIndex = index;
+
+  // console.log(Object.keys(data.ipSearches[index]));
+  console.log(data.ipSearches);
+
+  location.data = data.ipSearches[index];
+  drawMarker(location);
+}
+
+function redrawMarkers(index) {
+  
+  if (data.ipSearches.length !== index) {
+    for (let i = index; i < data.ipSearches.length; i++) {    
+      const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };
+      location.data = data.ipSearches[index];
+      drawMarker(location);
+    }
+  }
 }
 
 function redrawPolyLines(index) {

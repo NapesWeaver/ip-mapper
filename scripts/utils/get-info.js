@@ -126,7 +126,7 @@ function getUserLocation() {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
-      drawMarker({ lat: data.privateLat, lng: data.privateLng });
+      drawMarker({ lat: data.privateLat, lng: data.privateLng, data:{ city: 'hello'}});
       $('#start').prop('disabled', false);
 
     }, geolocationError);

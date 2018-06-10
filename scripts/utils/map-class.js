@@ -3,7 +3,7 @@ class GoogleMap {
     let options = {
       zoom: zoom || 0,
       center: center || { lat: 0, lng: 0 },
-      styles: []
+      styles: [],
     };
 
     this.zoom = zoom;
@@ -16,18 +16,22 @@ class GoogleMap {
   }
   
   addMarker(location) {
-    let marker = new google.maps.Marker({
+    const info = location.data.city;
+    const marker = new google.maps.Marker({
       position: location,
       map: this.map,
       icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-      moveMarker: (location) => {
-        this.map.setCenter(location);
-        this.marker.setPosition(location);
-      }
+      title: location.data.city,      
     });
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: info,
+    });
+
     marker.addListener('click', () => {
       this.map.setZoom(8);
       this.map.setCenter(marker.getPosition());
+      infoWindow.open(this.map, marker);
     });
     this.markers.push(marker);
   };
@@ -38,7 +42,7 @@ class GoogleMap {
       geodesic: true,
       strokeColor: '#FF0000',
       strokeOpacity: 1.0,
-      strokeWeight: 1
+      strokeWeight: 1,
     });
     ipPath.setMap(this.map);
     this.polyLines.push(ipPath);
