@@ -8,6 +8,7 @@ function decoratePage() {
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
   const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.map((e, i) => {
+    const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
     return `
     <div class="result" data-index="${i}">
       <h3>IP: ${e.ip}</h3>
@@ -16,7 +17,7 @@ function decoratePage() {
         <li>Organization: ${e.org}</li>
         <li>Region: ${e.region}</li>
         <li>City: ${e.city}</li>
-        <li>Distance: ${e.distance.toFixed(1)}mi</li>
+        <li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>
       </ul>
       <input type="button" class="delete-button" value="DELETE">
     </div>

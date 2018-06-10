@@ -24,9 +24,8 @@ function deleteMapObject(index) {
     markersOffSet++;
   }
   deletePolyLines(index + polyLinesOffSet);
-  deleteMarker(index + markersOffSet);
-  // deleteMarkers(index + markersOffSet);
-  // redrawMarkers(index);
+  deleteMarkers(index + markersOffSet);
+  redrawMarkers(index);
   redrawPolyLines(index);
 }
 
@@ -37,7 +36,7 @@ function deleteMarker(index) {
 
 function deleteMarkers(index) {
   for (let i = index; i < GoogleMap.markers.length;) {
-    deleteMarker();
+    deleteMarker(index);
   }
 }
 
@@ -112,23 +111,20 @@ function mapSearch() {
   
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);
   data.ipSearches[index].dataIndex = index;
-
-  // console.log(Object.keys(data.ipSearches[index]));
-  console.log(data.ipSearches);
-
+  
   location.data = data.ipSearches[index];
   drawMarker(location);
+  console.log(data.ipSearches);
 }
 
 function redrawMarkers(index) {
-  
-  if (data.ipSearches.length !== index) {
-    for (let i = index; i < data.ipSearches.length; i++) {    
-      const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };
-      location.data = data.ipSearches[index];
-      drawMarker(location);
-    }
+  for (let i = index; i < data.ipSearches.length; i++) {    
+    let location = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
+    data.ipSearches[i].dataIndex = index;
+    location.data = data.ipSearches[i];
+    drawMarker(location);
   }
+  console.log(data.ipSearches);
 }
 
 function redrawPolyLines(index) {
