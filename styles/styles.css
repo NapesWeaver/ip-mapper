@@ -24,10 +24,6 @@ h3 {
   font-size: 1em;
 }
 
-/* .form-controls {
-  margin: 6px 0 6px 0;
-} */
-
 header,
 #map,
 form,
@@ -37,6 +33,37 @@ form,
 footer {
   width: 330px;
   margin: 0 auto;  
+}
+
+
+#search-text {
+  width: 50%;
+  font-family: inherit;
+}
+
+.delete-button {
+  margin: 3px 0 3px 230px;
+  position: absolute;
+}
+
+footer {  
+  text-align: center;
+  font-size: 0.8em;
+}
+
+input,
+.slider {
+  cursor: pointer;
+}
+
+.slider-switch {
+  text-align: center;
+  background: #C5EFBA;
+}
+
+footer,
+.slider-switch {
+  margin: 6px auto 6px auto;
 }
 
 .host-results,
@@ -51,31 +78,14 @@ footer {
   background: #C5EFBA;
 }
 
-#search-text {
-  width: 50%;
-  font-family: inherit;
+/** Google Map InfoWindow CSS **/
+
+.info-window h1 {
+  font-size: 1em;
 }
 
-.delete-button {
-  margin: 3px 0 3px 230px;
-  position: absolute;
-}
-
-footer {
-  margin: 6px auto 6px auto;  
-  text-align: center;
-  font-size: 0.8em;
-}
-
-input,
-.slider {
-  cursor: pointer;
-}
-
-.slider-switch {
-  margin: 6px auto 6px auto;
-  text-align: center;
-  background: #C5EFBA;
+.info-window li {
+  font-size: 0.9em;
 }
 
 /** CSS for creating the "slider-switch" **/
@@ -130,16 +140,8 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/** Google Map InfoWindow CSS **/
-.info-window h1 {
-  font-size: 1em;
-}
-
-.info-window li {
-  font-size: 0.9em;
-}
-
 /** Responsive CSS **/
+
 @media only screen and (min-width: 640px) {
 
 
