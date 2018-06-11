@@ -1,36 +1,54 @@
 body {
   /* box-sizing: border-box; */
-  font-family: sans-serif;
+  font-family: sans-serif;  
+  /* background: #AAD7FF; */
 }
 
 #map {
-  height: 400px;
-  width: 300px;
+  height: 300px;  
   margin: 0 auto;
+  /* border: solid 1px #000000; */
 }
 
 h1 {
+  margin-bottom: 6px;
   text-align: center;
-  font-size: 1.8em;
-}
-
-h2 {
   font-size: 1.5em;
 }
 
-h3 {
+h2 {
   font-size: 1.2em;
 }
 
-div p {
-  color: red;
+h3 {
+  font-size: 1em;
 }
 
+/* .form-controls {
+  margin: 6px 0 6px 0;
+} */
+
+header,
+#map,
 form,
+.slider-switch,
+.host-results,
+.result,
+footer {
+  width: 330px;
+  margin: 0 auto;  
+}
+
 .host-results,
 .result {
-  width: 300px;
-  margin: 5px auto;  
+  background: #F9F5E7;
+}
+
+header,
+.slider-switch,
+.form-controls,
+footer {
+  background: #C5EFBA;
 }
 
 #search-text {
@@ -39,10 +57,12 @@ form,
 }
 
 .delete-button {
-  margin-left: 63%;
+  margin: 3px 0 3px 230px;
+  position: absolute;
 }
 
 footer {
+  margin: 6px auto 6px auto;  
   text-align: center;
   font-size: 0.8em;
 }
@@ -53,14 +73,18 @@ input,
 }
 
 .slider-switch {
-  width: 200px;
-  margin: auto;
+  margin: 6px auto 6px auto;
   text-align: center;
+  background: #C5EFBA;
 }
-/* The switch - the box around the slider */
+
+/** CSS for creating the "slider-switch" **/
+
+/* Box surronding slider */
 .switch {  
   position: relative;
   display: inline-block;
+  margin-top: 3px;
   width: 60px;
   height: 19px;
 }
@@ -68,7 +92,7 @@ input,
 .switch input {
   display:none;
 }
-/* The slider */
+/* Slider */
 .slider {
   position: absolute;  
   top: 0;
@@ -104,4 +128,24 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+/** Google Map InfoWindow CSS **/
+.info-window h1 {
+  font-size: 1em;
+}
+
+.info-window li {
+  font-size: 0.9em;
+}
+
+/** Responsive CSS **/
+@media only screen and (min-width: 640px) {
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+
 }

@@ -16,14 +16,6 @@
 
     <main>
       <div class="slider-switch">
-        <label>Radial</label>
-        <label class="switch">
-          <input id="view" type="checkbox">
-          <span class="slider"></span>
-        </label>
-        <label>Traceroute</label>
-      </div>
-      <div class="slider-switch">
         <label>Default</label>
         <label class="switch">
           <input id="theme" type="checkbox">
@@ -31,12 +23,19 @@
         </label>
         <label>Dark</label>
       </div>
-      
+
+      <!-- <iframe title="IP Mapper">
+        <div id="map">        
+        </div>
+      </iframe> -->
       <div id="map">        
-      </div>   
+      </div>
+
       <div class="page">
         <form class="ip-start-form">
-          <input type="submit" id="start" value="START" disabled="disabled">         
+          <label>Get Local Network Information
+            <input type="submit" id="start" value="START" disabled="disabled">
+          </label>
         </form>
 
         <div class="search-results">
@@ -47,7 +46,7 @@
     </main>
 
     <footer role="contentinfo">
-        <p>Last Updated on June 9, 2018</p>
+        <p>Last Updated on June 11, 2018</p>
     </footer>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
