@@ -127,9 +127,11 @@ function getUserLocation() {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
+
       drawMarker({ lat: data.privateLat, lng: data.privateLng, data:{ title: `Private IP: ${data.privateIP}`}});
       $('#start').prop('disabled', false);
 
+      
     }, geolocationError);
   } else {
     $('#start').prop('disabled', false);   

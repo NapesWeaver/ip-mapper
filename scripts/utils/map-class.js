@@ -16,7 +16,7 @@ class GoogleMap {
   }
   
   addMarker(location) {
-    const info = location.data.title;
+    const info = location.data.formattedInfo;
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -29,8 +29,8 @@ class GoogleMap {
     });
 
     marker.addListener('click', () => {
-      this.map.setZoom(8);
-      this.map.setCenter(marker.getPosition());
+      // this.map.setZoom(7);
+      // this.map.setCenter(marker.getPosition());
       infoWindow.open(this.map, marker);
     });
     this.markers.push(marker);

@@ -1,5 +1,5 @@
 import { data, resetData } from './data/data.js';
-import { decoratePage, decorateStart } from './utils/template.js';
+import { decorateInfoWindow, decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
 import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
 
@@ -101,6 +101,8 @@ function mapHost() {
   }
   const title = `Public IP: ${data.publicIP}`;
   const location = { lat: data.publicLat, lng: data.publicLng, data: { title: title } };
+
+  
   drawMarker(location);
 }
 
@@ -109,14 +111,19 @@ function mapSearch() {
   const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
-
+  
   drawPolyLine(startingLatLng, location);
+  
   
   data.ipSearches[index].dataIndex = index;
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
   
-  location.data = data.ipSearches[index];
+
+  location.data = data.ipSearches[index];  
   location.data.title = title;
+  location.data.formattedInfo = decorateInfoWindow(index);
+
+
   drawMarker(location);
 }
 
