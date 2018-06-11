@@ -1,17 +1,19 @@
 import { data } from '../data/data.js';
 
-function decorateInfoWindow(index) {
+function decorateSearchInfoWindow(index) {
   const publicHost = data.ipSearches[index].public_host === undefined ? '' : `<li>Host Name: ${data.ipSearches[index].public_host}</li>`;
   const hopTypeString = data.ipSearches[index].hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
   return `
-  <h3>IP: ${data.ipSearches[index].ip}</h3>
+  <h1>IP: ${data.ipSearches[index].ip}</h1>
   <ul>
     ${publicHost}
-    <li>Country: ${data.ipSearches[index].country_name}</li>            
     <li>Organization: ${data.ipSearches[index].org}</li>
+    <li>Country: ${data.ipSearches[index].country_name}</li>            
     <li>Region: ${data.ipSearches[index].region}</li>
     <li>City: ${data.ipSearches[index].city}</li>
     <li>${hopTypeString}: ${data.ipSearches[index].distance.toFixed(1)}mi</li>
+    <li>Latitude: ${data.ipSearches[index].latitude}</li>
+    <li>Longitude: ${data.ipSearches[index].longitude}</li>
   </ul>
   `;
 }
@@ -29,8 +31,8 @@ function decoratePage() {
       <h3>IP: ${e.ip}</h3>
       <ul>
         ${publicHost}
-        <li>Country: ${e.country_name}</li>            
         <li>Organization: ${e.org}</li>
+        <li>Country: ${e.country_name}</li>            
         <li>Region: ${e.region}</li>
         <li>City: ${e.city}</li>
         <li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>
@@ -47,10 +49,10 @@ function decoratePage() {
       <li>Private IP: ${data.privateIP}</li>
       <li>Public IP: ${data.publicIP}</li>
       <li>${data.hostName}</li>  
-      ${distance}
       ${downLink}
       ${effectiveType}
       ${rtt}
+      ${distance}
     </ul>
     <input type="text" id="search-text" placeholder="Search IP">
     <input type="submit" value="SEARCH">
@@ -61,6 +63,35 @@ function decoratePage() {
     ${decorateSearchInfo}
     </div>
   </div>
+  `;
+}
+
+function decoratePrivateInfoWindow() {
+  return `
+  <h1>Private IP: ${data.privateIP}</h1>
+  <ul>    
+    <li>Latitude: ${data.privateLat}</li>
+    <li>Longitude: ${data.privateLng}</li>
+  </ul>
+  `;
+}
+
+function decoratePublicInfoWindow() {
+  const downLink = data.downloadSpeed !== 0.0 ? `<li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>` : '';
+  const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
+  const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
+
+  return `
+  <h1>Public IP: ${data.publicIP}</h1>
+  <ul>
+    <li>${data.hostName}</li>  
+    ${downLink}
+    ${effectiveType}
+    ${rtt}
+    <li>Latitude: ${data.publicLat}</li>
+    <li>Longitude: ${data.publicLng}</li>
+    ${data.distance}
+  </ul>
   `;
 }
 
@@ -76,4 +107,4 @@ function decorateStart() {
   `;
 }
 
-export { decorateInfoWindow, decoratePage, decorateStart };
+export { decoratePrivateInfoWindow, decoratePublicInfoWindow, decorateSearchInfoWindow, decoratePage, decorateStart };

@@ -20,7 +20,8 @@ class GoogleMap {
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      // icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
       title: location.data.title,      
     });
 
@@ -36,11 +37,11 @@ class GoogleMap {
     this.markers.push(marker);
   };
   
-  drawLine(latLngs) {
+  drawLine(latLngs, strokeColor) {
     let ipPath = new google.maps.Polyline({
       path: latLngs,
       geodesic: true,
-      strokeColor: '#FF0000',
+      strokeColor: strokeColor || '#FF0000',
       strokeOpacity: 1.0,
       strokeWeight: 1,
     });

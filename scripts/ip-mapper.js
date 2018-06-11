@@ -1,5 +1,5 @@
 import { data, resetData } from './data/data.js';
-import { decorateInfoWindow, decoratePage, decorateStart } from './utils/template.js';
+import { decoratePublicInfoWindow, decorateSearchInfoWindow, decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
 import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
 
@@ -64,8 +64,8 @@ function drawMarker(location) {
   resizeMap();
 }
 
-function drawPolyLine(startingLatLng, newLatLng) {   
-  GoogleMap.drawLine([startingLatLng, newLatLng]);
+function drawPolyLine(startingLatLng, newLatLng, strokeColor) {   
+  GoogleMap.drawLine([startingLatLng, newLatLng], strokeColor);
 }
 
 function getSearchItemIndex(item) {
@@ -94,15 +94,16 @@ function getStartingLatLng(index) {
 }
 
 function mapHost() {
+  const title = `Public IP: ${data.publicIP}`;
+  const location = { lat: data.publicLat, lng: data.publicLng, data: { } };
+  location.data.title = title;
+  location.data.formattedInfo = decoratePublicInfoWindow();
     
   if (data.privateLat !== 0 && data.privateLng !== 0) {
+    location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
-  const title = `Public IP: ${data.publicIP}`;
-  const location = { lat: data.publicLat, lng: data.publicLng, data: { title: title } };
-
-  
   drawMarker(location);
 }
 
@@ -111,8 +112,7 @@ function mapSearch() {
   const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
-  
-  drawPolyLine(startingLatLng, location);
+  drawPolyLine(startingLatLng, location, '#009A30');
   
   
   data.ipSearches[index].dataIndex = index;
@@ -121,8 +121,8 @@ function mapSearch() {
 
   location.data = data.ipSearches[index];  
   location.data.title = title;
-  location.data.formattedInfo = decorateInfoWindow(index);
-
+  location.data.formattedInfo = decorateSearchInfoWindow(index);
+  location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
   drawMarker(location);
 }
@@ -143,7 +143,7 @@ function redrawPolyLines(index) {
       let startingLatLng = getStartingLatLng(i);
       let nextLatLng = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
       data.ipSearches[i].distance = GoogleMap.getDistance(startingLatLng, nextLatLng);
-      drawPolyLine(startingLatLng, nextLatLng);
+      drawPolyLine(startingLatLng, nextLatLng, '#009A30');
     }
   }
 }

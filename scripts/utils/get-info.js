@@ -1,4 +1,5 @@
 import { data } from '../data/data.js';
+import { decoratePrivateInfoWindow } from '../utils/template.js';
 import { drawMarker, mapSearch, renderPage } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
@@ -128,10 +129,15 @@ function getUserLocation() {
       data.privateLng = position.coords.longitude;
 
 
-      drawMarker({ lat: data.privateLat, lng: data.privateLng, data:{ title: `Private IP: ${data.privateIP}`}});
-      $('#start').prop('disabled', false);
+      let location = { lat: data.privateLat, lng: data.privateLng, data: { } };
+      location.data.title = `Private IP: ${data.privateIP}`;
+      location.data.formattedInfo = decoratePrivateInfoWindow();
 
-      
+      drawMarker(location);
+
+
+
+      $('#start').prop('disabled', false);
     }, geolocationError);
   } else {
     $('#start').prop('disabled', false);   
