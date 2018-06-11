@@ -96,14 +96,14 @@ function getStartingLatLng(index) {
 function mapHost() {
   const title = `Public IP: ${data.publicIP}`;
   const location = { lat: data.publicLat, lng: data.publicLng, data: { } };
-  location.data.title = title;
-  location.data.formattedInfo = decoratePublicInfoWindow();
-    
+  
   if (data.privateLat !== 0 && data.privateLng !== 0) {
     location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
     data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
     GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
+  location.data.title = title;
+  location.data.formattedInfo = decoratePublicInfoWindow();
   drawMarker(location);
 }
 

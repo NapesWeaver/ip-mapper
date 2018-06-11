@@ -54,7 +54,7 @@ function decoratePage() {
       ${rtt}
       ${distance}
     </ul>
-    <input type="text" id="search-text" placeholder="Search IP">
+    <input type="text" id="search-text" placeholder="Search IP" title="IPv4 dotted quad" pattern="[0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9]">
     <input type="submit" value="SEARCH">
     <input type="reset" value="RESET">
   </form>
@@ -77,6 +77,7 @@ function decoratePrivateInfoWindow() {
 }
 
 function decoratePublicInfoWindow() {
+  const distance = data.distance !== 0.0 ? `<li>Distance: ${data.distance.toFixed(2)}mi</li>` : '';
   const downLink = data.downloadSpeed !== 0.0 ? `<li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>` : '';
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
@@ -90,7 +91,7 @@ function decoratePublicInfoWindow() {
     ${rtt}
     <li>Latitude: ${data.publicLat}</li>
     <li>Longitude: ${data.publicLng}</li>
-    ${data.distance}
+    ${distance}
   </ul>
   `;
 }

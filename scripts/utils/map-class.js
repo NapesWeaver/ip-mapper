@@ -20,7 +20,6 @@ class GoogleMap {
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      // icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
       icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
       title: location.data.title,      
     });
@@ -30,8 +29,8 @@ class GoogleMap {
     });
 
     marker.addListener('click', () => {
-      // this.map.setZoom(7);
-      // this.map.setCenter(marker.getPosition());
+      this.map.setZoom(7);
+      this.map.setCenter(marker.getPosition());
       infoWindow.open(this.map, marker);
     });
     this.markers.push(marker);

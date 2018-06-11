@@ -35,6 +35,7 @@ form,
 
 #search-text {
   width: 50%;
+  font-family: inherit;
 }
 
 .delete-button {
