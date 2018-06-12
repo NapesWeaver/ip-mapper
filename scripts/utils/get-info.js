@@ -17,7 +17,7 @@ function callBackSearchIP(response) {
 
 function callBackSearchHost(response) {
   const host = response[Object.keys(response)[0]];
-  data.ipSearches[length - 1].public_host = host;
+  data.ipSearches[data.ipSearches.length - 1].public_host = host;
   renderPage();
 }
 

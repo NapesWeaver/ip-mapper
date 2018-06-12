@@ -1,5 +1,6 @@
 let initialData = {
   MAPS_KEY: 'AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4',
+  tracerouteChecked: false,
   privateIP: '0.0.0.0',    
   privateLat: 0.0,
   privateLng: 0.0,
@@ -19,7 +20,7 @@ let data = Object.assign({}, initialData);
 function resetData() {
   console.log(data);
   // data = Object.assign({}, initialData);
-  // Object.keys(data).forEach(e => delete data[e]);
+  data.tracerouteChecked = false;
   data.ipSearches = [];
   console.log(data);
 }

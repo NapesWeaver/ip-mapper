@@ -10,8 +10,12 @@ function attachListeners() {
   $('.page').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
-  // $('main').on( 'change', '#view', toggleView);
-  $('main').on( 'change', '#theme', toggleTheme);
+  $('input[name="theme"]').on('change', () => {
+    toggleTheme();
+  });
+  $('.page').on('change', 'input[name="hop-type"]', () => {
+    data.tracerouteChecked === true ? data.tracerouteChecked = false : data.tracerouteChecked = true;
+  });  
 }
 
 function deleteMapObject(index) {
@@ -77,8 +81,8 @@ function getSearchItemIndex(item) {
 
 function getStartingLatLng(index) {
   let startingLatLng = {};
-          
-  if ($('#view').prop('checked')) {
+  
+  if (data.tracerouteChecked === true) {
     data.ipSearches[index].hopType = 'traceRoute';
 
     if (index === 0) {

@@ -17,17 +17,13 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
-}
-
-h3 {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 header,
+.radio-controls,
 #map,
 form,
-.slider-switch,
 .host-results,
 .result,
 footer {
@@ -42,7 +38,7 @@ footer {
 }
 
 .delete-button {
-  margin: 3px 0 3px 230px;
+  margin: 3px 0 3px 243px;
   position: absolute;
 }
 
@@ -52,17 +48,13 @@ footer {
 }
 
 input,
-.slider {
-  cursor: pointer;
+label,
+button,
+input[type="radio"] {
+	cursor: pointer;
 }
 
-.slider-switch {
-  text-align: center;
-  background: #C5EFBA;
-}
-
-footer,
-.slider-switch {
+footer {
   margin: 6px auto 6px auto;
 }
 
@@ -72,7 +64,7 @@ footer,
 }
 
 header,
-.slider-switch,
+.radio-controls,
 .form-controls,
 footer {
   background: #C5EFBA;
@@ -86,58 +78,6 @@ footer {
 
 .info-window li {
   font-size: 0.9em;
-}
-
-/** CSS for creating the "slider-switch" **/
-
-/* Box surronding slider */
-.switch {  
-  position: relative;
-  display: inline-block;
-  margin-top: 3px;
-  width: 60px;
-  height: 19px;
-}
-/* Hide default HTML checkbox */
-.switch input {
-  display:none;
-}
-/* Slider */
-.slider {
-  position: absolute;  
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 11px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
 }
 
 /** Responsive CSS **/

@@ -20,7 +20,10 @@ function decorateSearchInfoWindow(index) {
   `;
 }
 
-function decoratePage() {  
+function decoratePage() {
+  let radialChecked = '';
+  let tracerouteChecked = '';
+  data.tracerouteChecked === true ? tracerouteChecked = 'checked' : radialChecked = 'checked';
   const distance = data.distance !== 0.0 ? `<li>Distance: ${data.distance.toFixed(2)}mi</li>` : '';
   const downLink = data.downloadSpeed !== 0.0 ? `<li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>` : '';
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
@@ -32,7 +35,7 @@ function decoratePage() {
     <div class="result" data-index="${i}">
       <input type="button" class="delete-button" value="DELETE">
       <div class="clear-float"> 
-        <h3>IP: ${e.ip}</h3>
+        <h2>IP: ${e.ip}</h2>
         <ul>
           ${publicHost}
           <li>Organization: ${e.org}</li>
@@ -67,13 +70,14 @@ function decoratePage() {
       </label>
       <input type="submit" value="SEARCH">
       <input type="reset" value="RESET">
-      <div class="slider-switch">
-        <label>Radial</label>
-        <label class="switch">
-          <input id="view" type="checkbox">
-          <span class="slider"></span>
-        </label>
-        <label>Traceroute</label>
+      <div class="radio-controls">
+        <input type="radio" id="radial-view"
+        name="hop-type" value="radial-view" ${radialChecked}>
+        <label for="radial-view">Radial</label>
+  
+        <input type="radio" id="traceroute"
+        name="hop-type" value="traceroute" ${tracerouteChecked}>
+        <label for="traceroute">Traceroute</label>
       </div>
     </div>
   </form>
@@ -123,7 +127,7 @@ function decorateStart() {
   return `
   <form class="ip-start-form">
     <label>Get Local Network Information
-      <input type="submit" id="start" value="START">
+      <input type="submit" id="start" value="CONNECT">
     </label>        
   </form>
   <div class="search-results">

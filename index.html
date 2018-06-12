@@ -15,13 +15,14 @@
     </header>
 
     <main>
-      <div class="slider-switch">
-        <label>Default</label>
-        <label class="switch">
-          <input id="theme" type="checkbox">
-          <span class="slider"></span>
-        </label>
-        <label>Dark</label>
+      <div class="radio-controls">
+        <input type="radio" id="default-theme"
+        name="theme" value="default" checked>
+        <label for="default-theme">Default Theme</label>
+  
+        <input type="radio" id="dark-theme"
+        name="theme" value="dark">
+        <label for="dark-theme">Dark Theme</label>
       </div>
 
       <!-- <iframe title="IP Mapper">
@@ -34,7 +35,7 @@
       <div class="page">
         <form class="ip-start-form">
           <label>Get Local Network Information
-            <input type="submit" id="start" value="START" disabled="disabled">
+            <input type="submit" id="start" value="CONNECT" tabindex="1" disabled="disabled">
           </label>
         </form>
 
