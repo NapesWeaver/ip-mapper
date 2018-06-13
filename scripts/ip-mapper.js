@@ -187,6 +187,7 @@ function submitReset() {
   resetMap();
   $('.page').html(decorateStart);
   getLocalInfo();
+  $('#start').focus();
 }
 
 function submitSearch(event) {

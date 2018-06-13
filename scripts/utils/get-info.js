@@ -26,8 +26,8 @@ function callBackUserHost(response) {
   data.hostName = response[Object.keys(response)[0]];
 }
 
-function geolocationError(error) {
-  
+function geolocationError(error) {  
+
   switch (error.code) {
   case error.PERMISSION_DENIED:
     console.log('Request for Geolocation denied.');
@@ -41,7 +41,8 @@ function geolocationError(error) {
   case error.UNKNOWN_ERROR:
     console.log('An unknown error occurred.');
     break;
-  } 
+  }
+  renderLocalInfo();
 }
 
 function getHostName(ip, callBack) {
@@ -65,6 +66,13 @@ function getLocalConnectionInfo() {
       data.effectiveType = navigator.connection.effectiveType;
     }
     saveNetworkInfo();
+  }
+}
+
+function getLocalDistance() {
+  if (data.privateLat !== 0 && data.privateLng !== 0) {    
+    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+    GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
 }
 
@@ -132,30 +140,20 @@ function getUserLocation() {
       location.data.title = `Private IP: ${data.privateIP}`;
       location.data.formattedInfo = decoratePrivateInfoWindow();   
       
-      drawMarker(location);
-      
-      getDistance();
-      renderHTML();
-
+      drawMarker(location);      
+      renderLocalInfo();
     }, geolocationError);
   } else {
     console.log('Geolocation not supported.');
-
-    getDistance();
-    renderHTML();
+    renderLocalInfo();    
   }
-  console.log(data.distance);
 }
 
-function getDistance() {
-  // console.log(data.privateLat);
-  if (data.privateLat !== 0 && data.privateLng !== 0) {
-    
-    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
-    GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
-  }
-  data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+function renderLocalInfo() {
+  getLocalDistance();
+  renderHTML();
 }
+
 function testForPrivateIP() {
   
   if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {

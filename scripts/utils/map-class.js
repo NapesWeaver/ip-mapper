@@ -73,4 +73,3 @@ function toGoogleLatLng(latLng) {
 }
 
 export default googleMap;
-
