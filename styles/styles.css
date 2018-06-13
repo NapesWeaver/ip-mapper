@@ -74,12 +74,20 @@ footer {
 
 .info-window {
   background: #E8EBDE;
-  padding: 15px;
+  padding: 9px;
 }
+
+.info-window h1,
+.info-window h2 {
+  margin-bottom: 3px;
+}
+
 .info-window h1 {
+  margin: 0;
   font-size: 1em;
 }
 
+.info-window h2,
 .info-window li {
   font-size: 0.9em;
 }

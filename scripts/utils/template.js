@@ -1,13 +1,13 @@
 import { data } from '../data/data.js';
 
 function decorateSearchInfoWindow(index) {
-  const publicHost = data.ipSearches[index].public_host === undefined ? '' : `<li>Host Name: ${data.ipSearches[index].public_host}</li>`;
+  const publicHost = data.ipSearches[index].public_host === undefined ? '' : `<h2>Host Name: ${data.ipSearches[index].public_host}</h2>`;
   const hopTypeString = data.ipSearches[index].hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
   return `
   <div class="info-window">
     <h1>IP: ${data.ipSearches[index].ip}</h1>
+    ${publicHost}
     <ul>
-      ${publicHost}
       <li>Organization: ${data.ipSearches[index].org}</li>
       <li>Country: ${data.ipSearches[index].country_name}</li>            
       <li>Region: ${data.ipSearches[index].region}</li>
@@ -111,8 +111,8 @@ function decoratePublicInfoWindow() {
   return `
   <div class="info-window">
     <h1>Public IP: ${data.publicIP}</h1>
+    <h2>${data.hostName}</h2>
     <ul>
-      <li>${data.hostName}</li>  
       ${downLink}
       ${effectiveType}
       ${rtt}
