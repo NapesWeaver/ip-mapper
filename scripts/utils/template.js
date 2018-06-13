@@ -29,7 +29,8 @@ function decoratePage() {
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
   const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.map((e, i) => {
-    const publicHost = e.public_host === undefined ? '' : `<li>Host Name: ${e.public_host}</li>`;
+    const publicHost = e.public_host !== null ? `<li>Host Name: ${e.public_host}</li>` : '';
+    const organization = e.org !== undefined ? `<li>Organization: ${e.org}</li>` : '';
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
     return `
     <div class="result" data-index="${i}">
@@ -38,7 +39,7 @@ function decoratePage() {
         <h2>IP: ${e.ip}</h2>
         <ul>
           ${publicHost}
-          <li>Organization: ${e.org}</li>
+          ${organization}
           <li>Country: ${e.country_name}</li>            
           <li>Region: ${e.region}</li>
           <li>City: ${e.city}</li>
