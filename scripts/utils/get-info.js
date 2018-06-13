@@ -135,18 +135,20 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
-
-      let location = { lat: data.privateLat, lng: data.privateLng, data: { } };
-      location.data.title = `Private IP: ${data.privateIP}`;
-      location.data.formattedInfo = decoratePrivateInfoWindow();   
-      
-      drawMarker(location);      
+      mapUserLocation();
       renderLocalInfo();
     }, geolocationError);
   } else {
     console.log('Geolocation not supported.');
     renderLocalInfo();    
   }
+}
+
+function mapUserLocation() {
+  let location = { lat: data.privateLat, lng: data.privateLng, data: { } };
+  location.data.title = `Private IP: ${data.privateIP}`;
+  location.data.formattedInfo = decoratePrivateInfoWindow();      
+  drawMarker(location);
 }
 
 function renderLocalInfo() {
@@ -166,4 +168,4 @@ function testForPrivateIP() {
   }
 }
 
-export { callBackSearchIP, getLocalInfo, getIP, getPublicIP, getUserLocation };
+export { callBackSearchIP, getLocalInfo, getIP, getUserLocation };

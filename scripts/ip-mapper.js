@@ -99,7 +99,7 @@ function getStartingLatLng(index) {
 
 function mapPublicIP() {
   const title = `Public IP: ${data.publicIP}`;
-  const location = { lat: data.publicLat, lng: data.publicLng, data: { } };
+  let location = { lat: data.publicLat, lng: data.publicLng, data: { } };
   
   location.data.title = title;
   location.data.formattedInfo = decoratePublicInfoWindow();
@@ -109,14 +109,14 @@ function mapPublicIP() {
 
 function mapSearch() {
   const index = data.ipSearches.length - 1;
-  const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
+  let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
 
   drawPolyLine(startingLatLng, location, '#009A30');  
   
   data.ipSearches[index].dataIndex = index;
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);    
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
 
   location.data = data.ipSearches[index];  
   location.data.title = title;
@@ -127,24 +127,10 @@ function mapSearch() {
 }
 
 function redrawMarkers(index) {
-  for (let i = index; i < data.ipSearches.length; i++) {    
-    let location = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
-    data.ipSearches[i].dataIndex = index;
-    location.data = data.ipSearches[i];
-    drawMarker(location);
+  for (let i = index; i < data.ipSearches.length; i++) {
+    mapSearch();
   }
-}
-
-function redrawPolyLines(index) {
-  
-  if (data.ipSearches.length !== index) {
-    for (let i = index; i < data.ipSearches.length; i++) {    
-      let startingLatLng = getStartingLatLng(i);
-      let nextLatLng = { lat: data.ipSearches[i].latitude, lng: data.ipSearches[i].longitude };
-      data.ipSearches[i].distance = GoogleMap.getDistance(startingLatLng, nextLatLng);
-      drawPolyLine(startingLatLng, nextLatLng, '#009A30');
-    }
-  }
+  renderHTML();
 }
 
 function renderHTML() {
