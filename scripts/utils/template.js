@@ -71,15 +71,15 @@ function decoratePage() {
       </label>
       <input type="submit" value="SEARCH">
       <input type="reset" value="RESET">
-      <div class="radio-controls">
+      <fieldset>
+        <legend>Search Type</legend>
         <input type="radio" id="radial-view"
         name="hop-type" value="radial-view" ${radialChecked}>
-        <label for="radial-view">Radial</label>
-  
+        <label for="radial-view">Radial</label>  
         <input type="radio" id="traceroute"
         name="hop-type" value="traceroute" ${tracerouteChecked}>
         <label for="traceroute">Traceroute</label>
-      </div>
+      </fieldset>
     </div>
   </form>
   <div class="search-results">

@@ -21,7 +21,7 @@ h2 {
 }
 
 header,
-.radio-controls,
+fieldset,
 #map,
 form,
 .host-results,
@@ -31,6 +31,10 @@ footer {
   margin: 0 auto;  
 }
 
+legend {
+  float: left;
+  padding-top: 3px;
+}
 
 #search-text {
   width: 50%;
@@ -64,7 +68,7 @@ footer {
 }
 
 header,
-.radio-controls,
+fieldset,
 .form-controls,
 footer {
   background: #C5EFBA;

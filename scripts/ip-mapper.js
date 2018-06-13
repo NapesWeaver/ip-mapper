@@ -96,6 +96,27 @@ function getStartingLatLng(index) {
   return startingLatLng;
 }
 
+// function createLocationObject(lat, lan, title, icon, formattedInfo) {
+//   let location = { 
+//     lat: this.lat,
+//     lan: this.lan,
+//     data: {
+//       title: this.title,
+//       icon: this.icon,
+//       formattedInfo: this.formattedInfo,
+//     }
+//   };
+//   return location;
+// }
+
+// function mapPublicIP() {
+//   const title = `Public IP: ${data.publicIP}`;
+//   const icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+//   const formattedInfo = decoratePublicInfoWindow();
+//   const location = createLocationObject(data.publicLat, data.publicLng, title, icon, formattedInfo);
+//   drawMarker(location);
+// }
+
 function mapPublicIP() {
   const title = `Public IP: ${data.publicIP}`;
   let location = { lat: data.publicLat, lng: data.publicLng, data: { } };
@@ -110,7 +131,6 @@ function mapSearch(index) {
   let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
-
   
   data.ipSearches[index].dataIndex = index;
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  

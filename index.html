@@ -15,15 +15,16 @@
     </header>
 
     <main>
-      <div class="radio-controls">
+      <fieldset>
+        <legend>Theme</legend>
         <input type="radio" id="default-theme"
         name="theme" value="default" checked>
-        <label for="default-theme">Default Theme</label>
+        <label for="default-theme">Light</label>
   
         <input type="radio" id="dark-theme"
         name="theme" value="dark">
-        <label for="dark-theme">Dark Theme</label>
-      </div>
+        <label for="dark-theme">Dark</label>
+      </fieldset>
 
       <div id="map">        
       </div>
@@ -31,7 +32,6 @@
       <div class="page">
         <form class="ip-start-form">
           <label>Get Local Network Information
-            <!-- <input type="submit" id="start" value="CONNECT" disabled="disabled"> -->
             <input type="submit" id="start" value="CONNECT">
           </label>
         </form>
