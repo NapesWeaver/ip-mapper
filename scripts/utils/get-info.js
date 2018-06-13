@@ -11,8 +11,9 @@ function callBackPublicIP(response) {
 }
 
 function callBackSearchIP(response) {
+  const index = data.ipSearches.length;
   data.ipSearches.push(response);
-  mapSearch();
+  mapSearch(index);
   getHostName(response.ip, callBackSearchHost);
 }
 

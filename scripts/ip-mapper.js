@@ -30,7 +30,6 @@ function deleteMapObject(index) {
   deletePolyLines(index + polyLinesOffSet);
   deleteMarkers(index + markersOffSet);
   redrawMarkers(index);
-  redrawPolyLines(index);
 }
 
 function deleteMarker(index) {
@@ -107,28 +106,27 @@ function mapPublicIP() {
   drawMarker(location);
 }
 
-function mapSearch() {
-  const index = data.ipSearches.length - 1;
+function mapSearch(index) {
   let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
 
-  drawPolyLine(startingLatLng, location, '#009A30');  
   
   data.ipSearches[index].dataIndex = index;
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
-
+  
   location.data = data.ipSearches[index];  
   location.data.title = title;
   location.data.formattedInfo = decorateSearchInfoWindow(index);
   location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
-
+  
+  drawPolyLine(startingLatLng, location, '#009A30');  
   drawMarker(location);
 }
 
 function redrawMarkers(index) {
   for (let i = index; i < data.ipSearches.length; i++) {
-    mapSearch();
+    mapSearch(i);
   }
   renderHTML();
 }
