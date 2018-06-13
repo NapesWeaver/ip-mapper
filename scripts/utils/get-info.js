@@ -1,6 +1,7 @@
 import { data } from '../data/data.js';
+import GoogleMap from '../utils/map-class.js';
 import { decoratePrivateInfoWindow } from '../utils/template.js';
-import { drawMarker, mapSearch, renderPage } from '../ip-mapper.js';
+import { drawMarker, mapSearch, renderHTML } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
@@ -18,7 +19,7 @@ function callBackSearchIP(response) {
 function callBackSearchHost(response) {
   const host = response[Object.keys(response)[0]];
   data.ipSearches[data.ipSearches.length - 1].public_host = host;
-  renderPage();
+  renderHTML();
 }
 
 function callBackUserHost(response) {
@@ -26,7 +27,7 @@ function callBackUserHost(response) {
 }
 
 function geolocationError(error) {
-  $('#start').prop('disabled', false);
+  
   switch (error.code) {
   case error.PERMISSION_DENIED:
     console.log('Request for Geolocation denied.');
@@ -68,7 +69,6 @@ function getLocalConnectionInfo() {
 }
 
 function getLocalInfo() {
-  getUserLocation();
   getLocalConnectionInfo();
   testForPrivateIP();
   getPublicIP();
@@ -128,23 +128,34 @@ function getUserLocation() {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;
 
-
       let location = { lat: data.privateLat, lng: data.privateLng, data: { } };
       location.data.title = `Private IP: ${data.privateIP}`;
-      location.data.formattedInfo = decoratePrivateInfoWindow();
-
+      location.data.formattedInfo = decoratePrivateInfoWindow();   
+      
       drawMarker(location);
+      
+      getDistance();
+      renderHTML();
 
-
-
-      $('#start').prop('disabled', false);
     }, geolocationError);
   } else {
-    $('#start').prop('disabled', false);   
     console.log('Geolocation not supported.');
-  }  
+
+    getDistance();
+    renderHTML();
+  }
+  console.log(data.distance);
 }
 
+function getDistance() {
+  // console.log(data.privateLat);
+  if (data.privateLat !== 0 && data.privateLng !== 0) {
+    
+    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+    GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
+  }
+  data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+}
 function testForPrivateIP() {
   
   if (/*@cc_on!@*/false || !!document.documentMode || window.navigator.userAgent.indexOf('Edge') > -1) {
@@ -157,4 +168,4 @@ function testForPrivateIP() {
   }
 }
 
-export { callBackSearchIP, getLocalInfo, getIP };
+export { callBackSearchIP, getLocalInfo, getIP, getPublicIP, getUserLocation };

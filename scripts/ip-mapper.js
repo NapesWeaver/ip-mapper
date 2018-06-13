@@ -1,7 +1,7 @@
 import { data, resetData } from './data/data.js';
 import { decoratePublicInfoWindow, decorateSearchInfoWindow, decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
-import { getIP, callBackSearchIP, getLocalInfo } from './utils/get-info.js';
+import { getIP, callBackSearchIP, getLocalInfo, getUserLocation } from './utils/get-info.js';
 
 function attachListeners() {
   $('.page').on('submit', '.ip-start-form', submitStart);
@@ -60,7 +60,7 @@ function deleteSearch(event) {
   data.ipSearches.splice(index, 1);
   deleteMapObject(index);
   resizeMap();  
-  renderPage();
+  renderHTML();
 }
 
 function drawMarker(location) { 
@@ -97,17 +97,13 @@ function getStartingLatLng(index) {
   return startingLatLng;
 }
 
-function mapHost() {
+function mapPublicIP() {
   const title = `Public IP: ${data.publicIP}`;
   const location = { lat: data.publicLat, lng: data.publicLng, data: { } };
   
-  if (data.privateLat !== 0 && data.privateLng !== 0) {
-    location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
-    GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
-  }
   location.data.title = title;
   location.data.formattedInfo = decoratePublicInfoWindow();
+  location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
   drawMarker(location);
 }
 
@@ -116,12 +112,11 @@ function mapSearch() {
   const location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
   const startingLatLng = getStartingLatLng(index);
   const title = data.ipSearches[index].ip;
-  drawPolyLine(startingLatLng, location, '#009A30');
-  
+
+  drawPolyLine(startingLatLng, location, '#009A30');  
   
   data.ipSearches[index].dataIndex = index;
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
-  
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);    
 
   location.data = data.ipSearches[index];  
   location.data.title = title;
@@ -152,7 +147,7 @@ function redrawPolyLines(index) {
   }
 }
 
-function renderPage() {
+function renderHTML() {
   $('.page').html(decoratePage);
   $('#search-text').focus();
 }
@@ -201,9 +196,9 @@ function submitSearch(event) {
 }
 
 function submitStart(event) {
-  event.preventDefault();       
-  mapHost();
-  renderPage();
+  event.preventDefault();     
+  getUserLocation();
+  mapPublicIP();
 }
 
 function toggleTheme() {
@@ -304,8 +299,4 @@ function toggleTheme() {
   GoogleMap.map.setOptions(options);
 }
 
-function toggleView() {
-  // console.log('toggleView()');
-}
-
-export { attachListeners, drawMarker, mapSearch, renderPage };
+export { attachListeners, drawMarker, mapSearch, renderHTML };
