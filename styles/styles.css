@@ -1,3 +1,12 @@
+noscript {
+  display: block;
+  margin: auto;
+  padding-top: 25px;
+  text-align: center;
+  font-weight: bold;
+  color: #DD4C40;
+}
+
 body {
   /* box-sizing: border-box; */
   font-family: sans-serif;  
@@ -22,6 +31,7 @@ h2 {
 
 header,
 fieldset,
+noscript,
 #map,
 form,
 .host-results,
