@@ -33,6 +33,7 @@ function decoratePage() {
     const publicHost = e.public_host !== null ? `<li>Host Name: ${e.public_host}</li>` : '';
     const organization = e.org !== undefined ? `<li>Organization: ${e.org}</li>` : '';
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
+    const distance = e.distance !== 0.0 ? `<li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>` : '';
     return `
     <div class="result" data-index="${i}">
       <input type="button" class="delete-button" value="DELETE">
@@ -44,7 +45,7 @@ function decoratePage() {
           <li>Country: ${e.country_name}</li>            
           <li>Region: ${e.region}</li>
           <li>City: ${e.city}</li>
-          <li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>
+          ${distance}
         </ul>
       </div>
     </div>
@@ -68,7 +69,7 @@ function decoratePage() {
 
     <div class="form-controls">
       <label for="#search-text">Enter IPv4 Address to Search
-        <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad" pattern="[0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9][.][0-2]?[0-9]?[0-9]">
+        <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad" pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$">
       </label>
       <input type="submit" value="SEARCH">
       <input type="reset" value="RESET">

@@ -1,7 +1,7 @@
 import { data, resetData } from './data/data.js';
 import { decoratePublicInfoWindow, decorateSearchInfoWindow, decoratePage, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
-import { getIP, callBackSearchIP, getLocalInfo, getUserLocation } from './utils/get-info.js';
+import { searchIP, callBackSearchIP, getLocalInfo, getUserLocation } from './utils/get-info.js';
 
 function attachListeners() {
   $('.page').on('submit', '.ip-start-form', submitStart);
@@ -128,20 +128,23 @@ function mapPublicIP() {
 }
 
 function mapSearch(index) {
-  let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
-  const startingLatLng = getStartingLatLng(index);
-  const title = data.ipSearches[index].ip;
   
-  data.ipSearches[index].dataIndex = index;
-  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
-  
-  location.data = data.ipSearches[index];  
-  location.data.title = title;
-  location.data.formattedInfo = decorateSearchInfoWindow(index);
-  location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
-  
-  drawPolyLine(startingLatLng, location, '#009A30');  
-  drawMarker(location);
+  if (data.ipSearches[index].latitude) {
+    let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
+    const startingLatLng = getStartingLatLng(index);
+    const title = data.ipSearches[index].ip;
+    
+    data.ipSearches[index].dataIndex = index;
+    data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
+    
+    location.data = data.ipSearches[index];  
+    location.data.title = title;
+    location.data.formattedInfo = decorateSearchInfoWindow(index);
+    location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    
+    drawPolyLine(startingLatLng, location, '#009A30');  
+    drawMarker(location);
+  }  
 }
 
 function redrawMarkers(index) {
@@ -196,7 +199,7 @@ function submitReset() {
 
 function submitSearch(event) {
   event.preventDefault();
-  getIP($('#search-text').val(), callBackSearchIP);
+  searchIP($('#search-text').val(), callBackSearchIP);
   $('#search-text').val('');
 }
 
