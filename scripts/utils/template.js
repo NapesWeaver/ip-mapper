@@ -74,7 +74,7 @@ function decoratePage() {
       <input type="submit" value="SEARCH">
       <input type="reset" value="RESET">
       <fieldset>
-        <legend>Search Type</legend>
+        <legend>Search Type: </legend>
         <input type="radio" id="radial-view"
         name="hop-type" value="radial-view" ${radialChecked}>
         <label for="radial-view">Radial</label>  
