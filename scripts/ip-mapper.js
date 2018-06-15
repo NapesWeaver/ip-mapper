@@ -115,7 +115,7 @@ function mapPublicIP() {
   const title = `Public IP: ${data.publicIP}`;
   const icon = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
   const formattedInfo = decoratePublicInfoWindow();
-  let location = createLocationObject(data.publicLat, data.publicLng, title, icon, formattedInfo);
+  let location = createLocationObject(data.publicLat, data.publicLng, -1, title, icon, formattedInfo);
   drawMarker(location);
 }
 
