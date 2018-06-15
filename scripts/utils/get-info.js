@@ -13,9 +13,7 @@ function callBackPublicIP(response) {
 function callBackSearchIP(response) {
   
   if(response.latitude) {
-    const index = data.ipSearches.length;
     data.ipSearches.push(response);
-    mapSearch(index);
     getHostName(response.ip, callBackSearchHost);
   } else {
     console.log('No results.');
@@ -24,7 +22,9 @@ function callBackSearchIP(response) {
 
 function callBackSearchHost(response) {
   const host = response[Object.keys(response)[0]];
-  data.ipSearches[data.ipSearches.length - 1].public_host = host;
+  const index = data.ipSearches.length - 1;
+  data.ipSearches[index].public_host = host;  
+  mapSearch(index);
   renderHTML();
 }
 
