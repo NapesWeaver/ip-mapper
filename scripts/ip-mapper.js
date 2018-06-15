@@ -153,7 +153,7 @@ function mapSearch(index) {
     location.data = data.ipSearches[index];  
     location.data.title = title;
     location.data.formattedInfo = decorateSearchInfoWindow(index);
-    location.data.icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
+    location.data.icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
     
     drawPolyLine(startingLatLng, location, '#009A30');  
     drawMarker(location);
