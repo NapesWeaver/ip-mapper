@@ -18,6 +18,36 @@ function attachListeners() {
   });  
 }
 
+function createLocationObject(lat, lng, index, title, icon, formattedInfo) {
+  let location = { 
+    lat: lat,
+    lng: lng,
+    data: {
+      dataIndex: index,
+      title: title,
+      icon: icon,
+      formattedInfo: formattedInfo,
+    }
+  };
+  return location;
+}
+
+function createPublicIPLocation() {
+  const title = `Public IP: ${data.publicIP}`;
+  const icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+  const formattedInfo = decoratePublicInfoWindow();
+  let location = createLocationObject(data.publicLat, data.publicLng, -1, title, icon, formattedInfo);
+  return location;
+}
+
+function createSearchedLocation(index) {
+  const title = data.ipSearches[index].ip;
+  const icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+  const formattedInfo = decorateSearchInfoWindow(index);
+  let location = createLocationObject(data.ipSearches[index].latitude, data.ipSearches[index].longitude, index, title, icon, formattedInfo);  
+  return Object.assign(location.data, location);
+}
+
 function deleteMapObject(index) {
   let polyLinesOffSet = 0;
   let markersOffSet = 1;
@@ -28,8 +58,7 @@ function deleteMapObject(index) {
     markersOffSet++;
   }
   deletePolyLines(index + polyLinesOffSet);
-  deleteMarkers(index + markersOffSet);
-  redrawMarkers(index);
+  deleteMarkers(index + markersOffSet);  
 }
 
 function deleteMarker(index) {
@@ -58,6 +87,7 @@ function deleteSearch(event) {
   const index = getSearchItemIndex(event.currentTarget);
   data.ipSearches.splice(index, 1);
   deleteMapObject(index);
+  redrawMarkers(index);
   resizeMap();  
   renderHTML();
 }
@@ -69,6 +99,11 @@ function drawMarker(location) {
 
 function drawPolyLine(startingLatLng, newLatLng, strokeColor) {   
   GoogleMap.drawLine([startingLatLng, newLatLng], strokeColor);
+}
+
+function getSearchDistance(index, startingLatLng) {   
+  data.ipSearches[index].dataIndex = index;
+  data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude });
 }
 
 function getSearchItemIndex(item) {
@@ -96,67 +131,19 @@ function getStartingLatLng(index) {
   return startingLatLng;
 }
 
-function createLocationObject(lat, lng, index, title, icon, formattedInfo) {
-  let location = { 
-    lat: lat,
-    lng: lng,
-    data: {
-      dataIndex: index,
-      title: title,
-      icon: icon,
-      formattedInfo: formattedInfo,
-    }
-  };
-  console.log(location);
-  return location;
-}
-
 function mapPublicIP() {
-  const title = `Public IP: ${data.publicIP}`;
-  const icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-  const formattedInfo = decoratePublicInfoWindow();
-  let location = createLocationObject(data.publicLat, data.publicLng, -1, title, icon, formattedInfo);
-  drawMarker(location);
+  drawMarker(createPublicIPLocation());
 }
-
-// function mapSearch(index) {
-  
-//   if (data.ipSearches[index].latitude) {
-//     const startingLatLng = getStartingLatLng(index);
-    
-//     data.ipSearches[index].dataIndex = index;
-//     data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude });
-    
-//     const title = data.ipSearches[index].ip;
-//     const icon = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
-//     const formattedInfo = decorateSearchInfoWindow(index);
-//     let location = createLocationObject(data.ipSearches[index].latitude, data.ipSearches[index].longitude, title, icon, formattedInfo);
-
-//     location.data = data.ipSearches[index];
-//     console.log(location);
-
-//     drawPolyLine(startingLatLng, location, '#009A30');  
-//     drawMarker(location);
-//   }  
-// }
 
 function mapSearch(index) {
   
   if (data.ipSearches[index].latitude) {
-    let location = { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude };  
     const startingLatLng = getStartingLatLng(index);
-    const title = data.ipSearches[index].ip;
-    
-    data.ipSearches[index].dataIndex = index;
-    data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, location);  
-    
-    location.data = data.ipSearches[index];  
-    location.data.title = title;
-    location.data.formattedInfo = decorateSearchInfoWindow(index);
-    location.data.icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-    
-    drawPolyLine(startingLatLng, location, '#009A30');  
+    getSearchDistance(index, startingLatLng);
+
+    const location = createSearchedLocation(index);
     drawMarker(location);
+    drawPolyLine(startingLatLng, location, '#009A30'); 
   }  
 }
 
