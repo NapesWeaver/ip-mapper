@@ -51,9 +51,16 @@ legend {
   font-family: inherit;
 }
 
-.delete-button {
-  margin: 3px 0 3px 243px;
-  position: absolute;
+.delete-button,
+.focus-button {
+  display: block;
+  margin: 3px auto;
+}
+
+.result-controls { 
+  
+  width: 72px;
+  float: right;
 }
 
 footer {  

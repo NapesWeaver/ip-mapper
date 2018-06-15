@@ -10,6 +10,9 @@ function attachListeners() {
   $('.page').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
+  $('.page').on('click', '.focus-button', function(event) {
+    focusMarker(event);
+  });
   $('input[name="theme"]').on('change', () => {
     toggleTheme();
   });
@@ -101,6 +104,14 @@ function drawPolyLine(startingLatLng, newLatLng, strokeColor) {
   GoogleMap.drawLine([startingLatLng, newLatLng], strokeColor);
 }
 
+function focusMarker(event) {
+  let index = getSearchItemIndex(event.currentTarget) + 1;
+  // If we have an extra marker for privateIP location
+  if (data.privateLat !== 0 && data.privateLng !== 0) index++;
+  GoogleMap.map.setZoom(5);
+  GoogleMap.map.setCenter(GoogleMap.markers[index].position);
+}
+
 function getSearchDistance(index, startingLatLng) {   
   data.ipSearches[index].dataIndex = index;
   data.ipSearches[index].distance = GoogleMap.getDistance(startingLatLng, { lat: data.ipSearches[index].latitude, lng: data.ipSearches[index].longitude });
@@ -144,8 +155,8 @@ function mapSearch(index) {
 
     const location = createSearchedLocation(index);
     drawMarker(location);
-    drawPolyLine(startingLatLng, location, '#009A30'); 
-  }  
+    drawPolyLine(startingLatLng, location, '#009A30');    
+  }   
 }
 
 function redrawMarkers(index) {

@@ -36,8 +36,11 @@ function decoratePage() {
     const distance = e.distance !== 0.0 ? `<li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>` : '';
     return `
     <div class="result" data-index="${i}">
+      <div class="result-controls">
       <input type="button" class="delete-button" value="DELETE">
-      <div class="clear-float"> 
+        <input type="button" class="focus-button" value="FOCUS">
+      </div>
+      <div> 
         <h2>IP: ${e.ip}</h2>
         <ul>
           ${publicHost}
