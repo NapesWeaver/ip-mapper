@@ -20,7 +20,6 @@ let data = Object.assign({}, initialData);
 function resetData() {
   console.log(data);
   // data = Object.assign({}, initialData);
-
   data.tracerouteChecked = false;
   data.privateIP = '0.0.0.0';    
   data.privateLat = 0.0;
@@ -33,9 +32,7 @@ function resetData() {
   data.rtt = 0;
   data.distance =  0.0;
   data.hostName = '0.0.0.0';
-  data.ipSearches = [];
-
-  
+  data.ipSearches = [];  
   console.log(data);
 }
 

@@ -136,6 +136,7 @@ function mapPublicIP() {
 }
 
 function mapSearch(index) {
+  GoogleMap.infoWindows.forEach((infoWindow) => infoWindow.close());
   
   if (data.ipSearches[index].latitude) {
     const startingLatLng = getStartingLatLng(index);

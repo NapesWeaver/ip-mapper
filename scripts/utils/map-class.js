@@ -12,6 +12,7 @@ class GoogleMap {
     this.options = options;
     this.map = new google.maps.Map(document.getElementById(target || 'map'), options);
     this.markers = [];
+    this.infoWindows = [];
     this.polyLines = [];
   }
   
@@ -23,17 +24,16 @@ class GoogleMap {
       icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
       title: location.data.title,      
     });
-
-    const infoWindow = new google.maps.InfoWindow({
+    let infoWindow = new google.maps.InfoWindow({
       content: info,
     });
-
     marker.addListener('click', () => {
       this.map.setZoom(7);
       this.map.setCenter(marker.getPosition());
-      infoWindow.open(this.map, marker);
+      infoWindow.open(this.map, marker);      
     });
     this.markers.push(marker);
+    this.infoWindows.push(infoWindow);
   };
   
   drawLine(latLngs, strokeColor) {
