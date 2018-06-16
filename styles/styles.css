@@ -8,15 +8,7 @@ noscript {
 }
 
 body {
-  /* box-sizing: border-box; */
-  font-family: sans-serif;  
-  /* background: #AAD7FF; */
-}
-
-#map {
-  height: 300px;  
-  margin: 0 auto;
-  /* border: solid 1px #000000; */
+  font-family: sans-serif;
 }
 
 h1 {
@@ -27,6 +19,57 @@ h1 {
 
 h2 {
   font-size: 1.5em;
+}
+
+legend {
+  float: left;
+  padding-top: 3px;
+}
+
+footer {  
+  margin: 6px auto 6px auto;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+#map {
+  height: 300px;  
+  margin: 0 auto;
+}
+
+#search-text {
+  width: 50%;
+  font-family: inherit;
+}
+
+.host-results,
+.result {
+  background: #F9F5E7;
+}
+
+.result-controls {   
+  width: 72px;
+  float: right;
+}
+
+header,
+fieldset,
+.form-controls,
+footer {
+  background: #C5EFBA;
+}
+
+.delete-button,
+.focus-button {
+  display: block;
+  margin: 3px auto;
+}
+
+input,
+label,
+button,
+input[type="radio"] {
+	cursor: pointer;
 }
 
 header,
@@ -41,56 +84,6 @@ footer {
   margin: 0 auto;  
 }
 
-legend {
-  float: left;
-  padding-top: 3px;
-}
-
-#search-text {
-  width: 50%;
-  font-family: inherit;
-}
-
-.delete-button,
-.focus-button {
-  display: block;
-  margin: 3px auto;
-}
-
-.result-controls { 
-  
-  width: 72px;
-  float: right;
-}
-
-footer {  
-  text-align: center;
-  font-size: 0.8em;
-}
-
-input,
-label,
-button,
-input[type="radio"] {
-	cursor: pointer;
-}
-
-footer {
-  margin: 6px auto 6px auto;
-}
-
-.host-results,
-.result {
-  background: #F9F5E7;
-}
-
-header,
-fieldset,
-.form-controls,
-footer {
-  background: #C5EFBA;
-}
-
 /** Google Map InfoWindow CSS **/
 
 .info-window {
@@ -98,16 +91,16 @@ footer {
   padding: 9px;
 }
 
+.info-window h1 {
+  margin: 0;
+  font-size: 1em;
+}
 
 .info-window h1,
 .info-window h2 {
   margin-bottom: 3px;
+  text-align: center;
   font-weight: bold;
-}
-
-.info-window h1 {
-  margin: 0;
-  font-size: 1em;
 }
 
 .info-window h2,
