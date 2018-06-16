@@ -108,7 +108,7 @@ function focusMarker(event) {
   let index = getSearchItemIndex(event.currentTarget) + 1;
   // If we have an extra marker for privateIP location
   if (data.privateLat !== 0 && data.privateLng !== 0) index++;
-  GoogleMap.map.setZoom(5);
+  GoogleMap.map.setZoom(6);
   GoogleMap.map.setCenter(GoogleMap.markers[index].position);
 }
 

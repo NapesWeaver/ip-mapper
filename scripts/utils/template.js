@@ -1,7 +1,7 @@
 import { data } from '../data/data.js';
 
 function decorateSearchInfoWindow(index) {
-  const publicHost = data.ipSearches[index].public_host === null ? '' : `<h2>Host Name: ${data.ipSearches[index].public_host}</h2>`;
+  const publicHost = data.ipSearches[index].public_host === null ? '' : `<h2>${data.ipSearches[index].public_host}</h2>`;
   const hopTypeString = data.ipSearches[index].hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
   const organization = data.ipSearches[index].org === undefined ? '' : `<li>Organization: ${data.ipSearches[index].org}</li>`;
   return `
