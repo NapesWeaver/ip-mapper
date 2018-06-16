@@ -146,7 +146,7 @@ function mapPublicIP() {
   drawMarker(createPublicIPLocation());
 }
 
-function mapSearch(index) {
+function mapSearchedIP(index) {
   GoogleMap.infoWindows.forEach((infoWindow) => infoWindow.close());
   
   if (data.ipSearches[index].latitude) {
@@ -161,7 +161,7 @@ function mapSearch(index) {
 
 function redrawMarkers(index) {
   for (let i = index; i < data.ipSearches.length; i++) {
-    mapSearch(i);
+    mapSearchedIP(i);
   }
   renderHTML();
 }
@@ -218,7 +218,6 @@ function submitSearch(event) {
 function submitStart(event) {
   event.preventDefault();     
   getUserLocation();
-  mapPublicIP();
 }
 
 function toggleTheme() {
@@ -319,4 +318,4 @@ function toggleTheme() {
   GoogleMap.map.setOptions(options);
 }
 
-export { attachListeners, drawMarker, mapSearch, renderHTML };
+export { attachListeners, drawMarker, mapSearchedIP, mapPublicIP, renderHTML };

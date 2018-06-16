@@ -1,7 +1,7 @@
 import { data } from '../data/data.js';
 import GoogleMap from '../utils/map-class.js';
 import { decoratePrivateInfoWindow } from '../utils/template.js';
-import { drawMarker, mapSearch, renderHTML } from '../ip-mapper.js';
+import { drawMarker, mapSearchedIP, mapPublicIP, renderHTML } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
@@ -24,12 +24,20 @@ function callBackSearchHost(response) {
   const host = response[Object.keys(response)[0]];
   const index = data.ipSearches.length - 1;
   data.ipSearches[index].public_host = host;  
-  mapSearch(index);
+  mapSearchedIP(index);
   renderHTML();
 }
 
 function callBackUserHost(response) {
-  data.hostName = response[Object.keys(response)[0]];
+  data.hostName = response[Object.keys(response)[0]];  
+}
+
+function createPrivateIPLocation() {
+  let location = { lat: data.privateLat, lng: data.privateLng, data: { } };  
+  location.data.title = `Private IP: ${data.privateIP}`;
+  location.data.formattedInfo = decoratePrivateInfoWindow();     
+  mapPrivateIP(location);
+  mapPublicIP();
 }
 
 function geolocationError(error) {  
@@ -48,7 +56,8 @@ function geolocationError(error) {
     console.log('An unknown error occurred.');
     break;
   }
-  renderLocalInfo();
+  mapPublicIP();
+  renderHTML();
 }
 
 function getHostName(ip, callBack) {
@@ -68,13 +77,6 @@ function getLocalConnectionInfo() {
       data.effectiveType = navigator.connection.effectiveType;
     }
     saveNetworkInfo();
-  }
-}
-
-function getLocalDistance() {
-  if (data.privateLat !== 0 && data.privateLng !== 0) {    
-    data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
-    GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);
   }
 }
 
@@ -136,25 +138,20 @@ function getUserLocation() {
     // signal strength &information about your local router, computer's IP address 
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
-      data.privateLng = position.coords.longitude;
-      mapUserLocation();
-      renderLocalInfo();
+      data.privateLng = position.coords.longitude;       
+      createPrivateIPLocation();       
     }, geolocationError);
   } else {
     console.log('Geolocation not supported.');
-    renderLocalInfo();    
-  }
+    mapPublicIP();
+    renderHTML();    
+  }  
 }
 
-function mapUserLocation() {
-  let location = { lat: data.privateLat, lng: data.privateLng, data: { } };
-  location.data.title = `Private IP: ${data.privateIP}`;
-  location.data.formattedInfo = decoratePrivateInfoWindow();      
+function mapPrivateIP(location) {
+  data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
+  GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);   
   drawMarker(location);
-}
-
-function renderLocalInfo() {
-  getLocalDistance();
   renderHTML();
 }
 

@@ -32,16 +32,6 @@ footer {
   font-size: 0.8em;
 }
 
-#map {
-  height: 300px;  
-  margin: 0 auto;
-}
-
-#search-text {
-  width: 50%;
-  font-family: inherit;
-}
-
 .host-results,
 .result {
   background: #F9F5E7;
@@ -52,10 +42,20 @@ footer {
   float: right;
 }
 
+#map {
+  height: 300px;  
+  margin: 0 auto;
+}
+
+#search-text {
+  width: 50%;
+  font-family: inherit;
+}
+
 header,
 fieldset,
-.form-controls,
-footer {
+footer,
+.form-controls {
   background: #C5EFBA;
 }
 
@@ -66,20 +66,18 @@ footer {
 }
 
 input,
-label,
-button,
-input[type="radio"] {
+label {
 	cursor: pointer;
 }
 
 header,
-fieldset,
 noscript,
-#map,
 form,
+fieldset,
+footer,
 .host-results,
 .result,
-footer {
+#map {
   width: 330px;
   margin: 0 auto;  
 }
@@ -110,20 +108,27 @@ footer {
 /** Responsive CSS **/
 @media only screen and (min-width: 640px) {
 
+  #map {
+    height: 420px;
+  }
+  #search-text {
+    width: 102px;
+  }
+
   header,
-  fieldset,
   noscript,
-  #map,
   form,
+  fieldset,
+  footer,
   .host-results,
   .result,
-  footer {
+  #map {
+    /* width: 100%; */
     width: 640px;
     margin: 0 auto;  
   }
 }
 
 @media only screen and (min-width: 1024px) {
-
 
 }
