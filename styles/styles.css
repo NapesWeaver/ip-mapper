@@ -85,7 +85,6 @@ footer {
 }
 
 /** Google Map InfoWindow CSS **/
-
 .info-window {
   background: #E8EBDE;
   padding: 9px;
@@ -109,10 +108,19 @@ footer {
 }
 
 /** Responsive CSS **/
-
 @media only screen and (min-width: 640px) {
 
-
+  header,
+  fieldset,
+  noscript,
+  #map,
+  form,
+  .host-results,
+  .result,
+  footer {
+    width: 640px;
+    margin: 0 auto;  
+  }
 }
 
 @media only screen and (min-width: 1024px) {
