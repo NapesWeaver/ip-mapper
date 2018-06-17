@@ -86,9 +86,7 @@ function decoratePage() {
     </div>
   </form>
   <div class="search-results">
-    <div class="results">
     ${decorateSearchInfo}
-    </div>
   </div>
   `;
 }
@@ -135,8 +133,6 @@ function decorateStart() {
     </label>        
   </form>
   <div class="search-results">
-    <div class="results">
-    </div>
   </div>
   `;
 }
