@@ -44,11 +44,10 @@ footer {
 
 #map {
   height: 300px;  
-  margin: 0 auto;
 }
 
 #search-text {
-  width: 50%;
+  width: 105px;
   font-family: inherit;
 }
 
@@ -68,18 +67,6 @@ footer,
 input,
 label {
 	cursor: pointer;
-}
-
-header,
-noscript,
-form,
-fieldset,
-footer,
-.host-results,
-.result,
-#map {
-  width: 330px;
-  margin: 0 auto;  
 }
 
 /** Google Map InfoWindow CSS **/
@@ -109,26 +96,12 @@ footer,
 @media only screen and (min-width: 640px) {
 
   #map {
-    height: 420px;
-  }
-  #search-text {
-    width: 102px;
-  }
-
-  header,
-  noscript,
-  form,
-  fieldset,
-  footer,
-  .host-results,
-  .result,
-  #map {
-    /* width: 100%; */
-    width: 640px;
-    margin: 0 auto;  
+    height: 380px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-
+  #map {
+    height: 470px;
+  }
 }

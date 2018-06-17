@@ -7,6 +7,7 @@
     <meta name="description" content="Get local and remote Internet Protocol information">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/float-grid.css">
     <link rel="stylesheet" href="styles/styles.css">
   </head>
   <body>
@@ -15,18 +16,18 @@
     </header>
 
     <main>
+      <noscript>This page requires JavaScript.</noscript>
+      
+      <div id="map">        
+      </div>
+
       <fieldset>
         <legend>Theme:</legend>
         <input type="radio" id="default-theme" name="theme" value="default" checked>
         <label for="default-theme">Light</label>  
         <input type="radio" id="dark-theme" name="theme" value="dark">
         <label for="dark-theme">Dark</label>
-      </fieldset>      
-
-      <noscript>This page requires JavaScript</noscript>
-      
-      <div id="map">        
-      </div>
+      </fieldset>  
 
       <div class="page">        
         <form class="ip-start-form">
@@ -35,7 +36,7 @@
           </label>
         </form>
 
-        <div class="search-results">
+        <div class="row search-results">
         </div>
       </div>     
     </main>

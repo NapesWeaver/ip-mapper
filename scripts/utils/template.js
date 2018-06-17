@@ -35,7 +35,7 @@ function decoratePage() {
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
     const distance = e.distance !== 0.0 ? `<li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>` : '';
     return `
-    <div class="result" data-index="${i}">
+    <div class="col-6 result" data-index="${i}">
       <div class="result-controls">
         <input type="button" class="delete-button" value="DELETE">
         <input type="button" class="focus-button" value="FOCUS">
@@ -55,7 +55,7 @@ function decoratePage() {
 
   return `
   <form class="ip-search-form">
-    <div class="host-results">
+    <div class="row host-results">
       <h2>Host Information</h2>
       <ul>
         <li>Private IP: ${data.privateIP}</li>
@@ -83,7 +83,7 @@ function decoratePage() {
       </fieldset>
     </div>
   </form>
-  <div class="search-results">
+  <div class="row search-results">
     ${decorateSearchInfo}
   </div>
   `;
