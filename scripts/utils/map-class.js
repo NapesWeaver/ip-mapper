@@ -28,7 +28,7 @@ class GoogleMap {
       content: info,
     });
     marker.addListener('click', () => {
-      this.map.setZoom(6);
+      this.map.setZoom(12);
       this.map.setCenter(marker.getPosition());
       infoWindow.open(this.map, marker);      
     });

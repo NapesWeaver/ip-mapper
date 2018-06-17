@@ -106,7 +106,6 @@ function decoratePrivateInfoWindow() {
 }
 
 function decoratePublicInfoWindow() {
-  console.log(data.distance);
   const distance = data.distance !== 0.0 ? `<li>Distance: ${data.distance.toFixed(2)}mi</li>` : '';
   const downLink = data.downloadSpeed !== 0.0 ? `<li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>` : '';
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';

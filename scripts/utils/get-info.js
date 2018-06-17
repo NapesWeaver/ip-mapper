@@ -15,9 +15,7 @@ function callBackSearchIP(response) {
   if(response.latitude) {
     data.ipSearches.push(response);
     getHostName(response.ip, callBackSearchHost);
-  } else {
-    console.log('No results.');
-  }  
+  }
 }
 
 function callBackSearchHost(response) {
