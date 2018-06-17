@@ -37,20 +37,18 @@ function decoratePage() {
     return `
     <div class="result" data-index="${i}">
       <div class="result-controls">
-      <input type="button" class="delete-button" value="DELETE">
+        <input type="button" class="delete-button" value="DELETE">
         <input type="button" class="focus-button" value="FOCUS">
-      </div>
-      <div> 
-        <h2>IP: ${e.ip}</h2>
-        <ul>
-          ${publicHost}
-          ${organization}
-          <li>Country: ${e.country_name}</li>            
-          <li>Region: ${e.region}</li>
-          <li>City: ${e.city}</li>
-          ${distance}
-        </ul>
-      </div>
+      </div>       
+      <h2>IP: ${e.ip}</h2>
+      <ul>
+        ${publicHost}
+        ${organization}
+        <li>Country: ${e.country_name}</li>            
+        <li>Region: ${e.region}</li>
+        <li>City: ${e.city}</li>
+        ${distance}
+      </ul>      
     </div>
     `;
   }).join('') : '';
