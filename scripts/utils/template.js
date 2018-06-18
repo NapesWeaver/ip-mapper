@@ -101,18 +101,24 @@ function decoratePage() {
   // }).join('') : '';
 
   return `
-  <form class="ip-search-form">
+    <form class="ip-search-form">
     <div class="row host-results">
-      <h2>Host Information</h2>
-      <ul>
-        <li>Private IP: ${data.privateIP}</li>
-        <li>Public IP: ${data.publicIP}</li>
-        <li>${data.hostName}</li>  
-        ${downLink}
-        ${effectiveType}
-        ${rtt}
-        ${distance}
-      </ul>
+      <div class="col-6">
+        <h2>Host Information</h2>
+        <ul>
+          <li>Private IP: ${data.privateIP}</li>
+          <li>Public IP: ${data.publicIP}</li>
+          <li>${data.hostName}</li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <ul>
+          ${downLink}
+          ${effectiveType}
+          ${rtt}
+          ${distance}
+        </ul>
+      </div>
     </div>
 
     <div class="form-controls">
