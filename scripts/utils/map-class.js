@@ -30,7 +30,8 @@ class GoogleMap {
     marker.addListener('click', () => {
       this.map.setZoom(12);
       this.map.setCenter(marker.getPosition());
-      infoWindow.open(this.map, marker);      
+      infoWindow.open(this.map, marker);     
+      console.log(this.map); 
     });
     this.markers.push(marker);
     this.infoWindows.push(infoWindow);

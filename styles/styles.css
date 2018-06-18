@@ -1,3 +1,7 @@
+/* * {
+  box-sizing: border-box;
+} */
+
 noscript {
   display: block;
   margin: auto;
@@ -8,6 +12,7 @@ noscript {
 }
 
 body {
+  
   font-family: sans-serif;
 }
 
@@ -26,20 +31,15 @@ legend {
   padding-top: 3px;
 }
 
+.form-controls,
+.ip-start-form {
+  padding-left: 12px;
+}
+
 footer {  
   margin: 6px auto 6px auto;
   text-align: center;
   font-size: 0.8em;
-}
-
-.host-results,
-.result {
-  background: #F9F5E7;
-}
-
-.result-controls {   
-  width: 72px;
-  float: right;
 }
 
 #map {
@@ -51,11 +51,9 @@ footer {
   font-family: inherit;
 }
 
-header,
-fieldset,
-footer,
-.form-controls {
-  background: #C5EFBA;
+.result-controls {   
+  width: 72px;
+  float: right;
 }
 
 .delete-button,
@@ -63,6 +61,18 @@ footer,
   display: block;
   margin: 3px auto;
 }
+
+.page {
+  background: #F9F5E7;
+} 
+
+header,
+fieldset,
+footer,
+.form-controls {
+  background: #C5EFBA;
+}
+
 
 input,
 label {
@@ -95,12 +105,23 @@ label {
 /** Responsive CSS **/
 @media only screen and (min-width: 640px) {
 
+  .form-controls,
+  .ip-start-form {
+    padding-left: 10%
+  }
+
   #map {
     height: 380px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
+
+  .form-controls,
+  .ip-start-form {
+    padding-left: 25%
+  }
+
   #map {
     height: 470px;
   }

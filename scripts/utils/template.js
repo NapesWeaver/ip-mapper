@@ -53,6 +53,53 @@ function decoratePage() {
     `;
   }).join('') : '';
 
+  // const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.forEach((e) => {
+  //   const publicHost = e.public_host !== null ? `<li>Host Name: ${e.public_host}</li>` : '';
+  //   const organization = e.org !== undefined ? `<li>Organization: ${e.org}</li>` : '';
+  //   const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
+  //   const dist
+  //   console.log(e.dataIndex);
+  //   if (e.dataIndex % 2 === 0) {
+  //     console.log('even');
+  //     return `
+  //     <div class="col-6 result" data-index="${i}">
+  //       <div class="result-controls">
+  //         <input type="button" class="delete-button" value="DELETE">
+  //         <input type="button" class="focus-button" value="FOCUS">
+  //       </div>       
+  //       <h2>IP: ${e.ip}</h2>
+  //       <ul>
+  //         ${publicHost}
+  //         ${organization}
+  //         <li>Country: ${e.country_name}</li>            
+  //         <li>Region: ${e.region}</li>
+  //         <li>City: ${e.city}</li>
+  //         ${distance}
+  //       </ul>      
+  //     </div>
+  //     `;
+  //   } else {
+  //     console.log('odd');
+  //     return `
+  //     <div class="col-6 result" data-index="${i}">
+  //       <div class="result-controls">
+  //         <input type="button" class="delete-button" value="DELETE">
+  //         <input type="button" class="focus-button" value="FOCUS">
+  //       </div>       
+  //       <h2>IP: ${e.ip}</h2>
+  //       <ul>
+  //         ${publicHost}
+  //         ${organization}
+  //         <li>Country: ${e.country_name}</li>            
+  //         <li>Region: ${e.region}</li>
+  //         <li>City: ${e.city}</li>
+  //         ${distance}
+  //       </ul>      
+  //     </div>
+  //     `;
+  //   }
+  // }).join('') : '';
+
   return `
   <form class="ip-search-form">
     <div class="row host-results">
