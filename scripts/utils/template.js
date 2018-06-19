@@ -60,8 +60,8 @@ function decoratePage() {
   return `
     <form class="ip-search-form">
     <div class="row host-results">
-      <div class="col-6">
-        <h2>Host Information</h2>
+      <h2>Host Information</h2>
+      <div class="col-6">        
         <ul>
           <li>Private IP: ${data.privateIP}</li>
           <li>Public IP: ${data.publicIP}</li>
@@ -80,7 +80,7 @@ function decoratePage() {
 
     <div class="form-controls">
       <label for="#search-text">Enter IPv4 Address to Search
-        <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad" pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$">
+        <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
       </label>
       <input type="submit" value="SEARCH">
       <input type="reset" value="RESET">

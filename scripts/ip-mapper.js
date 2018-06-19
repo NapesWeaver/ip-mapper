@@ -6,7 +6,8 @@ import { searchIP, callBackSearchIP, getLocalInfo, getUserLocation } from './uti
 function attachListeners() {
   $('.page').on('submit', '.ip-start-form', submitStart);
   $('.page').on('submit', '.ip-search-form', submitSearch);
-  $('.page').on('reset', '', submitReset);
+  $('.page').on('change', '#search-text', validateInput);
+  $('.page').on('reset', submitReset);
   $('.page').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
@@ -19,6 +20,19 @@ function attachListeners() {
   $('.page').on('change', 'input[name="hop-type"]', () => {
     data.tracerouteChecked === true ? data.tracerouteChecked = false : data.tracerouteChecked = true;
   });  
+}
+
+function validateInput() {
+  // let inputField = $('#search-text');
+  let inputField = document.getElementById('search-text');
+  const constraint = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$');
+  if (constraint.test($('#search-text').val())) {
+    console.log('no error');
+    inputField.setCustomValidity('');
+  } else {
+    console.log('Please enter a valid IPv4 dotted quad.');    
+    inputField.setCustomValidity('Please enter a valid IPv4 dotted quad.');
+  }
 }
 
 function createLocationObject(lat, lng, index, title, icon, formattedInfo) {
@@ -212,6 +226,7 @@ function submitReset() {
 function submitSearch(event) {
   event.preventDefault();
   searchIP($('#search-text').val(), callBackSearchIP);
+  validateInput();
   $('#search-text').val('');
 }
 

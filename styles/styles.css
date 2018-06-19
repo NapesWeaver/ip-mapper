@@ -108,6 +108,10 @@ label {
     font-size: 1em;
   }
 
+  h2 {
+    text-align: center;
+  }
+
   .form-controls,
   .ip-start-form {
     padding-left: 6%
