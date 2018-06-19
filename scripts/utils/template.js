@@ -48,7 +48,7 @@ function decoratePage() {
         <li>Region: ${e.region}</li>
         <li>City: ${e.city}</li>
         ${distance}
-      </ul>      
+      </ul>
     </div>
     `;
   }).join('') : '';

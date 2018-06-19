@@ -37,7 +37,7 @@ function createLocationObject(lat, lng, index, title, icon, formattedInfo) {
 
 function createPublicIPLocation() {
   const title = `Public IP: ${data.publicIP}`;
-  const icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+  const icon = './images/yellow-dot.png';
   const formattedInfo = decoratePublicInfoWindow();
   let location = createLocationObject(data.publicLat, data.publicLng, -1, title, icon, formattedInfo);
   return location;
@@ -45,7 +45,7 @@ function createPublicIPLocation() {
 
 function createSearchedLocation(index) {
   const title = data.ipSearches[index].ip;
-  const icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+  const icon = './images/green-dot.png';
   const formattedInfo = decorateSearchInfoWindow(index);
   let location = createLocationObject(data.ipSearches[index].latitude, data.ipSearches[index].longitude, index, title, icon, formattedInfo);  
   return Object.assign(location.data, location);
