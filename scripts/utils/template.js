@@ -39,10 +39,10 @@ function decoratePage() {
     return `
     ${rowStart}
     <div class="col-6 result" data-index="${i}">
-      <div class="result-controls">
-      <input type="button" class="focus-button" value="FOCUS">
+      <fieldset class="result-controls">
+        <input type="button" class="focus-button" value="FOCUS">
         <input type="button" class="delete-button" value="DELETE">
-      </div>       
+      </fieldset>       
       <h3>IP: ${e.ip}</h3>
       
       <ul>        
@@ -83,10 +83,10 @@ function decoratePage() {
       <label for="#search-text">Enter IPv4 Address to Search
         <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
       </label>
-      <div class="action-buttons">
+      <fieldset class="action-buttons">
         <input type="submit" value="SEARCH">
         <input type="reset" value="RESET">
-      </div>
+      </fieldset>
       <fieldset>
         <legend>Search Type: </legend>
         <input type="radio" id="radial-view" name="hop-type" value="radial-view" ${radialChecked}>
