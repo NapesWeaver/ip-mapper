@@ -23,12 +23,17 @@ function attachListeners() {
 }
 
 function validateInput() {
-  // let inputField = $('#search-text');
   let inputField = document.getElementById('search-text');
-  const constraint = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$');
-  if (constraint.test($('#search-text').val())) {
-    console.log('no error');
-    inputField.setCustomValidity('');
+  const constraint = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$');
+  let dottedQuads = $('#search-text').val().split('.');
+  
+  if (dottedQuads.length === 4) {
+    dottedQuads.forEach((e) => {
+      if (constraint.test(e)) {
+        console.log('no error');
+        inputField.setCustomValidity('');
+      }
+    });
   } else {
     console.log('Please enter a valid IPv4 dotted quad.');    
     inputField.setCustomValidity('Please enter a valid IPv4 dotted quad.');
@@ -226,7 +231,6 @@ function submitReset() {
 function submitSearch(event) {
   event.preventDefault();
   searchIP($('#search-text').val(), callBackSearchIP);
-  validateInput();
   $('#search-text').val('');
 }
 
