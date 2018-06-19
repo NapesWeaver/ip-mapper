@@ -31,6 +31,10 @@ legend {
   padding-top: 3px;
 }
 
+label[for="#search-text"] {
+  font-size: 1.2em;
+}
+
 footer {  
   /* margin: 6px auto 6px auto; */
   text-align: center;
@@ -44,6 +48,10 @@ footer {
 #search-text {
   width: 105px;
   font-family: inherit;
+}
+
+.theme-controls {
+  padding-left: 3%;
 }
 
 .form-controls,
@@ -109,7 +117,7 @@ label {
   }
 
   h2 {
-    text-align: center;
+    /* text-align: center; */
   }
 
   .form-controls,
