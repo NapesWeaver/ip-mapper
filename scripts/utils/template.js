@@ -30,7 +30,7 @@ function decoratePage() {
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
   const decorateSearchInfo = data.ipSearches.length > 0 ? data.ipSearches.map((e, i) => {
-    const publicHost = e.public_host !== null ? `<li>Host Name: ${e.public_host}</li>` : '';
+    const publicHost = e.public_host !== null ? `<li>${e.public_host}</li>` : '';
     const organization = e.org !== undefined ? `<li>Organization: ${e.org}</li>` : '';
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
     const distance = e.distance !== 0.0 ? `<li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>` : '';
@@ -40,12 +40,13 @@ function decoratePage() {
     ${rowStart}
     <div class="col-6 result" data-index="${i}">
       <div class="result-controls">
+      <input type="button" class="focus-button" value="FOCUS">
         <input type="button" class="delete-button" value="DELETE">
-        <input type="button" class="focus-button" value="FOCUS">
       </div>       
-      <h2>IP: ${e.ip}</h2>
-      <ul>
-        ${publicHost}
+      <h3>IP: ${e.ip}</h3>
+      
+      <ul>        
+        <li>${publicHost}</li>
         ${organization}
         <li>Country: ${e.country_name}</li>            
         <li>Region: ${e.region}</li>
@@ -60,12 +61,12 @@ function decoratePage() {
   return `
     <form class="ip-search-form">
     <div class="row host-results">
-      <h2>Host Information</h2>
       <div class="col-6">        
+      <h2>Host Information</h2>      
         <ul>
+          <li>${data.hostName}</li>
           <li>Private IP: ${data.privateIP}</li>
           <li>Public IP: ${data.publicIP}</li>
-          <li>${data.hostName}</li>
         </ul>
       </div>
       <div class="col-6">
@@ -82,8 +83,10 @@ function decoratePage() {
       <label for="#search-text">Enter IPv4 Address to Search
         <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
       </label>
-      <input type="submit" value="SEARCH">
-      <input type="reset" value="RESET">
+      <div class="action-buttons">
+        <input type="submit" value="SEARCH">
+        <input type="reset" value="RESET">
+      </div>
       <fieldset>
         <legend>Search Type: </legend>
         <input type="radio" id="radial-view" name="hop-type" value="radial-view" ${radialChecked}>

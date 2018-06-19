@@ -26,6 +26,13 @@ h2 {
   font-size: 1.5em;
 }
 
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
 legend {
   float: left;
   padding-top: 3px;
@@ -59,8 +66,7 @@ footer {
   padding-left: 5%;
 }
 
-.result-controls {   
-  width: 72px;
+.result-controls {
   float: right;
 }
 
@@ -123,6 +129,13 @@ label {
   .form-controls,
   .ip-start-form {
     padding-left: 6%
+  }
+
+  .action-buttons,
+  input[type="button"] {
+    display: inline;
+    /* margin-right: 3% */
+    /* text-align: right;   */
   }
 
   #map {
