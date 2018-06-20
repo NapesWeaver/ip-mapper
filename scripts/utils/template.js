@@ -60,12 +60,12 @@ function decoratePage() {
   return `
     <form class="ip-search-form">
     <div class="row host-results">
-      <div class="col-6 col-1">        
+      <div class="col-6 col-custom">        
         <h2>Host Information</h2>      
         <h3>${data.hostName}</h3>
       </div>
 
-      <div class="col-6 col-1">
+      <div class="col-6">
         <div class="col-6">
           <ul>
             <li>Private IP: ${data.privateIP}</li>

@@ -3,6 +3,7 @@ noscript {
   margin: auto;
   padding-top: 25px;
   text-align: center;
+  font-size: 1.7em;
   font-weight: bold;
   color: #DD4C40;
 }
@@ -10,7 +11,21 @@ noscript {
 body {  
   word-wrap: break-word;
   font-family: sans-serif;
+  line-height: 1.3em;
   font-size: 0.8em;
+}
+
+header {
+  padding: 3px;
+}
+
+footer {
+  padding: 1px;
+}
+
+.ip-start-form,
+.form-controls {
+  padding-top: 2px;
 }
 
 h1 {
@@ -22,17 +37,21 @@ h2 {
 }
 
 h3 {
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 h4 {
+  padding-left: 10px;
   font-size: 1.1em;
 }
 
-h1,
+h1 {
+  text-align: center;
+}
+
 h2,
-h3,
-h4 {
+h3 {
+  margin: 3px;
   text-align: center;
 }
 
@@ -68,6 +87,10 @@ footer {
   padding-left: 5%;
 }
 
+.host-results {
+  max-width: 100%;
+}
+
 .result-controls {
   float: right;
 }
@@ -78,14 +101,17 @@ footer {
   margin: 3px auto;
 }
 
-.page {
-  background: #F9F5E7;
-} 
-
 header,
+.theme-controls,
 footer,
 .form-controls {
   background: #C5EFBA;
+}
+
+.ip-start-form,
+.host-results,
+.search-results {
+  background: #F9F5E7;
 }
 
 input,
@@ -130,7 +156,33 @@ label {
 @media only screen and (min-width: 640px) {
 
   body {
-    font-size: 1em;
+    font-size: 0.9em;
+    line-height: 1.1em;
+  }
+
+  header {
+    padding: 7px;
+  }
+
+  h2,
+  h3,
+  h4 {
+    margin: 5px;
+  }
+
+  legend {
+    padding-top: 2px;
+  }
+
+  #map {
+    height: 380px;
+  }
+
+  .ip-start-form,
+  .row,
+  .form-controls {
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
 
   .form-controls,
@@ -142,32 +194,56 @@ label {
   input[type="button"] {
     display: inline;
   }
-
-  #map {
-    height: 380px;
-  }
-
-  .col-1 {
-    width: 100%;
-  }
 }
 
 @media only screen and (min-width: 800px) {
 
-  .form-controls,
-  .ip-start-form {
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  h2 {
+    font-size: 1.6em;
+  }
+  
+  h3 {
+    font-size: 1.3em;
+  }
+  
+  h4 {
+    padding-left: 25px;
+    font-size: 1.2em;
+  }
+
+  .ip-start-form,
+  .form-controls {
     padding-left: 15%;
   }
 
-  .col-6 {
-    width: 50%;
+  .col-custom {
+    width: 45%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
 
+  body {
+    line-height: 1.2em;
+    font-size: 1em;
+  }
   h1 {
     font-size: 2em;
+  }
+
+  legend {
+    padding-top: 0;
+  }
+
+  .ip-start-form,
+  .row,
+  .form-controls {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .form-controls,
