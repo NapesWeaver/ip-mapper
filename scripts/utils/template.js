@@ -86,14 +86,14 @@ function decoratePage() {
     </div>
 
     <div class="form-controls">
-      <label for="#search-text">Enter IPv4 Address to Search
-        <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
-      </label>
-      <fieldset class="search-controls">
+      <fieldset class="search">
+        <label for="#search-text">Enter IPv4 Address to Search
+          <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
+        </label>
         <input type="submit" value="SEARCH">
         <input type="reset" value="RESET">
       </fieldset>
-      <fieldset>
+      <fieldset class="search-type">
         <legend>Search Type: </legend>
         <input type="radio" id="radial-view" name="hop-type" value="radial-view" ${radialChecked}>
         <label for="radial-view">Radial</label>  

@@ -10,7 +10,7 @@ noscript {
 
 body {  
   word-wrap: break-word;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.3em;
   font-size: 0.8em;
 }
@@ -21,11 +21,6 @@ header {
 
 footer {
   padding: 1px;
-}
-
-.ip-start-form,
-.form-controls {
-  padding-top: 2px;
 }
 
 h1 {
@@ -41,18 +36,17 @@ h3 {
 }
 
 h4 {
-  padding-left: 10px;
   font-size: 1.1em;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
 }
 
 h2,
 h3 {
   margin: 3px;
-  text-align: center;
 }
 
 legend {
@@ -78,13 +72,21 @@ footer {
   font-family: inherit;
 }
 
-.theme-controls {
+.map-controls {
   padding-left: 3%;
 }
 
-.form-controls,
 .ip-start-form {
-  padding-left: 5%;
+  text-align: center;
+}
+
+.ip-start-form,
+.form-controls {
+  padding-top: 2px;
+}
+
+.form-controls {
+  padding-left: 20px;
 }
 
 .host-results {
@@ -102,7 +104,7 @@ footer {
 }
 
 header,
-.theme-controls,
+.map-controls,
 footer,
 .form-controls {
   background: #C5EFBA;
@@ -164,6 +166,10 @@ label {
     padding: 7px;
   }
 
+  h3 {
+    text-align: center;
+  }
+  
   h2,
   h3,
   h4 {
@@ -185,12 +191,16 @@ label {
     padding-bottom: 3px;
   }
 
-  .form-controls,
-  .ip-start-form {
-    padding-left: 6%
+  .form-controls {
+    text-align: center;
   }
 
-  .search-controls,
+  .search-type {
+    width: 250px;
+    margin: auto;
+  }
+
+  .search,
   input[type="button"] {
     display: inline;
   }
@@ -215,11 +225,6 @@ label {
     font-size: 1.2em;
   }
 
-  .ip-start-form,
-  .form-controls {
-    padding-left: 15%;
-  }
-
   .col-custom {
     width: 45%;
   }
@@ -231,8 +236,13 @@ label {
     line-height: 1.2em;
     font-size: 1em;
   }
+
   h1 {
     font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
   }
 
   legend {
@@ -246,9 +256,8 @@ label {
     padding-bottom: 5px;
   }
 
-  .form-controls,
-  .ip-start-form {
-    padding-left: 25%
+  .search-type {
+    width: 275px;
   }
 
   #map {
