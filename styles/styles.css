@@ -86,7 +86,11 @@ footer {
 }
 
 .form-controls {
-  padding-left: 20px;
+  padding-left: 0.8em;
+}
+
+.form-buttons {
+  display: inline-block;
 }
 
 .host-results {
@@ -191,23 +195,21 @@ label {
   .ip-start-form,
   .map-controls,
   .row,
-  .form-controls {
+  .search,
+  .search-type {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
   }
 
   .form-controls {
+    padding-top: 0;
+    padding-left: 0;
     text-align: center;
   }
 
   .search-type {
     width: 250px;
     margin: auto;
-  }
-
-  .search,
-  input[type="button"] {
-    display: inline;
   }
 }
 
@@ -254,10 +256,25 @@ label {
   }
 
   .search-type {
-    width: 275px;
+    width: 300px;
   }
 
   #map {
     height: 470px;
+  }
+
+  .ip-start-form,
+  .map-controls,
+  .row,
+  .search,
+  .search-type {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+  }
+
+  .ip-start-form,
+  .search,
+  .search-type {
+    font-size: 1.1em;
   }
 }

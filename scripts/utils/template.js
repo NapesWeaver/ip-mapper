@@ -90,8 +90,10 @@ function decoratePage() {
         <label for="#search-text">Enter IPv4 Address to Search
           <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
         </label>
-        <input type="submit" value="SEARCH">
-        <input type="reset" value="RESET">
+        <div class="form-buttons">
+          <input type="submit" value="SEARCH">
+          <input type="reset" value="RESET">
+        </div>
       </fieldset>
       <fieldset class="search-type">
         <legend>Search Type: </legend>
