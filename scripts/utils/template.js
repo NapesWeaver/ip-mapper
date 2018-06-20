@@ -43,7 +43,7 @@ function decoratePage() {
         <input type="button" class="focus-button" value="FOCUS">
         <input type="button" class="delete-button" value="DELETE">
       </fieldset>       
-      <h3>IP: ${e.ip}</h3>      
+      <h4>IP: ${e.ip}</h4>      
       <ul>        
         <li>${publicHost}</li>
         ${organization}
@@ -60,13 +60,12 @@ function decoratePage() {
   return `
     <form class="ip-search-form">
     <div class="row host-results">
-      <div class="col-6">        
-      <h2>Host Information</h2>      
-        <ul>
-          <li class="ellipsis">${data.hostName}</li>          
-        </ul>
+      <div class="col-6 col-1">        
+        <h2>Host Information</h2>      
+        <h3>${data.hostName}</h3>
       </div>
-      <div class="col-6">
+
+      <div class="col-6 col-1">
         <div class="col-6">
           <ul>
             <li>Private IP: ${data.privateIP}</li>
@@ -82,6 +81,7 @@ function decoratePage() {
             ${rtt}          
           </ul>
         </div>
+
       </div>
     </div>
 
@@ -129,7 +129,7 @@ function decoratePublicInfoWindow() {
   return `
   <div class="info-window">
     <h1>Public IP: ${data.publicIP}</h1>
-    <h2>${data.hostName}</h2>
+    <h2 class="ellipsis">${data.hostName}</h2>
     <ul>
       ${downLink}
       ${effectiveType}
