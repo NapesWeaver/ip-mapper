@@ -22,24 +22,6 @@ function attachListeners() {
   });  
 }
 
-function validateInput() {
-  let inputField = document.getElementById('search-text');
-  const constraint = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$');
-  let dottedQuads = $('#search-text').val().split('.');
-  
-  if (dottedQuads.length === 4) {
-    dottedQuads.forEach((e) => {
-      if (constraint.test(e)) {
-        console.log('no error');
-        inputField.setCustomValidity('');
-      }
-    });
-  } else {
-    console.log('Please enter a valid IPv4 dotted quad.');    
-    inputField.setCustomValidity('Please enter a valid IPv4 dotted quad.');
-  }
-}
-
 function createLocationObject(lat, lng, index, title, icon, formattedInfo) {
   let location = { 
     lat: lat,
@@ -335,6 +317,28 @@ function toggleTheme() {
     };
   }
   GoogleMap.map.setOptions(options);
+}
+
+function validateInput() {
+  const constraint = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$');
+  const dottedQuads = $('#search-text').val().split('.');
+  let inputField = document.getElementById('search-text');
+  let validated = false;
+
+  if (dottedQuads.length === 4) {
+    let goodData = true;
+    dottedQuads.forEach((e) => {
+      if (!constraint.test(e)) {
+        goodData = false;
+      }
+    });
+    if (goodData) validated = true;
+  }
+  if (validated) {
+    inputField.setCustomValidity('');
+  } else {  
+    inputField.setCustomValidity('Please enter a valid IPv4 dotted quad.');
+  }
 }
 
 export { attachListeners, drawMarker, mapSearchedIP, mapPublicIP, renderHTML };

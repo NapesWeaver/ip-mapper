@@ -23,16 +23,14 @@ h1 {
 }
 
 h2 {
+  text-align: center;
   font-size: 1.5em;
 }
 
 h3 {
-  font-size: 1.3em;
-}
-
-h4 {
   font-size: 1.2em;
 }
+
 legend {
   float: left;
   padding-top: 3px;
@@ -91,6 +89,17 @@ label {
 	cursor: pointer;
 }
 
+.ellipsis {
+  text-align: center;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis:hover {
+  overflow: visible;
+}
+
 /** Google Map InfoWindow CSS **/
 .info-window {
   background: #E8EBDE;
@@ -130,7 +139,7 @@ label {
     padding-left: 6%
   }
 
-  .action-buttons,
+  .search-controls,
   input[type="button"] {
     display: inline;
     /* margin-right: 3% */

@@ -1,7 +1,7 @@
 import { data } from '../data/data.js';
 
 function decorateSearchInfoWindow(index) {
-  const publicHost = data.ipSearches[index].public_host === null ? '' : `<h2>${data.ipSearches[index].public_host}</h2>`;
+  const publicHost = data.ipSearches[index].public_host === null ? '' : `<h2 class="ellipsis">${data.ipSearches[index].public_host}</h2>`;
   const hopTypeString = data.ipSearches[index].hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
   const organization = data.ipSearches[index].org === undefined ? '' : `<li>Organization: ${data.ipSearches[index].org}</li>`;
   return `
@@ -43,8 +43,7 @@ function decoratePage() {
         <input type="button" class="focus-button" value="FOCUS">
         <input type="button" class="delete-button" value="DELETE">
       </fieldset>       
-      <h3>IP: ${e.ip}</h3>
-      
+      <h3>IP: ${e.ip}</h3>      
       <ul>        
         <li>${publicHost}</li>
         ${organization}
@@ -64,18 +63,25 @@ function decoratePage() {
       <div class="col-6">        
       <h2>Host Information</h2>      
         <ul>
-          <li>${data.hostName}</li>
-          <li>Private IP: ${data.privateIP}</li>
-          <li>Public IP: ${data.publicIP}</li>
+          <li class="ellipsis">${data.hostName}</li>          
         </ul>
       </div>
       <div class="col-6">
-        <ul>
-          ${downLink}
-          ${effectiveType}
-          ${rtt}
-          ${distance}
-        </ul>
+        <div class="col-6">
+          <ul>
+            <li>Private IP: ${data.privateIP}</li>
+            <li>Public IP: ${data.publicIP}</li>
+            ${distance}
+          </ul>
+        </div>
+      
+        <div class="col-6">
+          <ul>
+            ${downLink}
+            ${effectiveType}
+            ${rtt}          
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -83,7 +89,7 @@ function decoratePage() {
       <label for="#search-text">Enter IPv4 Address to Search
         <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
       </label>
-      <fieldset class="action-buttons">
+      <fieldset class="search-controls">
         <input type="submit" value="SEARCH">
         <input type="reset" value="RESET">
       </fieldset>
