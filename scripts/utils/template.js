@@ -88,7 +88,7 @@ function decoratePage() {
     <fieldset role="group" class="form-controls">
       <fieldset role="group" class="search">
         <label for="#search-text">Enter IPv4 Address to Search
-          <input type="text" id="search-text" placeholder="8.8.8.8" title="Enter an IPv4 dotted quad to search" required>
+          <input type="text" id="search-text" placeholder="8.8.8.8" required>
         </label>
         <div class="form-buttons">
           <input type="submit" value="SEARCH" title="Search a remote IPv4 address">
