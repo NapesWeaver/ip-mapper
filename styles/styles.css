@@ -9,6 +9,7 @@ noscript {
 }
 
 body {  
+  box-sizing: border-box;
   word-wrap: break-word;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.3em;
@@ -95,6 +96,15 @@ footer {
 
 .host-results {
   max-width: 100%;
+}
+
+.result {
+  margin-top: 0.3em;
+  box-shadow: 0px 2px #C5EFBA;
+}
+
+.result ul {
+  margin-bottom: 0.3em;
 }
 
 .result-controls {
@@ -192,9 +202,7 @@ label {
     height: 380px;
   }
 
-  .ip-start-form,
   .map-controls,
-  .row,
   .search,
   .search-type {
     padding-top: 0.3em;
@@ -210,6 +218,10 @@ label {
   .search-type {
     width: 250px;
     margin: auto;
+  }
+
+  .result {
+    box-shadow: 2px 1px #C5EFBA;
   }
 }
 
@@ -233,6 +245,10 @@ label {
 
   .col-custom {
     width: 45%;
+  }
+
+  .result {
+    box-shadow: 3px 2px #C5EFBA;
   }
 }
 
@@ -263,9 +279,7 @@ label {
     height: 470px;
   }
 
-  .ip-start-form,
   .map-controls,
-  .row,
   .search,
   .search-type {
     padding-top: 0.4em;
@@ -276,5 +290,9 @@ label {
   .search,
   .search-type {
     font-size: 1.1em;
+  }
+
+  .result {
+    box-shadow: 4px 2px #C5EFBA;
   }
 }

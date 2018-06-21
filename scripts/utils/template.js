@@ -39,9 +39,9 @@ function decoratePage() {
     return `
     ${rowStart}
     <div class="col-6 result" data-index="${i}">
-      <fieldset class="result-controls">
-        <input type="button" class="focus-button" value="FOCUS">
-        <input type="button" class="delete-button" value="DELETE">
+      <fieldset role="group" class="result-controls">
+        <input type="button" class="focus-button" value="FOCUS" title="Focus map on this search item">
+        <input type="button" class="delete-button" value="DELETE" title="Delete this search item">
       </fieldset>       
       <h4>IP: ${e.ip}</h4>      
       <ul>        
@@ -85,24 +85,24 @@ function decoratePage() {
       </div>
     </div>
 
-    <div class="form-controls">
-      <fieldset class="search">
+    <fieldset role="group" class="form-controls">
+      <fieldset role="group" class="search">
         <label for="#search-text">Enter IPv4 Address to Search
-          <input type="text" id="search-text" placeholder="8.8.8.8" title="IPv4 dotted quad">
+          <input type="text" id="search-text" placeholder="8.8.8.8" title="Enter an IPv4 dotted quad to search" required>
         </label>
         <div class="form-buttons">
-          <input type="submit" value="SEARCH">
-          <input type="reset" value="RESET">
+          <input type="submit" value="SEARCH" title="Search a remote IPv4 address">
+          <input type="reset" value="RESET" title="Reset host info and searches">
         </div>
       </fieldset>
-      <fieldset class="search-type">
+      <fieldset role="group" class="search-type">
         <legend>Search Type: </legend>
-        <input type="radio" id="radial-view" name="hop-type" value="radial-view" ${radialChecked}>
-        <label for="radial-view">Radial</label>  
-        <input type="radio" id="traceroute" name="hop-type" value="traceroute" ${tracerouteChecked}>
-        <label for="traceroute">Traceroute</label>
+        <input type="radio" id="radial-view" name="hop-type" value="radial-view" title="Map searches radially"${radialChecked}>
+        <label for="radial-view" title="Map searches radially">Radial</label>  
+        <input type="radio" id="traceroute" name="hop-type" value="traceroute" title="Map searches in hops"${tracerouteChecked}>
+        <label for="traceroute" title="Map searches in hops">Traceroute</label>
       </fieldset>
-    </div>
+    </fieldset>
   </form>
   <div class="search-results">
     ${decorateSearchInfo}
@@ -146,10 +146,20 @@ function decoratePublicInfoWindow() {
 
 function decorateStart() {
   return `
-  <form class="ip-start-form">
-    <label>Get Local Network Information
-      <input type="submit" id="start" value="CONNECT">
-    </label>        
+  <form class="ip-start-form">          
+    <section role="region">
+      <div class="row">
+        <div class="col-12">                      
+          <h2>Map Local and Remote IPv4 Addresses</h2>
+          <p>Press connect to get local user information and search remote IPv4 Addresses.</p>                                  
+        </div>
+      </div>
+    </section>
+    <fieldset role="group" class="form-controls">
+      <label>Get Local Network Information
+        <input type="submit" id="start" value="CONNECT">
+      </label>
+    </fieldset>
   </form>
   <div class="search-results">
   </div>

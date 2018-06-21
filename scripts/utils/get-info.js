@@ -153,7 +153,7 @@ function mapPrivateIP(location) {
   renderHTML();
 }
 
-function searchIP(ip, callBack) {  
+function searchIP(ip, callBack) {
   $.getJSON(`https://ipapi.co/${ip}/json/`, callBack);
 }
 
