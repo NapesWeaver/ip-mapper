@@ -1,7 +1,7 @@
 import { data } from '../data/data.js';
 import GoogleMap from '../utils/map-class.js';
 import { decoratePrivateInfoWindow } from '../utils/template.js';
-import { drawMarker, mapSearchedIP, mapPublicIP, renderHTML } from '../ip-mapper.js';
+import { drawMarker, mapSearchedIP, mapPublicIP, renderHostInfo, renderSearchInfo } from '../ip-mapper.js';
 
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
@@ -23,7 +23,7 @@ function callBackSearchHost(response) {
   const index = data.ipSearches.length - 1;
   data.ipSearches[index].public_host = host;  
   mapSearchedIP(index);
-  renderHTML();
+  renderSearchInfo();
 }
 
 function callBackUserHost(response) {
@@ -55,7 +55,7 @@ function geolocationError(error) {
     break;
   }
   mapPublicIP();
-  renderHTML();
+  renderHostInfo();
 }
 
 function getHostName(ip, callBack) {
@@ -142,7 +142,7 @@ function getUserLocation() {
   } else {
     console.log('Geolocation not supported.');
     mapPublicIP();
-    renderHTML();    
+    renderHostInfo();    
   }  
 }
 
@@ -150,10 +150,10 @@ function mapPrivateIP(location) {
   data.distance = GoogleMap.getDistance({ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng });
   GoogleMap.drawLine([{ lat: data.privateLat, lng: data.privateLng }, { lat: data.publicLat, lng: data.publicLng }]);   
   drawMarker(location);
-  renderHTML();
+  renderHostInfo();
 }
 
-function searchIP(ip, callBack) {
+function searchIP(ip, callBack) {  
   $.getJSON(`https://ipapi.co/${ip}/json/`, callBack);
 }
 

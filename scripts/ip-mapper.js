@@ -1,5 +1,5 @@
 import { data, resetData } from './data/data.js';
-import { decoratePublicInfoWindow, decorateSearchInfoWindow, decoratePage, decorateStart } from './utils/template.js';
+import { decorateHostInfo, decoratePublicInfoWindow, decorateSearchInfoWindow, decorateSearchResults, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';
 import { searchIP, callBackSearchIP, getLocalInfo, getUserLocation } from './utils/get-info.js';
 
@@ -8,10 +8,10 @@ function attachListeners() {
   $('.page').on('submit', '.ip-search-form', submitSearch);
   $('.page').on('change', '#search-text', validateInput);
   $('.page').on('reset', submitReset);
-  $('.page').on('click', '.delete-button', function(event) {
+  $('.search-results').on('click', '.delete-button', function(event) {
     deleteSearch(event);
   });
-  $('.page').on('click', '.focus-button', function(event) {
+  $('.search-results').on('click', '.focus-button', function(event) {
     focusMarker(event);
   });
   $('input[name="theme"]').on('change', () => {
@@ -88,12 +88,13 @@ function deletePolyLines(index) {
 }
 
 function deleteSearch(event) {
+  console.log('yes');
   const index = getSearchItemIndex(event.currentTarget);
   data.ipSearches.splice(index, 1);
   deleteMapObject(index);
   redrawMarkers(index);
   resizeMap();  
-  renderHTML();
+  renderSearchInfo();
 }
 
 function drawMarker(location) { 
@@ -164,12 +165,7 @@ function redrawMarkers(index) {
   for (let i = index; i < data.ipSearches.length; i++) {
     mapSearchedIP(i);
   }
-  renderHTML();
-}
-
-function renderHTML() {
-  $('.page').html(decoratePage);
-  $('#search-text').focus();
+  renderSearchInfo();
 }
 
 function removeMarkers() {
@@ -184,6 +180,16 @@ function removePolyLines() {
     GoogleMap.polyLines[i].setMap(null);
   }
   GoogleMap.polyLines = [];
+}
+
+function renderHostInfo() {
+  $('.page').html(decorateHostInfo);
+  // $('#search-text').focus();
+}
+
+function renderSearchInfo() {
+  $('.search-results').html(decorateSearchResults);
+  $('#search-text').focus();
 }
 
 function resetMap() {
@@ -206,6 +212,7 @@ function submitReset() {
   resetData();  
   resetMap();
   $('.page').html(decorateStart);
+  $('.search-results').html(decorateSearchResults)
   getLocalInfo();
   $('#start').focus();
 }
@@ -341,4 +348,4 @@ function validateInput() {
   }
 }
 
-export { attachListeners, drawMarker, mapSearchedIP, mapPublicIP, renderHTML };
+export { attachListeners, drawMarker, mapSearchedIP, mapPublicIP, renderHostInfo, renderSearchInfo };
