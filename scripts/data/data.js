@@ -1,5 +1,8 @@
 const initialData = {
   MAPS_KEY: 'AIzaSyCACNzsORCP0XW5NXCeigRB7DlB4sRlYq4',
+  SHODAN_KEY: '3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw',
+  SHODAN_END_POINT: 'https://api.shodan.io/dns/reverse?ips=',
+  IP_API_END_POINT: 'https://ipapi.co/',
   tracerouteChecked: false,
   privateIP: '0.0.0.0',    
   privateLat: 0.0,

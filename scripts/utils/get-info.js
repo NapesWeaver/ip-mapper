@@ -3,6 +3,14 @@ import GoogleMap from '../utils/map-class.js';
 import { decoratePrivateInfoWindow } from '../utils/template.js';
 import { drawMarker, mapSearchedIP, mapPublicIP, renderHostInfo, renderSearchInfo } from '../ip-mapper.js';
 
+function buildHostNameQuery(ip) {
+  return `${data.SHODAN_END_POINT}${ip}&key=${data.SHODAN_KEY}`;
+}
+
+function buildSearchIPQuery(ip) {
+  return `${data.IP_API_END_POINT}${ip}/json/`;
+}
+
 function callBackPublicIP(response) {
   data.publicIP = response.ip;
   data.publicLat = response.latitude;
@@ -60,7 +68,7 @@ function geolocationError(error) {
 }
 
 function getHostName(ip, callBack) {
-  $.getJSON(`https://api.shodan.io/dns/reverse?ips=${ip}&key=3ebsORr9MVlM1QSAQb4Xs0L1mh82xCKw`, callBack);
+  $.getJSON(buildHostNameQuery(ip), callBack);
 }
 
 function getLocalConnectionInfo() {
@@ -154,8 +162,8 @@ function mapPrivateIP(location) {
   renderHostInfo();
 }
 
-function searchIP(ip, callBack) {  
-  $.getJSON(`https://ipapi.co/${ip}/json/`, callBack);
+function searchIP(ip, callBack) {
+  $.getJSON(buildSearchIPQuery(ip), callBack);
 }
 
 function testForPrivateIP() {
