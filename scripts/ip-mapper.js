@@ -88,13 +88,13 @@ function deletePolyLines(index) {
 }
 
 function deleteSearch(event) {
-  console.log('yes');
   const index = getSearchItemIndex(event.currentTarget);
   data.ipSearches.splice(index, 1);
   deleteMapObject(index);
   redrawMarkers(index);
   resizeMap();  
   renderSearchInfo();
+  $('#search-text').focus();
 }
 
 function drawMarker(location) { 
@@ -184,12 +184,10 @@ function removePolyLines() {
 
 function renderHostInfo() {
   $('.page').html(decorateHostInfo);
-  // $('#search-text').focus();
 }
 
 function renderSearchInfo() {
   $('.search-results').html(decorateSearchResults);
-  $('#search-text').focus();
 }
 
 function resetMap() {
@@ -212,15 +210,13 @@ function submitReset() {
   resetData();  
   resetMap();
   $('.page').html(decorateStart);
-  $('.search-results').html(decorateSearchResults)
+  $('.search-results').html(decorateSearchResults);
   getLocalInfo();
-  $('#start').focus();
 }
 
 function submitSearch(event) {
   event.preventDefault();
   searchIP($('#search-text').val(), callBackSearchIP);
-  $('#search-text').val('');
 }
 
 function submitStart(event) {

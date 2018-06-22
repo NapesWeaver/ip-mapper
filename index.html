@@ -14,22 +14,17 @@
     <header role="banner">
       <h1>IP Mapper</h1>
     </header>
-
     <main>
       <fieldset role="group" class="map-controls">
         <legend>Theme:</legend>
-        <input type="radio" id="default-theme" name="theme" value="default" title="Light colored map"checked>
-        <label for="default-theme" title="Light colored map">Light</label>  
-        <input type="radio" id="dark-theme" name="theme" value="dark" title="Dark colored map">
-        <label for="dark-theme" title="Dark colored map">Dark</label>
-      </fieldset>  
-      
-
+        <input type="radio" id="default-theme" name="theme" value="default" checked>
+        <label for="default-theme">Light</label>  
+        <input type="radio" id="dark-theme" name="theme" value="dark">
+        <label for="dark-theme">Dark</label>
+      </fieldset>
       <noscript>This page requires JavaScript.</noscript>
-      
       <div id="map">        
       </div>
-
       <div class="page" aria-live="polite">        
         <form class="ip-start-form">
           
@@ -50,12 +45,10 @@
             </label>
           </fieldset>
         </form>
-
       </div>     
       <div class="search-results" aria-live="polite">          
       </div>
     </main>
-
     <footer role="contentinfo">
         <p>Last Updated on June 21, 2018</p>
     </footer>

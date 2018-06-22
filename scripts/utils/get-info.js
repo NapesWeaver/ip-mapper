@@ -10,20 +10,21 @@ function callBackPublicIP(response) {
   getHostName(data.publicIP, callBackUserHost);
 }
 
-function callBackSearchIP(response) {
-  
-  if(response.latitude) {
-    data.ipSearches.push(response);
-    getHostName(response.ip, callBackSearchHost);
-  }
-}
-
 function callBackSearchHost(response) {
   const host = response[Object.keys(response)[0]];
   const index = data.ipSearches.length - 1;
   data.ipSearches[index].public_host = host;  
   mapSearchedIP(index);
   renderSearchInfo();
+  $('#search-text').val('');
+}
+
+function callBackSearchIP(response) {
+  
+  if(response.latitude) {
+    data.ipSearches.push(response);
+    getHostName(response.ip, callBackSearchHost);
+  }
 }
 
 function callBackUserHost(response) {
