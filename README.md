@@ -1,8 +1,17 @@
 # IP Locator
-A web app for finding the geolocation of IP addresses.
+A web application for mapping the location of Internet Protocol v4 addresses.
 
 ## Summary
-Lorem ipsum!
+
+Connection info ~ navigator.connection
+
+Uses Web RTC to get the private IP for the device running the browser.
+
+If Location Access is allowed and the browser supports it, user location is obtained through navigator.geolocation.
+
+IP Geolocation API is used to map the users public IP and for mapping searches.
+
+The SHODAN web API is use for getting reverse-domain-names.
 
 ## Screenshots
 Landing Page
