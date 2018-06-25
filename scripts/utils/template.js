@@ -150,8 +150,8 @@ function decorateStart() {
         <div class="start">
           <h2>Map Internet Protocol v4 Addresses</h2>
           <p>Map IPv4 addresses radially, from the user&apos;s location and also in traceroute mode.</p>
-          <p>Allow Location Access to the browser for a more acurately mapped user location.</p>
           <p>Press connect to get local user information and map remote public IPv4 Addresses.</p>
+          <p>Allow Location Access to the browser for a more acurately mapped user location.</p>
         </div>
       </div>
       <fieldset role="group" class="form-controls">
