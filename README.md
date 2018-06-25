@@ -7,11 +7,11 @@ If supported by the browser, the [Network Information API](https://developer.moz
 
 Uses [WebRTC API](https://webrtc.org/) to get the private IP for the device running the browser.
 
-If Location Access is allowed and the browser supports it, user location is obtained through the [Geolocation API's](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation) Navigator.geolocation property.
+If Location Access is allowed and the browser supports it, user location is obtained through the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation) Navigator.geolocation property.
 
 [IP API](https://ipapi.co/api/#introduction) is used to map the users public IP and for mapping searches.
 
-The [SHODAN API](https://developer.shodan.io/) is used for getting reverse-domain-names.
+[SHODAN API](https://developer.shodan.io/) is used for getting reverse-domain-names.
 
 Mapping is accomplished via [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
 
