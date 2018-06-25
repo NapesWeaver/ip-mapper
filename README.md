@@ -20,8 +20,8 @@ Traceroute Searching
 ## Built With
 HTML, CSS, JavaScript and jQuery
 
-## Link
-- [Link](https://github.com/CraigPounds/ip-mapper)
+## Link to IP Mapper
+- [Link to IP Mapper](https://craigpounds.github.io/ip-mapper/)
 
 ## Acknowledgements
 Brandon Hinshaw
