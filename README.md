@@ -1,5 +1,5 @@
 # IP Locator
-A web application for displaying basic user network information and for mapping physical location of Internet Protocol version 4 addresses.
+A web application for displaying basic user network information and for mapping the physical location of Internet Protocol version 4 addresses.
 
 Users may enter valid IPv4 dotted-quad addresses and map them either radially (starting from the user's location) or in a traceroute fasion.
 
