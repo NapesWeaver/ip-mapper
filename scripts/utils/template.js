@@ -11,7 +11,7 @@ function decorateHostInfo() {
   return `
     <form class="ip-search-form">
     <div class="row host-results">
-      <div class="col-6 col-custom">        
+      <div class="col-6 col-host">        
         <h2>Host Information</h2>      
         <h3>${data.hostName}</h3>
       </div>
@@ -110,16 +110,20 @@ function decorateSearchInfoWindow(index) {
 }
 
 function decorateSearchResults() {
-  return data.ipSearches.reverse().map((e, i) => {
+  const searchResults = data.ipSearches.slice().reverse();
+  return searchResults.map((e, i) => {
     const publicHost = e.public_host !== null ? `<li>${e.public_host}</li>` : '';
     const organization = e.org !== undefined ? `<li>Organization: ${e.org}</li>` : '';
     const hopTypeString = e.hopType === 'radial' ? 'Total Distance' : 'Hop Distance';
     const distance = e.distance !== 0.0 ? `<li>${hopTypeString}: ${e.distance.toFixed(1)}mi</li>` : '';
-    const rowStart = i % 2 === 0 ? '<div class="row">' : '';
-    const rowEnd = i % 2 === 1 || i === data.ipSearches.length -1 ? '</div>' : '';
+    const rowStart = i % 4 === 0 ? '<div class="row">' : '';
+    const rowEnd = i % 4 === 3 || i === data.ipSearches.length -1 ? '</div>' : '';
+    const rowNestedColStart = i % 2 === 0 ? '<div class="col-6 col-searches">' : '';
+    const rowNestedColEnd = i % 2 === 1 || i === data.ipSearches.length -1 ? '</div>' : '';
     return `
     ${rowStart}
-    <div class="col-6 result" data-index="${i}">
+    ${rowNestedColStart}
+    <div class="col-6 result" data-index="${e.dataIndex}">
       <fieldset role="group" class="result-controls">
         <input type="button" class="focus-button" value="FOCUS">
         <input type="button" class="delete-button" value="DELETE">
@@ -134,6 +138,7 @@ function decorateSearchResults() {
         ${distance}
       </ul>
     </div>
+    ${rowNestedColEnd}
     ${rowEnd}
     `;
   }).join('');
@@ -141,23 +146,18 @@ function decorateSearchResults() {
 
 function decorateStart() {
   return `
-  <form class="ip-start-form">          
-    <section role="region">
-      <div class="row">
-        <div class="col-12">                      
-          <h2>Map Local and Remote IPv4 Addresses</h2>
-          <p>Press connect to get local user information and search remote IPv4 Addresses.</p>                                  
-        </div>
-      </div>
-    </section>
+  <form class="ip-start-form">
+    <div class="row host-results">
+      <h2>Map Local and Remote IPv4 Addresses</h2>
+      <p>Press connect to get local user information and search remote IPv4 Addresses.</p>
+    </div>
     <fieldset role="group" class="form-controls">
-      <label>Get Local Network Information
         <input type="submit" id="start" value="CONNECT">
-      </label>
     </fieldset>
   </form>
-  <div class="search-results">
-  </div>
+</div>     
+<div class="search-results" aria-live="polite">          
+</div>
   `;
 }
 

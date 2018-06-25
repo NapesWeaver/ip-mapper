@@ -4,6 +4,7 @@ class GoogleMap {
       zoom: zoom || 0,
       center: center || { lat: 0, lng: 0 },
       styles: [],
+      backgroundColor: '#C5EFBA',
     };
 
     this.zoom = zoom;
