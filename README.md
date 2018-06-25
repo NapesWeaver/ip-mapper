@@ -5,7 +5,7 @@ Users may enter valid IPv4 dotted-quad addresses and map them either radially (s
 
 ## Summary
 
-If supported by the browser, the [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) is used to collect basic user network connection information from the Navigator.connection property.
+If supported by the browser, the [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) is used to collect basic user network connection information (download speed, type and Round Trip Time for the current connection) from the Navigator.connection property.
 
 If supported by the browser, [WebRTC API](https://webrtc.org/) is utilized to get the private IP for the user's device.
 
