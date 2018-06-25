@@ -71,7 +71,6 @@ function decoratePublicInfoWindow() {
   const downLink = data.downloadSpeed !== 0.0 ? `<li>Effective Download Speed: ${data.downloadSpeed}Mbps</li>` : '';
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';
-
   return `
   <div class="info-window">
     <h1>Public IP: ${data.publicIP}</h1>
@@ -146,18 +145,22 @@ function decorateSearchResults() {
 
 function decorateStart() {
   return `
-  <form class="ip-start-form">
-    <div class="row host-results">
-      <h2>Map Local and Remote IPv4 Addresses</h2>
-      <p>Press connect to get local user information and search remote IPv4 Addresses.</p>
-    </div>
-    <fieldset role="group" class="form-controls">
+    <form class="ip-start-form">
+      <div class="row host-results">
+        <div class="start">
+          <h2>Map Internet Protocol v4 Addresses</h2>
+          <p>Map IPv4 addresses radially, from the user&apos;s location and also in traceroute mode.</p>
+          <p>Allow Location Access to the browser for a more acurately mapped user location.</p>
+          <p>Press connect to get local user information and map remote public IPv4 Addresses.</p>
+        </div>
+      </div>
+      <fieldset role="group" class="form-controls">
         <input type="submit" id="start" value="CONNECT">
-    </fieldset>
-  </form>
-</div>     
-<div class="search-results" aria-live="polite">          
-</div>
+      </fieldset>
+    </form>
+  </div>     
+  <div class="search-results" aria-live="polite">          
+  </div>
   `;
 }
 

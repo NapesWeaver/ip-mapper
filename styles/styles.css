@@ -223,7 +223,6 @@ label {
   }
 
   .start {
-    /* width: 70%; */
     text-align: center;
   }
 
@@ -282,10 +281,6 @@ label {
   h4 {
     font-size: 1.2em;
   }
-
-  /* .start {
-    width: 59%;
-  } */
 
   .col-host {
     width: 45%;
@@ -349,11 +344,6 @@ label {
   .search {
     font-size: 1.2em;
   }
-
-  /* .start {
-    width: 70%;
-    text-align: center;
-  } */
 
   #search-text {
     width: 180px;
