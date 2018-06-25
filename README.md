@@ -36,10 +36,6 @@ The SHODAN web API is use for getting reverse-domain-names.
 
 * jQuery
 
-## Link to IP Mapper
-
-- [IP Mapper](https://craigpounds.github.io/ip-mapper/)
-
 ## Example Input Test Data
 ```
 1.1.1.1
@@ -50,6 +46,9 @@ The SHODAN web API is use for getting reverse-domain-names.
 205.134.192.90
 216.117.2.180
 ```
+
+## Link to IP Mapper
+- [IP Mapper](https://craigpounds.github.io/ip-mapper/)
 
 ## Acknowledgements
 Brandon Hinshaw
