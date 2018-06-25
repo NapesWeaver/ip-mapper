@@ -13,6 +13,8 @@ If Location Access is allowed and the browser supports it, user location is obta
 
 The [SHODAN API](https://developer.shodan.io/) is used for getting reverse-domain-names.
 
+Mapping is accomplished via [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
+
 ## Screenshots
 ### Landing Page
 
