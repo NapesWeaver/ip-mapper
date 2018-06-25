@@ -28,16 +28,28 @@ The SHODAN web API is use for getting reverse-domain-names.
 
 ## Built With
 
-HTML
+* HTML
 
-CSS
+* CSS
 
-JavaScript
+* JavaScript
 
-jQuery
+* jQuery
 
 ## Link to IP Mapper
+
 - [IP Mapper](https://craigpounds.github.io/ip-mapper/)
+
+## Example Input Test Data
+```
+1.1.1.1
+1.2.3.4
+8.8.8.8
+91.121.134.23
+104.25.209.99
+205.134.192.90
+216.117.2.180
+```
 
 ## Acknowledgements
 Brandon Hinshaw
