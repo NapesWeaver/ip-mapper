@@ -1,19 +1,21 @@
 # IP Locator
 A web application for displaying basic user network information and for mapping physical location of Internet Protocol version 4 addresses.
 
+Users may enter valid IPv4 dotted-quad addresses and map them either radially (starting from the user's location) or in a traceroute fasion.
+
 ## Summary
 
 If supported by the browser, the [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) is used to collect basic user network connection information from the Navigator.connection property.
 
-Uses [WebRTC API](https://webrtc.org/) to get the private IP for the device running the browser.
+If supported by the browser, [WebRTC API](https://webrtc.org/) is utilized to get the private IP for the user's device.
 
 If Location Access is allowed and the browser supports it, user location is obtained through the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation) Navigator.geolocation property.
 
-[IP API](https://ipapi.co/api/#introduction) is used to map the users public IP and for mapping searches.
+Public IPs, as well as latitude and longitude for the user and for searches, are obtained via [IP API](https://ipapi.co/api/#introduction).
 
-[SHODAN API](https://developer.shodan.io/) is used for getting reverse-domain-names.
+The [SHODAN API](https://developer.shodan.io/) provides the means for getting reverse-domain-names.
 
-Mapping is accomplished via [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
+Mapping is, of course, accomplished via [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
 
 ## Screenshots
 ### Landing Page
