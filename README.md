@@ -52,7 +52,7 @@ Mapping is, of course, accomplished via [Google Maps JavaScript API](https://dev
 ```
 
 ## Link to IP Mapper
-- [IP Mapper](https://craigpounds.github.io/ip-mapper/)
+- [IP Mapper](https://napesweaver.github.io/ip-mapper/)
 
 ## Acknowledgements
 Brandon Hinshaw
