@@ -142,7 +142,7 @@ function getUserLocation() {
   if (navigator.geolocation) {
     // Local network information used by Google Location Services to estimate
     // location includes information about visible WiFi access points, including
-    // signal strength &information about your local router, computer's IP address 
+    // signal strength & information about your local router, computer's IP address 
     navigator.geolocation.getCurrentPosition(function (position) {
       data.privateLat = position.coords.latitude;
       data.privateLng = position.coords.longitude;       

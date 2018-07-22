@@ -9,7 +9,7 @@ If supported by the browser, the [Network Information API](https://developer.moz
 
 If supported by the browser, [WebRTC API](https://webrtc.org/) is utilized to get the private IP for the user's device.
 
-If Location Access is allowed and the browser supports it, user location is obtained through the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation) Navigator.geolocation property.
+If Location Access is allowed and the browser supports it, user location is obtained through the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) Navigator.geolocation property.
 
 Public IPs, as well as latitude and longitude for the user and for searches, are obtained via [IP API](https://ipapi.co/api/#introduction).
 
