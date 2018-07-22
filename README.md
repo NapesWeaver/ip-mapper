@@ -15,7 +15,7 @@ Public IPs, as well as latitude and longitude for the user and for searches, are
 
 The [SHODAN API](https://developer.shodan.io/) provides the means for getting reverse-domain-names.
 
-Mapping is, of course, accomplished via [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
+Mapping and distance calculations are accomplished using Google Maps JavaScript API. [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial).
 
 ## Screenshots
 ### Landing Page
