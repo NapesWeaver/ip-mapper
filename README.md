@@ -1,4 +1,4 @@
-# [IP Mapper]((https://craigpounds.github.io/ip-mapper/))
+# [IP Mapper](https://craigpounds.github.io/ip-mapper/)
 
 A web application for displaying basic user network information and for mapping the physical location of Internet Protocol version 4 addresses.
 
