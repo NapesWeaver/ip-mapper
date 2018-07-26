@@ -32,10 +32,10 @@ class GoogleMap {
       infoWindow.close();
     });
     marker.addListener('click', () => {
-      if(this.map.zoom === 12) {
+      if(this.map.zoom === 13) {
         this.map.setZoom(2);
       } else {
-        this.map.setZoom(12);
+        this.map.setZoom(13);
       }
       infoWindow.open(this.map, marker);
       this.map.setCenter(marker.getPosition());
