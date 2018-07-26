@@ -25,13 +25,20 @@ class GoogleMap {
       icon: location.data.icon || 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
       title: location.data.title,      
     });
-    let infoWindow = new google.maps.InfoWindow({
+    const infoWindow = new google.maps.InfoWindow({
       content: info,
     });
+    infoWindow.addListener('click', () => {
+      infoWindow.close();
+    });
     marker.addListener('click', () => {
-      this.map.setZoom(12);
-      this.map.setCenter(marker.getPosition());
+      if(this.map.zoom === 12) {
+        this.map.setZoom(2);
+      } else {
+        this.map.setZoom(12);
+      }
       infoWindow.open(this.map, marker);
+      this.map.setCenter(marker.getPosition());
     });
     this.markers.push(marker);
     this.infoWindows.push(infoWindow);
