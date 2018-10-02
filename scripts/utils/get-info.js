@@ -1,3 +1,5 @@
+'use strict';
+
 import { data } from '../data/data.js';
 import GoogleMap from '../utils/map-class.js';
 import { decoratePrivateInfoWindow } from '../utils/template.js';

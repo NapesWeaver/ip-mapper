@@ -1,3 +1,5 @@
+'use strict';
+
 import { data } from '../data/data.js';
 
 function decorateHostInfo() {
@@ -9,7 +11,7 @@ function decorateHostInfo() {
   const effectiveType = data.effectiveType !== 0 ? `<li>Effective Type: ${data.effectiveType}</li>` : '';
   const rtt = data.rtt !== 0 ? `<li>RTT: ${data.rtt}ms</li>` : '';  
   return `
-    <form class="ip-search-form">
+    <form action="#" class="ip-search-form">
     <div class="row host-results">
       <div class="col-6 col-host">        
         <h2>Host Information</h2>      
@@ -145,7 +147,7 @@ function decorateSearchResults() {
 
 function decorateStart() {
   return `
-    <form class="ip-start-form">
+    <form action="#" class="ip-start-form">
       <div class="row host-results">
         <div class="start">
           <h2>Map Internet Protocol v4 Addresses</h2>

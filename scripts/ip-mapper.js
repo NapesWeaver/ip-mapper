@@ -1,3 +1,5 @@
+'use strict';
+
 import { data, resetData } from './data/data.js';
 import { decorateHostInfo, decoratePublicInfoWindow, decorateSearchInfoWindow, decorateSearchResults, decorateStart } from './utils/template.js';
 import GoogleMap from './utils/map-class.js';

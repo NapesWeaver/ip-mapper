@@ -1,3 +1,5 @@
+'use strict';
+
 class GoogleMap {
   constructor(zoom, center, target) {    
     let options = {
