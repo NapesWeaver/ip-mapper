@@ -1,4 +1,4 @@
-# [IP Mapper](https://craigpounds.github.io/ip-mapper/)
+# [IP Mapper](https://napesweaver.github.io/ip-mapper/)
 
 A web application for displaying basic user network information and for mapping the physical location of Internet Protocol version 4 addresses.
 
@@ -53,7 +53,7 @@ Mapping and distance calculations are accomplished using Google Maps JavaScript 
 ```
 
 ## Link to IP Mapper
-- [IP Mapper](https://craigpounds.github.io/ip-mapper/)
+- [IP Mapper](https://napesweaver.github.io/ip-mapper/)
 
 ## Acknowledgements
 Brandon Hinshaw
