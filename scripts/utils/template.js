@@ -37,7 +37,7 @@ function decorateHostInfo() {
     <fieldset role="group" class="form-controls">
       <fieldset role="group" class="search">
         <label for="#search-text">Enter IPv4 Address to Search
-          <input type="text" id="search-text" placeholder="8.8.8.8" required>
+          <input type="text" id="search-text" placeholder="1.2.3.4" required>
         </label>
         <div class="form-buttons">
           <input type="submit" value="SEARCH">
